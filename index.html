@@ -18,11 +18,15 @@
         <ul class="navLi">
             <li>
                 <!-- Login para censista -->
-                <input class="btn btn-login" type="button" value="Login">
+                <input class="btn btn-login" id="btnIrALogin" type="button" value="Login">
             </li>
             <li>
                 <!-- Login para censista -->
-                <input class="btn btn-logout" type="button" value="Logout">
+                <input class="btn btn-logout" id="btnLogout" type="button" value="Logout">
+            </li>
+            <li>
+                <!-- Login para censista -->
+                <input class="btn btn-dashboard" id="btnDashbord" type="button" value="Dashboard">
             </li>
         </ul>
     </div>
@@ -38,12 +42,27 @@
 
         <!-- Login  -->
         <div class="contendorLogin">
+            <h3>Iniciar Sesion</h3>
             <label for="txtUsuario">Usuario: </label><input type="text" id="txtUsuario"><br><br>
             <label for="txtPassword">Contraseña: </label><input type="password" id="txtPassword"><br><br>
-            <input type="button" class="btn" id="btnLogin" value="Ingresar">
+            <div id="divMostrarErrorLogin"> </div>
+            <input type="button" class="btn" id="btnLogin" value="Ingresar"><br>
+            <input type="button" class="btn btn-crearUsuario" id="btnIrACrearUsuario" value="Crear Usuario">
+             
         </div>
 
 
+        <!-- Crear Usuario -->
+        <div class="contendorCrearUsuario">
+            <h3>Registrarse</h3>
+            <label for="txtCrearUsuarioNombre">Nombre: </label><input type="text" id="txtCrearUsuarioNombre"><br><br>
+            <label for="txtCrearUsuarioUser">Nombre Usuario: </label><input type="txt" id="txtCrearUsuarioUser"><br><br>
+            <label for="txtCrearUsuarioPassword">Contraseña: </label><input type="password" id="txtCrearUsuarioPassword"><br><br>
+            <div id="divMostrarErrorRegistrarse"> </div>
+            <input type="button" class="btn" id="btnRegistrarse" value="Registrarse"><br>
+            
+             
+        </div>
 
 
 

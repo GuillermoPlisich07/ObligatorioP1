@@ -35,7 +35,6 @@ html, body{
 }
 
 .contenedorPrincipal{
-    
     background-color: rgba(255, 255, 255, 0.4);
     border-radius:10px;
     max-width:650px;
@@ -67,4 +66,17 @@ html, body{
 
 .btn.btn-logout{
     background-color: #f51414;
+}
+
+.btn.btn-crearUsuario{
+    background-color: rgb(99, 99, 184);
+    color: white
+}
+
+.btn.btn-dashboard{
+    background-color: rgb(99, 99, 184);
+}
+
+#divMostrarErrorLogin{
+    color: #f51414;
 }

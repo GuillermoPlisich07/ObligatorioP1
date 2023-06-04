@@ -4,5 +4,6 @@ class Usuario{
         this.id = Usuario.idUsuario++;
         this.nombre;
         this.nombreUsuario;
+        this.password;
     }
 }
