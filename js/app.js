@@ -12,6 +12,7 @@ function eventos(){
     //Crear Usuario
     document.querySelector('#btnIrACrearUsuario').addEventListener('click', mostrarCrearUsuario);
     document.querySelector('#btnRegistrarse').addEventListener('click', registrarse);
+    document.querySelector('#btnVolverALogin').addEventListener('click', mostrarLogin);
 }
 
 eventos();
@@ -30,6 +31,7 @@ function mostrar(p){
 ocultar('.contendorLogin');
 ocultar('#btnLogout');
 ocultar('#btnDashbord');
+ocultar('.contendorCrearUsuario');
 
 
 
@@ -49,7 +51,9 @@ function volverAlDashboard(){
 
 function mostrarLogin(){
     // Cuando voy a loguearme oculto boton login
-    ocultar('#btnIrALogin');    
+    ocultar('#btnIrALogin');
+    // Ocular Registro de usuario si vengo desde ese apartado 
+    ocultar('.contendorCrearUsuario');    
     // Oculto bienvenida
     ocultar('.contendorBienvenida');
     // Muestro el login 
@@ -96,16 +100,14 @@ function login(){
 
 
 
-
-
-
-
 ////////////////////////////////////////////////////////////////////////
 //                             CREAR USUARIO        
 ////////////////////////////////////////////////////////////////////////
 
 function mostrarCrearUsuario(){
-    
+    ocultar('.contendorRegistroExistoso');
+    mostrar('.contendorCrearUsuario');
+    ocultar('.contendorLogin');
 }
 
 function registrarse(){
@@ -117,15 +119,24 @@ function registrarse(){
     if(sis.esVacio(nombre) && sis.esVacio(nombreUsuario) && sis.esVacio(password)){
         if(sis.usuarioRepetido(nombreUsuario)){
             if(sis.validarContrasenia(password)){
-
+                sis.ingresarRegistro(nombre,nombreUsuario,password);
+                mensaje = 'Bien'; 
             }else{
-                mensaje = '';
+                mensaje = 'La contraseña deberá tener un mínimo de 5 caracteres, contando con al menos una mayúscula, una minúscula y un número.';
             }
         }else{
             mensaje = `Ya existe un usuario un usuario con el nombre ${nombreUsuario}.`;
         }
     }else{
         mensaje = `Debe ingresar nombre, nombre usuario y contrasena.`;
+    }
+
+    if(mensaje === 'Bien'){
+        ocultar('.contendorRegistro');
+        mostrar('.contendorRegistroExistoso');
+        document.querySelector("#divMostrarRegistrarse").innerHTML = 'El registro se realizo exitosamente!';
+    }else{
+        document.querySelector("#divMostrarErrorRegistrarse").innerHTML = mensaje;
     }
 
 }

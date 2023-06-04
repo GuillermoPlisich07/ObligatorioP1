@@ -42,7 +42,7 @@ class Sistema{
             // Asigno a objetoUsuario un elemento del Array Usuario
             let objetoUsuario = this.usuarios[i];
             // Compruebo que los nombresUsuarios coincidan
-            if (objetoUsuario.nombreUsuario === usuario) {
+            if (objetoUsuario.nombreUsuario.toLowerCase() === usuario.toLowerCase()) {
                 // Asingo a user el usuario que se encontro
                 user = objetoUsuario; 
             }
@@ -74,19 +74,60 @@ class Sistema{
     // REGISTRAR USUARIO
 
     usuarioRepetido(usuario){
-        let bandera = false;
-        while(){
-
+        let bandera = true;
+        let i = 0;
+        while(i < this.usuarios.length && bandera === true){
+            let user = this.usuarios[i];
+            if(user.nombreUsuario.toLowerCase() === usuario.toLowerCase()){
+                bandera = false;
+            }
+            i++;
         }
         return bandera;
     }
 
     validarContrasenia(password){
-        let bandera = false;
-        return bandera;
+        // Requerimientos: minimo 5 caracteres, una mayuscula, una minuscula y un numero
+        let tieneMinimoCaracteres = password.length >= 5;
+        let tieneMayuscula = false;
+        let tieneMinuscula = false;
+        let tieneNumero = false;
+
+        // Verificar si la contraseña cumple con los requisitos
+        for (let i = 0; i < password.length; i++) {
+            let caracter = password.charAt(i);
+
+            // Si contiene al menos una mayuscula
+            if (caracter >= "A" && caracter <= "Z") {
+                tieneMayuscula = true;
+                
+            } 
+            // Si contiene al menos una minuscula
+            else if (caracter >= "a" && caracter <= "z") {
+                tieneMinuscula = true;
+            } 
+            // Si contiene al menos una numero
+            else if (caracter >= "0" && caracter <= "9") {
+                tieneNumero = true;
+            }
+        }
+
+        if (tieneMinimoCaracteres && tieneMayuscula && tieneMinuscula && tieneNumero) {
+            return true; // La contraseña es valida
+        } else {
+            return false; // La contraseña no cumple con los requisitos
+        }
     }
 
+    ingresarRegistro(nombre,nombreUsuario,password){
+        let usuario = new Usuario();
+        usuario.nombre = nombre;
+        usuario.password = password;
+        usuario.nombreUsuario = nombreUsuario;
 
+        this.usuarios.push(usuario);
+
+    }
 
 
 

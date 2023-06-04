@@ -9,8 +9,6 @@
 </head>
 <body>
     
-
-    
     <!-- Barra De Navegacion -->
     <div class="navContenedor">
         <!-- Logo -->
@@ -54,18 +52,29 @@
 
         <!-- Crear Usuario -->
         <div class="contendorCrearUsuario">
-            <h3>Registrarse</h3>
-            <label for="txtCrearUsuarioNombre">Nombre: </label><input type="text" id="txtCrearUsuarioNombre"><br><br>
-            <label for="txtCrearUsuarioUser">Nombre Usuario: </label><input type="txt" id="txtCrearUsuarioUser"><br><br>
-            <label for="txtCrearUsuarioPassword">Contraseña: </label><input type="password" id="txtCrearUsuarioPassword"><br><br>
-            <div id="divMostrarErrorRegistrarse"> </div>
-            <input type="button" class="btn" id="btnRegistrarse" value="Registrarse"><br>
+            <div class="contendorRegistro">
+                <h3>Registrarse</h3>
+                <label for="txtCrearUsuarioNombre">Nombre: </label><input type="text" id="txtCrearUsuarioNombre"><br><br>
+                <label for="txtCrearUsuarioUser">Nombre Usuario: </label><input type="txt" id="txtCrearUsuarioUser"><br><br>
+                <label for="txtCrearUsuarioPassword">Contraseña: </label><input type="password" id="txtCrearUsuarioPassword"><br><br>
+                <div id="divMostrarErrorRegistrarse"> </div>
+                <input type="button" class="btn" id="btnRegistrarse" value="Registrarse"><br><br>
+            </div>
+
+            <div class="contendorRegistroExistoso"> 
+                <div id="divMostrarRegistrarse"> </div><br><br>
+                <input type="button" class="btn" id="btnVolverALogin" value="Login">
+            </div>
 
              
         </div>
 
-
-        
+        <!-- Buscar Censo  -->
+        <div>
+            <h3>Buscar censo</h3>
+            <label for="txtBuscarCedula">Cedula: </label><input type="text"  id="txtBuscarCedula">
+            <input type="button" value="Buscar" id="buscarCedula">
+        </div>
 
 
         
