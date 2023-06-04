@@ -74,11 +74,17 @@ class Sistema{
     // REGISTRAR USUARIO
 
     usuarioRepetido(usuario){
+        let bandera = false;
         while(){
-            
+
         }
+        return bandera;
     }
 
+    validarContrasenia(password){
+        let bandera = false;
+        return bandera;
+    }
 
 
 

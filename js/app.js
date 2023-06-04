@@ -115,10 +115,14 @@ function registrarse(){
     let password = document.querySelector('#txtCrearUsuarioPassword').value;
 
     if(sis.esVacio(nombre) && sis.esVacio(nombreUsuario) && sis.esVacio(password)){
-        if(sis.){
+        if(sis.usuarioRepetido(nombreUsuario)){
+            if(sis.validarContrasenia(password)){
 
+            }else{
+                mensaje = '';
+            }
         }else{
-
+            mensaje = `Ya existe un usuario un usuario con el nombre ${nombreUsuario}.`;
         }
     }else{
         mensaje = `Debe ingresar nombre, nombre usuario y contrasena.`;
