@@ -2,6 +2,11 @@ let sis = new Sistema();
 sis.precargarUsuario();
 
 function eventos(){
+
+    // Buscar Censo
+    document.querySelector('#btnIrAInvitado').addEventListener('click', mostrarBuscarCenso);
+    document.querySelector('#btnBuscarCedula').addEventListener('click', buscarCenso);
+
     // Volver al dashboard
     document.querySelector('#btnDashbord').addEventListener('click', volverAlDashboard);
 
@@ -32,7 +37,7 @@ ocultar('.contendorLogin');
 ocultar('#btnLogout');
 ocultar('#btnDashbord');
 ocultar('.contendorCrearUsuario');
-
+// ocultar('.buscarCenso');
 
 
 function volverAlDashboard(){
@@ -41,6 +46,7 @@ function volverAlDashboard(){
     ocultar('#btnDashbord');
     mostrar('.contendorBienvenida');
     mostrar('#btnIrALogin');
+    ocultar('.buscarCenso');
 }
 
 
@@ -94,8 +100,12 @@ function login(){
 }
 
 ////////////////////////////////////////////////////////////////////////
-//                              END LOGIN        
+//                              END-LOGIN        
 ////////////////////////////////////////////////////////////////////////
+
+
+
+
 
 
 
@@ -139,6 +149,47 @@ function registrarse(){
         document.querySelector("#divMostrarErrorRegistrarse").innerHTML = mensaje;
     }
 
+}
+
+////////////////////////////////////////////////////////////////////////
+//                           END-CREAR USUARIO         
+////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+//                             BUSCAR CENSO        
+////////////////////////////////////////////////////////////////////////
+
+function mostrarBuscarCenso(){
+    // Cuando voy a buscar censo oculto boton login
+    ocultar('#btnIrALogin');
+    // Oculto bienvenida
+    ocultar('.contendorBienvenida');
+    // Muestro el buscar censo 
+    mostrar('.buscarCenso');
+    // Muestro boton para ir al dashboard
+    mostrar('#btnDashbord');
+}
+
+function buscarCenso(){
+    let cedula = document.querySelector("#txtBuscarCedula").value;
+
+    let mensaje = "";
+
+    if (sis.validarFormatoCedula(cedula)) {
+        let resultado = sis.validarDigitoVerificador(cedula);
+        mensaje = resultado;
+    }else{
+        mensaje = "La cédula ingresada NO cumple con el formato 1.111.111-1."
+    }
+
+    document.querySelector("#divResultadoBusqueda").innerHTML = mensaje;
 }
 
 ////////////////////////////////////////////////////////////////////////
