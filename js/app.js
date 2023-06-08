@@ -1,11 +1,12 @@
 let sis = new Sistema();
 sis.precargarUsuario();
+sis.precargarCensos();
 
 function eventos(){
 
     // Buscar Censo
     document.querySelector('#btnIrAInvitado').addEventListener('click', mostrarBuscarCenso);
-    document.querySelector('#btnBuscarCedula').addEventListener('click', buscarCenso);
+    document.querySelector('#btnBuscarCedula').addEventListener('click', buscar);
 
     // Volver al dashboard
     document.querySelector('#btnDashbord').addEventListener('click', volverAlDashboard);
@@ -46,7 +47,8 @@ function volverAlDashboard(){
     ocultar('#btnDashbord');
     mostrar('.contendorBienvenida');
     mostrar('#btnIrALogin');
-    ocultar('.buscarCenso');
+    // ocultar('.buscarCenso');
+    ocultar('.contendorCrearUsuario');
 }
 
 
@@ -177,16 +179,48 @@ function mostrarBuscarCenso(){
     mostrar('#btnDashbord');
 }
 
-function buscarCenso(){
+function buscar(){
     let cedula = document.querySelector("#txtBuscarCedula").value;
 
     let mensaje = "";
 
-    if (sis.validarFormatoCedula(cedula)) {
-        let resultado = sis.validarDigitoVerificador(cedula);
-        mensaje = resultado;
+    if (sis.validarFormatoCedula(cedula) && sis.validarDigitoVerificador(cedula)) {
+        let mensajeBusqueda=sis.buscarCenso(cedula);
+        if(sis.usuarioLogin === null){
+            
+            if(mensajeBusqueda === 'Se le valido el censo! Ya no podra Modificarlo'){
+                mensaje = mensajeBusqueda;
+            }else if(mensajeBusqueda === 'Su censo esta pendiente a validar! Puede realizar modificaciones'){
+                mensaje = mensajeBusqueda;
+                
+
+            }else if(mensajeBusqueda === 'Realice el censo'){
+                mensaje = mensajeBusqueda;
+                
+
+            }else{
+                mensaje = 'Hubo un error en el sistema';
+            }
+
+        }else{
+
+            if(mensajeBusqueda === 'Esta persona tiene el censo validado! No se podra realizar un nuevo censo'){
+                mensaje = mensajeBusqueda;
+            }else if(mensajeBusqueda === 'Tiene el censo por validar!'){
+                mensaje = mensajeBusqueda;
+
+
+            }else if(mensajeBusqueda === 'Realice el censo'){
+                mensaje = mensajeBusqueda;
+
+
+            }else{
+                mensaje = 'Hubo un error en el sistema';
+            }
+
+        }
     }else{
-        mensaje = "La cédula ingresada NO cumple con el formato 1.111.111-1."
+        mensaje = "La cédula ingresada no cumple con el formato 1.111.111-1"
     }
 
     document.querySelector("#divResultadoBusqueda").innerHTML = mensaje;
