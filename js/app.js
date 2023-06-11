@@ -46,7 +46,8 @@ function volverAlDashboard(){
     ocultar('#btnDashbord');
     mostrar('.contendorBienvenida');
     mostrar('#btnIrALogin');
-    ocultar('.buscarCenso');
+    //ocultar('.buscarCenso');
+    ocultar('.contendorCrearUsuario');
 }
 
 

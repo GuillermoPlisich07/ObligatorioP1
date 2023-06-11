@@ -1,8 +1,13 @@
 html, body{
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
+h3{
+    text-align: center;
+    text-transform: uppercase;
+}
+
 
 .contenedor{
     display: flex;
@@ -12,8 +17,11 @@ html, body{
 
 .navContenedor{
     width: 100%;
+    position:fixed;
+    top:0;
     display: flex;
     align-items: center;
+    background-color: white;
     justify-content: space-between;
     -webkit-box-shadow: -1px 17px 64px -7px rgba(121, 121, 121, 0.75);
     -moz-box-shadow: -1px 17px 64px -7px rgba(126, 126, 126, 0.75);
@@ -80,3 +88,60 @@ html, body{
 #divMostrarErrorLogin{
     color: #f51414;
 }
+
+.inputs{
+    width: 100%;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+
+}
+
+.inputs label{
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.inputs select, input{
+    display: block;
+    padding: 15px 5px;
+    border: none;
+    border-radius: 4px;
+    width: 100%;
+    background-color: #f1f1f1;
+    letter-spacing: 1px;
+    font-size: 1.000em;
+    font-weight: 400;
+    margin-top: 5px;
+}
+
+.chck{
+    width: 100%;
+    margin-top: 20px;
+    border: none;
+    border-radius: 4px;
+}
+
+.chck input{
+    display: inline-block;
+    width: auto;
+}
+
+.chck label{
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.nomApe{
+    display: flex;
+    gap: 25px;
+}
+
+
+
+
+
+
+    
+    
+    

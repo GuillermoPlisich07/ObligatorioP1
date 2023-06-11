@@ -12,7 +12,7 @@
     <!-- Barra De Navegacion -->
     <div class="navContenedor">
         <!-- Logo -->
-        <img class="logo" src="https://p1.develotion.com/2023_03/logo.jpg" alt="logo">
+        <a href=""><img class="logo" src="https://p1.develotion.com/2023_03/logo.jpg" alt="logo"></a>
         <ul class="navLi">
             <li>
                 <!-- Login para censista -->
@@ -38,17 +38,24 @@
             <!-- Boton Invitado -->
             <input type="button" class="btn" id="btnIrAInvitado" value="Comenzar Censo">
         </div>
-        <br><br>
 
         <!-- Login  -->
         <div class="contendorLogin">
             <h3>Iniciar Sesion</h3>
-            <label for="txtUsuario">Usuario: </label><input type="text" id="txtUsuario"><br><br>
-            <label for="txtPassword">Contraseña: </label><input type="password" id="txtPassword"><br><br>
+            <div class="inputs">
+                <label for="txtUsuario">Usuario: </label><input type="text" id="txtUsuario">
+            </div>
+            <div class="inputs">
+                <label for="txtPassword">Contraseña: </label><input type="password" id="txtPassword">
+            </div>
+            <div class="inputs">
+                <input type="button" class="btn" id="btnLogin" value="Ingresar">
+            </div>
             <div id="divMostrarErrorLogin"> </div>
-            <input type="button" class="btn" id="btnLogin" value="Ingresar"><br>
-            <input type="button" class="btn btn-crearUsuario" id="btnIrACrearUsuario" value="Crear Usuario">
-             
+            <div class="inputs">
+                <input type="button" class="btn btn-crearUsuario" id="btnIrACrearUsuario" value="Crear Usuario">
+            </div>
+            
         </div>
 
 
@@ -56,15 +63,24 @@
         <div class="contendorCrearUsuario">
             <div class="contendorRegistro">
                 <h3>Registrarse</h3>
-                <label for="txtCrearUsuarioNombre">Nombre: </label><input type="text" id="txtCrearUsuarioNombre"><br><br>
-                <label for="txtCrearUsuarioUser">Nombre Usuario: </label><input type="txt" id="txtCrearUsuarioUser"><br><br>
-                <label for="txtCrearUsuarioPassword">Contraseña: </label><input type="password" id="txtCrearUsuarioPassword"><br><br>
-                <div id="divMostrarErrorRegistrarse"> </div>
-                <input type="button" class="btn" id="btnRegistrarse" value="Registrarse"><br><br>
+                <div class="inputs">
+                    <label for="txtCrearUsuarioNombre">Nombre: </label><br><input type="text" id="txtCrearUsuarioNombre">
+                </div>
+                <div class="inputs">
+                    <label for="txtCrearUsuarioUser">Nombre Usuario: </label><br><input type="txt" id="txtCrearUsuarioUser">
+                </div>
+                <div class="inputs">
+                    <label for="txtCrearUsuarioPassword">Contraseña: </label><br><input type="password" id="txtCrearUsuarioPassword">
+                </div>
+                <div id="divMostrarErrorRegistrarse"></div>
+                <div class="inputs">
+                   <input type="button" class="btn" id="btnRegistrarse" value="Registrarse"> 
+                </div>
+                
             </div>
 
             <div class="contendorRegistroExistoso"> 
-                <div id="divMostrarRegistrarse"> </div><br><br>
+                <div id="divMostrarRegistrarse"></div><br><br>
                 <input type="button" class="btn" id="btnVolverALogin" value="Login">
             </div>
 
@@ -74,9 +90,66 @@
         <!-- Buscar Censo  -->
         <div >
             <h3>Buscar Censo</h3>
-            <label for="txtBuscarCedula">Cedula: </label><input type="text"  id="txtBuscarCedula"><br><br>
-            <div id="divResultadoBusqueda"></div>
-            <input type="button" class="btn" value="Buscar Censo" id="btnBuscarCedula"><br>
+            <div class="inputs">
+                <label for="txtBuscarCedula">Cedula: </label><br><input type="text"  id="txtBuscarCedula">
+            </div>
+            <div class="inputs">
+                <input type="button" class="btn" value="Buscar Censo" id="btnBuscarCedula"><br>
+            </div>
+        </div>
+
+        <!-- FORMULARIO GENERAL-->
+        <div class="formulario">
+
+            <!-- VOLVER AL BUSCAR PARA LOS CENSISTAS -->
+            <div class="inputs">
+                <input type="button" value="Volver a buscar" id="btnVolverABuscarCensista">
+            </div>
+
+            <!-- Resultado DE LA BUSQUEDA DE CEDULA -->
+            <div>
+                <br>
+                <div id="divResultadoBusqueda"></div>
+            </div>
+
+            <!-- FORMULARIO -->
+            <h3>CENSO</h3>
+            <div class="nomApe">
+                <div class="inputs">
+                    <label for="txtNombreFormulario">Nombre: </label><input type="text" id="txtNombreFormulario">
+                </div>
+                <div class="inputs">
+                    <label for="txtAppellidoFormulario">Apellido: </label><input type="text" id="txtAppellidoFormulario">
+                </div>
+            </div>
+            <div class="inputs">
+                <label for="txtCedulaFormulario">Cedula: </label><input type="text" id="txtCedulaFormulario">
+            </div>
+            <div class="inputs">
+                <label for="selDepartamentoFormulario">Departamento: </label><select id="selDepartamentoFormulario"></select>
+            </div>
+            <div class="inputs">
+                <label for="selOcupacionFormulario">Ocupacion: </label><select id="selOcupacionFormulario"></select>
+            </div>
+            <div class="chck">
+                <label for="chkValidarFormulario">Validar:</label><input type="checkbox" id="chkValidarFormulario">
+            </div>
+            
+            <!-- Boton Enviar -->
+            <div class="inputs EnviarCenso">
+                <input type="button" value="Enviar Censo" id="btnEnviarCenso">
+            </div>
+
+            <!-- Boton Eliminar -->
+            <div class="inputs EnviarCenso">
+                <input type="button" value="Eliminar Censo" id="btnEliminarCenso">
+            </div>
+
+            <!-- Boton Editar -->
+            <div class="inputs EnviarCenso">
+                <input type="button" value="Editar Censo" id="btnEditarCenso">
+            </div>
+            
         </div>
 
         

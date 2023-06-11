@@ -126,7 +126,7 @@ class Sistema{
         let usuario = new Usuario();
         usuario.nombre = nombre; // asigno nombre
         usuario.password = password; // asigno password
-        usuario.nombreUsuario = nombreUsuario; // asigno nombreUsuario
+        usuario.nombreUsuario = nombreUsuario.toLowerCase(); // asigno nombreUsuario en miniscula
 
         this.usuarios.push(usuario); // Lo ingreso en el array
 
