@@ -341,13 +341,73 @@ class Sistema{
         let censo = this.traerObjetoCenso(cedula);
         console.log(censo);
         document.querySelector('#txtNombreFormulario').value=censo.nombre;
-        document.querySelector('#txtAppellidoFormulario').value=censo.apellido;
+        document.querySelector('#txtApellidoFormulario').value=censo.apellido;
         document.querySelector('#txtEdadFormulario').value=censo.edad;
         document.querySelector('#txtCedulaFormulario').value=censo.cedula;
         document.querySelector('#selDepartamentoFormulario').value=censo.departamento;
         document.querySelector('#selOcupacionFormulario').value=censo.ocupacion;
         document.querySelector('#chkValidarFormulario').value=censo.checkCensado;
     }
+
+    mostrarFormulario(mensajeBusqueda, cedula){
+        let mensaje = '';
+        if(this.usuarioLogin === null){
+                
+            if(mensajeBusqueda === 'Se le valido el censo! Ya no podra Modificarlo'){
+                mensaje = mensajeBusqueda;
+                mostrar('.buscarCenso');
+            }else if(mensajeBusqueda === 'Su censo esta pendiente a validar! Puede realizar modificaciones'){
+                mensaje = mensajeBusqueda;
+                this.rellenarFormulario(cedula);
+                ocultar('.volverABuscar');
+                ocultar('.chck');
+                mostrar('.EliminarCenso');
+                mostrar('.EditarCenso');
+                ocultar('.ValidarCenso');
+                ocultar('.EnviarCenso');
+                mostrar('.formulario');
+            }else if(mensajeBusqueda === 'Realice el censo'){
+                mensaje = mensajeBusqueda;
+                ocultar('.volverABuscar');
+                ocultar('.chck');
+                ocultar('.EliminarCenso');
+                ocultar('.EditarCenso');
+                ocultar('.ValidarCenso');
+                mostrar('.EnviarCenso');
+                mostrar('.formulario');
+            }else{
+                mensaje = 'Hubo un error en el sistema';
+            }
+
+        }else{
+
+            if(mensajeBusqueda === 'Esta persona tiene el censo validado! No se podra realizar un nuevo censo' && this.usuarioLogin !== null){
+                mensaje = mensajeBusqueda;
+                mostrar('.buscarCenso');
+            }else if(mensajeBusqueda === 'Tiene el censo por validar!' && this.usuarioLogin !== null){
+                mensaje = mensajeBusqueda;
+                this.rellenarFormulario(cedula);
+                ocultar('.EnviarCenso');
+                ocultar('.EliminarCenso');
+                ocultar('.EditarCenso');
+                mostrar('.ValidarCenso');
+                mostrar('.volverABuscar');
+                mostrar('.formulario');
+            }else if(mensajeBusqueda === 'Realice el censo' && this.usuarioLogin !== null){
+                mensaje = mensajeBusqueda;
+                mostrar('.EnviarCenso');
+                ocultar('.EliminarCenso');
+                ocultar('.EditarCenso');
+                ocultar('.ValidarCenso');
+                mostrar('.volverABuscar');
+                mostrar('.formulario');
+            }else{
+                mensaje = 'Hubo un error en el sistema';
+            }
+
+        }
+        return mensaje;
+    }    
 
 
     

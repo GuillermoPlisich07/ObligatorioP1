@@ -1,3 +1,6 @@
+////////////////////////////////////////////////////////////////////////
+//                             GENERAL FUNCIONES        
+////////////////////////////////////////////////////////////////////////
 let sis = new Sistema();
 sis.precargarUsuario();
 sis.precargarCensos();
@@ -33,17 +36,6 @@ function mostrar(p){
     document.querySelector(`${p}`).style.display = "";
 }
 
-// OCULTAR COSAS
-ocultar('.contendorLogin');
-ocultar('#btnLogout');
-ocultar('#btnDashbord');
-ocultar('.contendorCrearUsuario');
-ocultar('.buscarCenso');
-ocultar('.formulario');
-ocultar('.volverABuscar');
-ocultar('#divResultadoBusqueda');
-
-
 function volverAlDashboard(){
     ocultar('.contendorLogin');
     ocultar('#btnLogout');
@@ -57,6 +49,38 @@ function volverAlDashboard(){
     ocultar('#divResultadoBusqueda');
 }
 
+// OCULTAR COSAS
+ocultar('.contendorLogin');
+ocultar('#btnLogout');
+ocultar('#btnDashbord');
+ocultar('.contendorCrearUsuario');
+ocultar('.buscarCenso');
+ocultar('.formulario');
+ocultar('.volverABuscar');
+ocultar('#divResultadoBusqueda');
+
+
+// FUNCION PARA LIMPIAR CAMPOS
+function limpiarCampo(campo){
+    document.querySelector(`#${campo}`).value='';
+}
+
+function limpiarMensajes(campo){
+    document.querySelector(`#${campo}`).innerHTML='';
+}
+
+
+////////////////////////////////////////////////////////////////////////
+//                      GENERAL FUNCIONES END       
+////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -64,6 +88,10 @@ function volverAlDashboard(){
 ////////////////////////////////////////////////////////////////////////
 
 function mostrarLogin(){
+    limpiarCampo('txtUsuario');
+    limpiarCampo('txtPassword');
+    limpiarMensajes('divMostrarErrorLogin');
+
     // Cuando voy a loguearme oculto boton login
     ocultar('#btnIrALogin');
     // Ocular Registro de usuario si vengo desde ese apartado 
@@ -123,6 +151,14 @@ function login(){
 ////////////////////////////////////////////////////////////////////////
 
 function mostrarCrearUsuario(){
+    limpiarCampo('txtCrearUsuarioNombre');
+    limpiarCampo('txtCrearUsuarioUser');
+    limpiarCampo('txtCrearUsuarioPassword');
+    limpiarMensajes('divMostrarRegistrarse');
+    limpiarMensajes('divMostrarErrorRegistrarse');
+
+
+    mostrar('.contendorRegistro');
     ocultar('.contendorRegistroExistoso');
     mostrar('.contendorCrearUsuario');
     ocultar('.contendorLogin');
@@ -165,16 +201,15 @@ function registrarse(){
 
 
 
-
-
-
-
-
 ////////////////////////////////////////////////////////////////////////
 //                             BUSCAR CENSO        
 ////////////////////////////////////////////////////////////////////////
 
 function mostrarBuscarCenso(){
+    limpiarCampo('txtBuscarCedula');
+    limpiarMensajes('divResultadoBusquedaError');
+    limpiarMensajes('divResultadoBusqueda');
+
     // Cuando voy a buscar censo oculto boton login
     ocultar('#btnIrALogin');
     // Oculto bienvenida
@@ -187,75 +222,35 @@ function mostrarBuscarCenso(){
 
 function buscar(){
     ocultar('.buscarCenso');
+    limpiarCampo('txtNombreFormulario');
+    limpiarCampo('txtApellidoFormulario');
+    limpiarCampo('txtCedulaFormulario');
+    limpiarCampo('txtEdadFormulario');
+    limpiarCampo('selDepartamentoFormulario');
+    limpiarCampo('selOcupacionFormulario');
+    limpiarCampo('chkValidarFormulario');
+
+    
+
+
 
     let cedula = document.querySelector("#txtBuscarCedula").value;
 
     let mensaje = "";
 
-    if (sis.validarFormatoCedula(cedula) && sis.validarDigitoVerificador(cedula)) {
-        let mensajeBusqueda=sis.buscarCenso(cedula);
-        if(sis.usuarioLogin === null){
-            
-            if(mensajeBusqueda === 'Se le valido el censo! Ya no podra Modificarlo'){
-                mensaje = mensajeBusqueda;
-                mostrar('.buscarCenso');
-            }else if(mensajeBusqueda === 'Su censo esta pendiente a validar! Puede realizar modificaciones'){
-                mensaje = mensajeBusqueda;
-                //FUNCION PARA RELLENAR
-                sis.rellenarFormulario(cedula);
-                ocultar('.volverABuscar');
-                ocultar('.chck');
-                ocultar('.EnviarCenso');
-                ocultar('.ValidarCenso');
-                mostrar('.EliminarCenso');
-                mostrar('.EditarCenso');
-                mostrar('.formulario');
-            }else if(mensajeBusqueda === 'Realice el censo'){
-                mensaje = mensajeBusqueda;
-                ocultar('.volverABuscar');
-                ocultar('.chck');
-                ocultar('.EliminarCenso');
-                ocultar('.EditarCenso');
-                ocultar('.ValidarCenso');
-                mostrar('.EnviarCenso');
-                mostrar('.formulario');
-            }else{
-                mensaje = 'Hubo un error en el sistema';
-            }
-
+    if (sis.validarFormatoCedula(cedula)) {
+        if(sis.validarDigitoVerificador(cedula)){
+            let mensajeBusqueda=sis.buscarCenso(cedula);
+            mensaje = sis.mostrarFormulario(mensajeBusqueda, cedula);
         }else{
-
-            if(mensajeBusqueda === 'Esta persona tiene el censo validado! No se podra realizar un nuevo censo' && sis.usuarioLogin !== null){
-                mensaje = mensajeBusqueda;
-                mostrar('.buscarCenso');
-            }else if(mensajeBusqueda === 'Tiene el censo por validar!' && sis.usuarioLogin !== null){
-                mensaje = mensajeBusqueda;
-                //FUNCION PARA RELLENAR
-                sis.rellenarFormulario(cedula);
-                ocultar('.EnviarCenso');
-                ocultar('.EliminarCenso');
-                ocultar('.EditarCenso');
-                mostrar('.formulario');
-                mostrar('.ValidarCenso');
-                mostrar('.volverABuscar');
-            }else if(mensajeBusqueda === 'Realice el censo' && sis.usuarioLogin !== null){
-                mensaje = mensajeBusqueda;
-                ocultar('.EliminarCenso');
-                ocultar('.EditarCenso');
-                ocultar('.ValidarCenso');
-                mostrar('.EnviarCenso');
-                mostrar('.volverABuscar');
-                mostrar('.formulario');
-            }else{
-                mensaje = 'Hubo un error en el sistema';
-            }
-
+            mensaje = "El digito verificador es incorrecto";
         }
     }else{
-        mensaje = "La cédula ingresada no cumple con el formato 1.111.111-1"
+        mensaje = "La cédula ingresada no cumple con el formato 1.111.111-1";
     }
 
-    if(mensaje=="La cédula ingresada no cumple con el formato 1.111.111-1"){
+    if(mensaje==="La cédula ingresada no cumple con el formato 1.111.111-1" || mensaje==="El digito verificador es incorrecto"){
+        mostrar('.buscarCenso');
         document.querySelector("#divResultadoBusquedaError").innerHTML = mensaje;
     }else{
         mostrar("#divResultadoBusqueda");
@@ -265,5 +260,5 @@ function buscar(){
 }
 
 ////////////////////////////////////////////////////////////////////////
-//                           END CREAR USUARIO         
+//                           END BUSCAR CENSO         
 ////////////////////////////////////////////////////////////////////////
