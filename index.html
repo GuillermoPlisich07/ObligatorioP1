@@ -88,33 +88,38 @@
         </div>
 
         <!-- Buscar Censo  -->
-        <div >
+        <div class="buscarCenso">
             <h3>Buscar Censo</h3>
+
             <div class="inputs">
-                <label for="txtBuscarCedula">Cedula: </label><br><input type="text"  id="txtBuscarCedula">
+                <label for="txtBuscarCedula">Cedula: </label><input type="text" placeholder="Ej: 1.111.111-1" id="txtBuscarCedula">
             </div>
             <div class="inputs">
                 <input type="button" class="btn" value="Buscar Censo" id="btnBuscarCedula"><br>
             </div>
+             <div>
+                <br>
+                <div id="divResultadoBusquedaError"></div>
+            </div>
+        </div>
+
+        <!-- Resultado DE LA BUSQUEDA DE CEDULA -->
+        <div>
+            <div id="divResultadoBusqueda"></div>
+        </div>
+        
+        <!-- VOLVER AL BUSCAR PARA LOS CENSISTAS -->
+        <div class="inputs volverABuscar">
+            <input type="button" value="Volver a buscar" id="btnVolverABuscarCensista">
         </div>
 
         <!-- FORMULARIO GENERAL-->
         <div class="formulario">
 
-            <!-- VOLVER AL BUSCAR PARA LOS CENSISTAS -->
-            <div class="inputs">
-                <input type="button" value="Volver a buscar" id="btnVolverABuscarCensista">
-            </div>
-
-            <!-- Resultado DE LA BUSQUEDA DE CEDULA -->
-            <div>
-                <br>
-                <div id="divResultadoBusqueda"></div>
-            </div>
-
             <!-- FORMULARIO -->
             <h3>CENSO</h3>
-            <div class="nomApe">
+            
+            <div class="parInput">
                 <div class="inputs">
                     <label for="txtNombreFormulario">Nombre: </label><input type="text" id="txtNombreFormulario">
                 </div>
@@ -122,8 +127,13 @@
                     <label for="txtAppellidoFormulario">Apellido: </label><input type="text" id="txtAppellidoFormulario">
                 </div>
             </div>
-            <div class="inputs">
-                <label for="txtCedulaFormulario">Cedula: </label><input type="text" id="txtCedulaFormulario">
+            <div class="parInput">
+                <div class="inputs">
+                    <label for="txtCedulaFormulario">Cedula: </label><input type="text" id="txtCedulaFormulario">
+                </div>
+                <div class="inputs">
+                    <label for="txtEdadFormulario">Edad: </label><input type="text" id="txtEdadFormulario">
+                </div>
             </div>
             <div class="inputs">
                 <label for="selDepartamentoFormulario">Departamento: </label><select id="selDepartamentoFormulario"></select>
@@ -139,15 +149,20 @@
             <div class="inputs EnviarCenso">
                 <input type="button" value="Enviar Censo" id="btnEnviarCenso">
             </div>
+            
+            <!-- Boton Editar -->
+            <div class="inputs EditarCenso">
+                <input type="button" value="Editar Censo" id="btnEditarCenso">
+            </div>
 
             <!-- Boton Eliminar -->
-            <div class="inputs EnviarCenso">
+            <div class="inputs EliminarCenso">
                 <input type="button" value="Eliminar Censo" id="btnEliminarCenso">
             </div>
 
-            <!-- Boton Editar -->
-            <div class="inputs EnviarCenso">
-                <input type="button" value="Editar Censo" id="btnEditarCenso">
+            <!-- Boton Validar -->
+            <div class="inputs ValidarCenso">
+                <input type="button" value="Validar Censo" id="btnValidarCenso">
             </div>
             
         </div>
