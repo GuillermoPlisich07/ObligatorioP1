@@ -2,7 +2,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap%22");
 
-html, body{
+html, .btn, body{
     margin: 0;
     padding: 0;
     font-family: "Poppins", sans-serif;
@@ -13,7 +13,7 @@ h3{
     text-transform: uppercase;
 }
 
-#divResultadoBusqueda{
+#divResultadoBusqueda, #divResultadoFormulario, #divResultadoBusquedaError{
     text-align: center;
 }
 
@@ -87,22 +87,25 @@ h3{
 
 .btn.btn-crearUsuario{
     background-color: rgb(99, 99, 184);
-    color: white
 }
 
 .btn.btn-dashboard{
     background-color: rgb(99, 99, 184);
 }
 
-.btn.btn-Editar{
+.btn.btn-Warning{
     background-color: #dfce37;
 }
 
-.btn.btn-Eliminar{
+.btn.btn-Danger{
     background-color: #c75048;
 }
 
-.btn.btn-Validar{
+.btn.btn-Normal{
+    background-color: #8a8a8a;
+}
+
+.btn.btn-Primary{
     background-color: #2196F3;
 }
 

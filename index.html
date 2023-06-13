@@ -16,29 +16,33 @@
         <ul class="navLi">
             <li>
                 <!-- Login para censista -->
-                <input class="btn btn-login" id="btnIrALogin" type="button" value="Buscar Censo">
+                <input class="btn btn-login" id="btnIrACenso" type="button" value="Buscar Censo">
             </li>
             <li>
                 <!-- Login para censista -->
-                <input class="btn btn-login" id="btnIrALogin" type="button" value="Nuevo Censo">
+                <input class="btn btn-login" id="btnIrANuevoCenso" type="button" value="Nuevo Censo">
             </li>
             <li>
                 <!-- Login para censista -->
-                <input class="btn btn-login" id="btnIrALogin" type="button" value="Reasignar Censo">
+                <input class="btn btn-login" id="btnIrAReasignarCenso" type="button" value="Reasignar Censo">
             </li>
             <li>
                 <!-- Login para censista -->
-                <input class="btn btn-login" id="btnIrALogin" type="button" value="Censos para validar">
+                <input class="btn btn-login" id="btnIrValidarCenso" type="button" value="Censos para validar">
+            </li>
+            <li>
+                <!-- Login para censista -->
+                <input class="btn btn-login" id="btnIrAEstadisticas" type="button" value="Estadisticas">
             </li>
 
 
 
 
 
-
-
-
-
+            <li>
+                <!-- Login para censista -->
+                <input class="btn btn-dashboard" id="btnDashbord" type="button" value="Dashboard">
+            </li>
             <li>
                 <!-- Login para censista -->
                 <input class="btn btn-login" id="btnIrALogin" type="button" value="Login">
@@ -47,10 +51,7 @@
                 <!-- Login para censista -->
                 <input class="btn btn-logout" id="btnLogout" type="button" value="Logout">
             </li>
-            <li>
-                <!-- Login para censista -->
-                <input class="btn btn-dashboard" id="btnDashbord" type="button" value="Dashboard">
-            </li>
+            
         </ul>
     </div>
 
@@ -63,6 +64,11 @@
             <!-- Boton Invitado -->
             <input type="button" class="btn" id="btnIrAInvitado" value="Comenzar Censo">
         </div>
+
+
+
+
+
 
         <!-- Login  -->
         <div class="contendorLogin">
@@ -113,6 +119,15 @@
              
         </div>
 
+
+
+
+
+
+
+
+
+
         <!-- Buscar Censo  -->
         <div class="buscarCenso">
             <h3>Buscar Censo</h3>
@@ -129,19 +144,27 @@
             </div>
         </div>
 
-
         <!-- Resultado DE LA BUSQUEDA DE CEDULA -->
         <div>
             <div id="divResultadoBusqueda"></div>
         </div>
         
         <!-- VOLVER AL BUSCAR PARA LOS CENSISTAS -->
-        <div class="inputs volverABuscar">
-            <input type="button" value="Volver a buscar" id="btnVolverABuscarCensista">
+        <div class="inputs divVolverABuscar">
+            <input type="button" class="btn btn-Primary" value="Volver a buscar" id="btnVolverABuscarCensista">
         </div>
 
+
+
+
+
+
+
+
+
+
         <!-- FORMULARIO GENERAL-->
-        <div class="formulario">
+        <div class="divFormulario">
 
             <!-- FORMULARIO -->
             <h3>CENSO</h3>
@@ -156,7 +179,7 @@
             </div>
             <div class="parInput">
                 <div class="inputs">
-                    <label for="txtCedulaFormulario">Cedula: </label><input type="text" id="txtCedulaFormulario">
+                    <label for="txtCedulaFormulario">Cedula: </label><input type="text" placeholder="Ej: 1.111.111-1" id="txtCedulaFormulario">
                 </div>
                 <div class="inputs">
                     <label for="txtEdadFormulario">Edad: </label><input type="text" id="txtEdadFormulario">
@@ -169,7 +192,7 @@
                 <label for="selOcupacionFormulario">Ocupacion: </label><select id="selOcupacionFormulario"></select>
             </div>
             <div class="chck">
-                <label for="chkValidarFormulario">Validar:</label><input type="checkbox" id="chkValidarFormulario">
+                <label for="chkValidarFormulario">Validar:</label><input type="checkbox" value id="chkValidarFormulario">
             </div>
             <!-- FORMULARIO END -->
             
@@ -180,17 +203,46 @@
             
             <!-- Boton Editar -->
             <div class="inputs EditarCenso">
-                <input type="button" class="btn btn-Editar" value="Editar Censo" id="btnEditarCenso">
+                <input type="button" class="btn btn-Warning" value="Editar Censo" id="btnEditarCenso">
             </div>
 
             <!-- Boton Eliminar -->
             <div class="inputs EliminarCenso">
-                <input type="button" class="btn btn-Eliminar" value="Eliminar Censo" id="btnEliminarCenso">
+                <input type="button" class="btn btn-Danger" value="Eliminar Censo" id="btnEliminarCenso">
             </div>
 
             <!-- Boton Validar -->
             <div class="inputs ValidarCenso">
-                <input type="button" class="btn btn-Validar" value="Validar Censo" id="btnValidarCenso">
+                <input type="button" class="btn btn-Primary" value="Validar Censo" id="btnValidarCenso">
+            </div>
+            
+        </div>
+
+        <!-- RESULTADO FORMULARIO ELIMINAR -->
+        <div class="divResultadoEliminar">
+            <div>
+                <h3>Desea eliminar este censo?</h3>
+            </div>
+
+            <div class="parInput">
+                <div class="inputs">
+                    <input type="button" class="btn" id="btnConfirmarEliminar" value="Confirmar">
+                </div>
+                
+                <div class="inputs">
+                    <input type="button" class="btn btn-Normal" id="btnCancelarEliminar" value="Cancelar">
+                </div>
+            </div>
+
+            <div class="inputs">
+                <div id="divResultadoEliminarError"></div>
+            </div>
+        </div>
+
+         <!-- RESULTADO FORMULARIO GENERAL-->
+        <div class="divMensajeFormulario">
+            <div class="inputs">
+                <div id="divResultadoFormulario"></div>
             </div>
             
         </div>

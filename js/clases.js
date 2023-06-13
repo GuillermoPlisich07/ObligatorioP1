@@ -23,3 +23,19 @@ class Censo{
         this.checkCensado=false;
     }
 }
+
+class Ocupacion{
+    static idOcupacion = 0;
+    constructor(){
+        this.id = Ocupacion.idOcupacion++;
+        this.nombre;
+    }
+}
+
+class Departamento{
+    static idDepartamento = 0;
+    constructor(){
+        this.id = Departamento.idDepartamento++;
+        this.nombre;
+    }
+}

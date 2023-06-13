@@ -10,8 +10,11 @@ class Sistema{
         //Array de censos 
         this.censos = new Array();
 
+        //Array Departamentos
+        this.departamentos = new Array();
 
-
+        //Array Ocupacion
+        this.ocupaciones = new Array();
 
     }
 
@@ -38,8 +41,8 @@ class Sistema{
         Censo1.apellido= 'Plisich';
         Censo1.edad = '23';
         Censo1.cedula = '52835922';
-        Censo1.departamento = 'Canelones';
-        Censo1.ocupacion = 'Estudiante';
+        Censo1.departamento = '1';
+        Censo1.ocupacion = '2';
         Censo1.idCensista=this.usuarios[0];
         Censo1.checkCensado=false;
         this.censos.push(Censo1);
@@ -49,14 +52,90 @@ class Sistema{
         Censo2.apellido= 'Fascendini';
         Censo2.edad = '22';
         Censo2.cedula = '50633843';
-        Censo2.departamento = 'Montevideo';
-        Censo2.ocupacion = 'Estudiante';
+        Censo2.departamento = '1';
+        Censo2.ocupacion = '2';
         Censo2.idCensista=this.usuarios[1];
         Censo2.checkCensado=true;
         this.censos.push(Censo2);
 
         //this.usuarioLogin=this.usuarios[0];
     }
+
+    precargaDepartamentos(){
+        let dep1 = new Departamento();
+        dep1.nombre = 'Artigas'; 
+        this.departamentos.push(dep1);
+        let dep2 = new Departamento();
+        dep2.nombre = 'Canelones'; 
+        this.departamentos.push(dep2);
+        let dep3 = new Departamento();
+        dep3.nombre = 'Cerro Largo'; 
+        this.departamentos.push(dep3);
+        let dep4 = new Departamento();
+        dep4.nombre = 'Colonia'; 
+        this.departamentos.push(dep4);
+        let dep5 = new Departamento();
+        dep5.nombre = 'Durazno'; 
+        this.departamentos.push(dep5);
+        let dep6 = new Departamento();
+        dep6.nombre = 'Flores'; 
+        this.departamentos.push(dep6);
+        let dep7 = new Departamento();
+        dep7.nombre = 'Florida'; 
+        this.departamentos.push(dep7);
+        let dep8 = new Departamento();
+        dep8.nombre = 'Lavalleja'; 
+        this.departamentos.push(dep8);
+        let dep9 = new Departamento();
+        dep9.nombre = 'Maldonado'; 
+        this.departamentos.push(dep9);
+        let dep10 = new Departamento();
+        dep10.nombre = 'Montevideo'; 
+        this.departamentos.push(dep10);
+        let dep11 = new Departamento();
+        dep11.nombre = 'Paysandú'; 
+        this.departamentos.push(dep11);
+        let dep12 = new Departamento();
+        dep12.nombre = 'Río Negro'; 
+        this.departamentos.push(dep12);
+        let dep13 = new Departamento();
+        dep13.nombre = 'Rivera'; 
+        this.departamentos.push(dep13);
+        let dep14 = new Departamento();
+        dep14.nombre = 'Rocha'; 
+        this.departamentos.push(dep14);
+        let dep15 = new Departamento();
+        dep15.nombre = 'Salto'; 
+        this.departamentos.push(dep15);
+        let dep16 = new Departamento();
+        dep16.nombre = 'San José'; 
+        this.departamentos.push(dep16);
+        let dep17 = new Departamento();
+        dep17.nombre = 'Soriano'; 
+        this.departamentos.push(dep17);
+        let dep18 = new Departamento();
+        dep18.nombre = 'Tacuarembó'; 
+        this.departamentos.push(dep18);
+        let dep19 = new Departamento();
+        dep19.nombre = 'Treinta y Tres'; 
+        this.departamentos.push(dep19);
+    }
+
+    precargaOcupacion(){
+        let ocup1 = new Ocupacion();
+        ocup1.nombre='Dependiente';
+        this.ocupaciones.push(ocup1);
+        let ocup2 = new Ocupacion();
+        ocup2.nombre='Independiente';
+        this.ocupaciones.push(ocup2);
+        let ocup3 = new Ocupacion();
+        ocup3.nombre='Estudiante';
+        this.ocupaciones.push(ocup3);
+        let ocup4 = new Ocupacion();
+        ocup4.nombre='no trabaja';
+        this.ocupaciones.push(ocup4);
+    }
+
 
 
     ///////////////////////// VALIDACIONES GLOBALES
@@ -66,6 +145,9 @@ class Sistema{
         return (dato.trim().length > 0)
     }
     
+    esNumerico(dato){
+        return !isNaN(Number(dato));
+    }
 
 
     ///////////////////////// CEDULA OPERACIONES
@@ -323,6 +405,8 @@ class Sistema{
 
 
     ////////////////////////// FORMULARIOS 
+
+    //Rellenar Formulario
     traerObjetoCenso(cedula){
         let cedulaFomateada = this.formatearCedula(cedula);
         let censo = null;
@@ -339,7 +423,6 @@ class Sistema{
 
     rellenarFormulario(cedula){
         let censo = this.traerObjetoCenso(cedula);
-        console.log(censo);
         document.querySelector('#txtNombreFormulario').value=censo.nombre;
         document.querySelector('#txtApellidoFormulario').value=censo.apellido;
         document.querySelector('#txtEdadFormulario').value=censo.edad;
@@ -349,6 +432,7 @@ class Sistema{
         document.querySelector('#chkValidarFormulario').value=censo.checkCensado;
     }
 
+    //Mostrar Formulario
     mostrarFormulario(mensajeBusqueda, cedula){
         let mensaje = '';
         if(this.usuarioLogin === null){
@@ -359,22 +443,22 @@ class Sistema{
             }else if(mensajeBusqueda === 'Su censo esta pendiente a validar! Puede realizar modificaciones'){
                 mensaje = mensajeBusqueda;
                 this.rellenarFormulario(cedula);
-                ocultar('.volverABuscar');
+                ocultar('.divVolverABuscar');
                 ocultar('.chck');
                 mostrar('.EliminarCenso');
                 mostrar('.EditarCenso');
                 ocultar('.ValidarCenso');
                 ocultar('.EnviarCenso');
-                mostrar('.formulario');
+                mostrar('.divFormulario');
             }else if(mensajeBusqueda === 'Realice el censo'){
                 mensaje = mensajeBusqueda;
-                ocultar('.volverABuscar');
+                ocultar('.divVolverABuscar');
                 ocultar('.chck');
                 ocultar('.EliminarCenso');
                 ocultar('.EditarCenso');
                 ocultar('.ValidarCenso');
                 mostrar('.EnviarCenso');
-                mostrar('.formulario');
+                mostrar('.divFormulario');
             }else{
                 mensaje = 'Hubo un error en el sistema';
             }
@@ -391,16 +475,18 @@ class Sistema{
                 ocultar('.EliminarCenso');
                 ocultar('.EditarCenso');
                 mostrar('.ValidarCenso');
-                mostrar('.volverABuscar');
-                mostrar('.formulario');
+                mostrar('.chck');
+                mostrar('.divVolverABuscar');
+                mostrar('.divFormulario');
             }else if(mensajeBusqueda === 'Realice el censo' && this.usuarioLogin !== null){
                 mensaje = mensajeBusqueda;
                 mostrar('.EnviarCenso');
                 ocultar('.EliminarCenso');
                 ocultar('.EditarCenso');
                 ocultar('.ValidarCenso');
-                mostrar('.volverABuscar');
-                mostrar('.formulario');
+                mostrar('.chck');
+                mostrar('.divVolverABuscar');
+                mostrar('.divFormulario');
             }else{
                 mensaje = 'Hubo un error en el sistema';
             }
@@ -409,8 +495,65 @@ class Sistema{
         return mensaje;
     }    
 
+    //Eliminar
 
-    
+    buscarPosicionCenso(cedula){
+        let i=0;
+        let bandera=false;
+        while(i<this.censos.length && bandera === false){
+            let objetoCenso = this.censos[i];
+            if(objetoCenso.cedula === cedula){
+                bandera=true;
+            }
+            i++;
+        }
+        i--;
+        return i;
+    }
+
+    eliminar(cedula){
+        let posicion = this.buscarPosicionCenso(cedula);
+        let censosNuevos= new Array();
+        let mensaje = '';
+        if(posicion>=0){
+            censosNuevos=this.censos.splice(posicion, 1);
+            mensaje='Se elimino correctamente! Se le retornara a buscar censo';
+        }else{
+            mensaje = 'Por alguna extraña razon el censo no fue encontrado,'
+        }
+        
+        return mensaje;
+    }
+
+    //Enviar Formulario
+    enviar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar){
+        let cedulaNueva = this.formatearCedula(cedula);
+        let mensaje = '';
+
+        let censosNuevo = new Censo();
+        censosNuevo.nombre = nombre;
+        censosNuevo.apellido= apellido;
+        censosNuevo.edad = edad;
+        censosNuevo.cedula = cedulaNueva;
+        censosNuevo.departamento = departamento;
+        censosNuevo.ocupacion = ocupacion;
+        censosNuevo.checkCensado=checkValidar;
+
+
+        if(this.usuarioLogin === null){
+            let objetoUsuario = this.usuarios[[Math.floor(Math.random() * this.usuarios.length)]];
+            censosNuevo.idCensista=objetoUsuario;
+            mensaje=`El censo se proceso correctamente! El cenisista asingnado es: ${objetoUsuario.nombre}`;
+        }else{
+            censosNuevo.idCensista=this.usuarioLogin;
+            mensaje='EL censo se proceso correctamente!';
+        }
+
+        this.censos.push(censosNuevo);
+
+        return mensaje;
+
+    }
 
 
 
