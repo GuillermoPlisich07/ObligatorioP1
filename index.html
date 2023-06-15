@@ -9,30 +9,26 @@
 </head>
 <body>
     
-    <!-- Barra De Navegacion -->
+    <!-- BARRA DE NAVEGACION -->
     <div class="navContenedor">
         <!-- Logo -->
         <a href=""><img class="logo" src="https://p1.develotion.com/2023_03/logo.jpg" alt="logo"></a>
         <ul class="navLi">
             <li>
-                <!-- Login para censista -->
-                <input class="btn btn-login" id="btnIrACenso" type="button" value="Buscar Censo">
+                <!-- Buscar Censo - Nuevo Censo -->
+                <input class="btn btn-login" id="btnIrACenso" type="button" value="Buscar Censo - Nuevo Censo">
             </li>
             <li>
-                <!-- Login para censista -->
-                <input class="btn btn-login" id="btnIrANuevoCenso" type="button" value="Nuevo Censo">
+                <!-- Reasignar Censo -->
+                <input class="btn btn-Normal" id="btnIrAReasignarCenso" type="button" value="Reasignar Censo">
             </li>
             <li>
-                <!-- Login para censista -->
-                <input class="btn btn-login" id="btnIrAReasignarCenso" type="button" value="Reasignar Censo">
+                <!-- Censos para validar -->
+                <input class="btn btn-Primary" id="btnIrValidarCenso" type="button" value="Censos para validar">
             </li>
             <li>
-                <!-- Login para censista -->
-                <input class="btn btn-login" id="btnIrValidarCenso" type="button" value="Censos para validar">
-            </li>
-            <li>
-                <!-- Login para censista -->
-                <input class="btn btn-login" id="btnIrAEstadisticas" type="button" value="Estadisticas">
+                <!-- Estadisticas -->
+                <input class="btn btn-Warning" id="btnIrAEstadisticas" type="button" value="Estadisticas">
             </li>
 
 
@@ -40,7 +36,7 @@
 
 
             <li>
-                <!-- Login para censista -->
+                <!-- Dashboard -->
                 <input class="btn btn-dashboard" id="btnDashbord" type="button" value="Dashboard">
             </li>
             <li>
@@ -48,14 +44,14 @@
                 <input class="btn btn-login" id="btnIrALogin" type="button" value="Login">
             </li>
             <li>
-                <!-- Login para censista -->
+                <!-- Logout para censista -->
                 <input class="btn btn-logout" id="btnLogout" type="button" value="Logout">
             </li>
             
         </ul>
     </div>
 
-    <!--  -->
+    <!--CONTENIDO PRINCIPAL  -->
     <div class="contenedorPrincipal">
         <!-- Bienvenida y comienzo de censo-->
         <div class="contendorBienvenida">
@@ -123,11 +119,6 @@
 
 
 
-
-
-
-
-
         <!-- Buscar Censo  -->
         <div class="buscarCenso">
             <h3>Buscar Censo</h3>
@@ -153,11 +144,6 @@
         <div class="inputs divVolverABuscar">
             <input type="button" class="btn btn-Primary" value="Volver a buscar" id="btnVolverABuscarCensista">
         </div>
-
-
-
-
-
 
 
 
@@ -229,13 +215,13 @@
                     <input type="button" class="btn" id="btnConfirmarEliminar" value="Confirmar">
                 </div>
                 
-                <div class="inputs">
+                <div class="inputs"> 
                     <input type="button" class="btn btn-Normal" id="btnCancelarEliminar" value="Cancelar">
                 </div>
             </div>
 
             <div class="inputs">
-                <div id="divResultadoEliminarError"></div>
+                <div class="divResultadoEliminarError"></div>
             </div>
         </div>
 
@@ -244,15 +230,11 @@
             <div class="inputs">
                 <div id="divResultadoFormulario"></div>
             </div>
-            
         </div>
 
         
         
     </div>
-
-
-
 
 
 

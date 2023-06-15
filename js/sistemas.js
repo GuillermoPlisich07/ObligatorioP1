@@ -43,7 +43,7 @@ class Sistema{
         Censo1.cedula = '52835922';
         Censo1.departamento = '1';
         Censo1.ocupacion = '2';
-        Censo1.idCensista=this.usuarios[0];
+        Censo1.idCensista=this.usuarios[1];
         Censo1.checkCensado=false;
         this.censos.push(Censo1);
 
@@ -390,7 +390,12 @@ class Sistema{
                         mensaje = 'Su censo esta pendiente a validar! Puede realizar modificaciones';
                     }else{
                         mensaje = 'Tiene el censo por validar!';
+                        if(objetoCenso.idCensista.id !== this.usuarioLogin.id){
+                            mensaje += `<br> Advertencia! Este censo esta asignado a la persona: ${objetoCenso.idCensista.nombre}.`
+                        }
                     }
+
+                    
                 }
             }
             i++;
@@ -421,11 +426,16 @@ class Sistema{
         return censo;
     }
 
+    cedulaConFormato(cedula){
+        
+    }
+
     rellenarFormulario(cedula){
         let censo = this.traerObjetoCenso(cedula);
         document.querySelector('#txtNombreFormulario').value=censo.nombre;
         document.querySelector('#txtApellidoFormulario').value=censo.apellido;
         document.querySelector('#txtEdadFormulario').value=censo.edad;
+        let formatoCedula = this.cedulaConFormato(cedula);
         document.querySelector('#txtCedulaFormulario').value=censo.cedula;
         document.querySelector('#selDepartamentoFormulario').value=censo.departamento;
         document.querySelector('#selOcupacionFormulario').value=censo.ocupacion;
@@ -468,16 +478,6 @@ class Sistema{
             if(mensajeBusqueda === 'Esta persona tiene el censo validado! No se podra realizar un nuevo censo' && this.usuarioLogin !== null){
                 mensaje = mensajeBusqueda;
                 mostrar('.buscarCenso');
-            }else if(mensajeBusqueda === 'Tiene el censo por validar!' && this.usuarioLogin !== null){
-                mensaje = mensajeBusqueda;
-                this.rellenarFormulario(cedula);
-                ocultar('.EnviarCenso');
-                ocultar('.EliminarCenso');
-                ocultar('.EditarCenso');
-                mostrar('.ValidarCenso');
-                mostrar('.chck');
-                mostrar('.divVolverABuscar');
-                mostrar('.divFormulario');
             }else if(mensajeBusqueda === 'Realice el censo' && this.usuarioLogin !== null){
                 mensaje = mensajeBusqueda;
                 mostrar('.EnviarCenso');
@@ -487,8 +487,16 @@ class Sistema{
                 mostrar('.chck');
                 mostrar('.divVolverABuscar');
                 mostrar('.divFormulario');
-            }else{
-                mensaje = 'Hubo un error en el sistema';
+            }else if(this.usuarioLogin !== null){
+                mensaje = mensajeBusqueda;
+                this.rellenarFormulario(cedula);
+                ocultar('.EnviarCenso');
+                ocultar('.EliminarCenso');
+                ocultar('.EditarCenso');
+                mostrar('.ValidarCenso');
+                mostrar('.chck');
+                mostrar('.divVolverABuscar');
+                mostrar('.divFormulario');
             }
 
         }
@@ -553,6 +561,32 @@ class Sistema{
 
         return mensaje;
 
+    }
+
+    // Modiciar Censo 
+    modificar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar){
+        let cedulaNueva = this.formatearCedula(cedula);
+        let mensaje = '';
+        
+        let objetoCenso = this.traerObjetoCenso(cedula);
+
+        objetoCenso.nombre = nombre;
+        objetoCenso.apellido= apellido;
+        objetoCenso.edad = edad;
+        objetoCenso.cedula = cedulaNueva;
+        objetoCenso.departamento = departamento;
+        objetoCenso.ocupacion = ocupacion;
+        objetoCenso.checkCensado=checkValidar;
+
+
+        if(this.usuarioLogin === null){
+            objetoCenso.idCensista = this.usuarioLogin;
+            mensaje=`El censo se edito correctamente!`;
+        }else{
+            mensaje='EL censo se valido correctamente!';
+        }
+
+        return mensaje;
     }
 
 

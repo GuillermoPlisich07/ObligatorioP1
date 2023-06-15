@@ -14,7 +14,9 @@ function eventos(){
     document.querySelector('#btnConfirmarEliminar').addEventListener('click', eliminarCenso);
     document.querySelector('#btnCancelarEliminar').addEventListener('click', cancelarEliminacion);
     document.querySelector('#btnVolverABuscarCensista').addEventListener('click', mostrarBuscarCenso);
-    document.querySelector('#btnEnviarCenso').addEventListener('click', enviarCenso);
+    document.querySelector('#btnEnviarCenso').addEventListener('click', llamarEnviar);
+    document.querySelector('#btnEditarCenso').addEventListener('click', llamarEdiar);
+    document.querySelector('#btnValidarCenso').addEventListener('click', llamarValidar);
     
 
 
@@ -66,7 +68,6 @@ function volverAlDashboard(){
         ocultar('#btnIrAInvitado');
         mostrar('#btnLogout');
         mostrar('#btnIrACenso');
-        mostrar('#btnIrANuevoCenso');
         mostrar('#btnIrAReasignarCenso');
         mostrar('#btnIrValidarCenso');
         mostrar('#btnIrAEstadisticas');
@@ -91,7 +92,6 @@ function onload(){
     ocultar('.divVolverABuscar');
     ocultar('#divResultadoBusqueda');
     ocultar('#btnIrACenso');
-    ocultar('#btnIrANuevoCenso');
     ocultar('#btnIrAReasignarCenso');
     ocultar('#btnIrValidarCenso');
     ocultar('#btnIrAEstadisticas');
@@ -331,10 +331,20 @@ function buscar(){
 //                         BOTONES FORMULARIO
 ////////////////////////////////////////////////////////////////////////
 
+function mostrarMensaje(mensaje){
+    limpiarMensajes('divResultadoFormulario');
+    document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
+    mostrar('.divMensajeFormulario');
+    ocultar('.divFormulario');
+    ocultar('#divResultadoBusqueda');
+    ocultar('.divVolverABuscar');
+    let temporizador = setTimeout(mostrarBuscarCenso, 4000);
+}
+
 //ELIMINAR
 function mostrarConfirmacionDeEliminar(){
     ocultar('.divFormulario');
-    ocultar('#divResultadoBusqueda')
+    ocultar('#divResultadoBusqueda');
     mostrar('.divResultadoEliminar');
     
 }
@@ -349,9 +359,10 @@ function eliminarCenso(){
     }
 
     if(mensaje === 'Usted no esta autorizado para eliminar este censo'){
-        document.querySelector('#divResultadoEliminarError').innerHTML=mensaje;
+        limpiarMensajes('divResultadoEliminarError');
+        document.querySelector('.divResultadoEliminarError').innerHTML=mensaje;
     }else{
-
+        limpiarMensajes('divResultadoFormulario');
         document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
         ocultar('.divResultadoEliminar');
         mostrar('.divMensajeFormulario');
@@ -368,15 +379,7 @@ function cancelarEliminacion(){
 }
 
 //ENVIAR
-function enviarCenso(){
-    let nombre = document.querySelector('#txtNombreFormulario').value;
-    let apellido = document.querySelector('#txtApellidoFormulario').value;
-    let cedula = document.querySelector('#txtCedulaFormulario').value;
-    let edad = document.querySelector('#txtEdadFormulario').value;
-    let departamento = document.querySelector('#selDepartamentoFormulario').value;
-    let ocupacion = document.querySelector('#selOcupacionFormulario').value;
-    let checkValidar = document.querySelector('#chkValidarFormulario').checked;
-
+function enviarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar){
 
     let mensaje = '';
 
@@ -416,6 +419,96 @@ function enviarCenso(){
     console.log(mensaje);
     console.log(sis.censos);
 }
+
+function llamarEnviar(){
+    let nombre = document.querySelector('#txtNombreFormulario').value;
+    let apellido = document.querySelector('#txtApellidoFormulario').value;
+    let cedula = document.querySelector('#txtCedulaFormulario').value;
+    let edad = document.querySelector('#txtEdadFormulario').value;
+    let departamento = document.querySelector('#selDepartamentoFormulario').value;
+    let ocupacion = document.querySelector('#selOcupacionFormulario').value;
+    let checkValidar = document.querySelector('#chkValidarFormulario').checked;
+    
+    enviarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar);
+}
+
+//EDITAR
+function modificarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar){
+
+    let mensaje = '';
+    let error = true;
+
+    if(sis.esVacio(nombre) && sis.esVacio(apellido) && sis.esVacio(cedula) && sis.esVacio(edad)){
+        if(departamento>=0 && ocupacion>=0){
+            if (sis.esNumerico(edad)) {
+                if(edad>=0 && edad<=130){
+                    if(sis.validarFormatoCedula(cedula)) {
+                        if(sis.validarDigitoVerificador(cedula)){
+                            if(sis.usuarioLogin === null){
+                                mensaje = sis.modificar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar);
+                                mensaje += '<br> Se le retornara a buscar censo';
+                                error = false;
+                            }else{
+                                if(checkValidar===true){
+                                    mensaje = sis.modificar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar);
+                                    mensaje += '<br> Se le retornara a buscar censo';
+                                    error = false;
+                                }else{
+                                    mensaje = 'Debe validar el censo.'
+                                }
+                            }
+                        }else{
+                            mensaje = 'El digito verificador es incorrecto.';
+                        }
+                    }else{
+                        mensaje = 'La cédula ingresada no cumple con el formato 1.111.111-1.';
+                    }
+                }else{
+                    mensaje = 'La edad debe de estar en el rango de 0 a 130 años.';
+                }
+            } else {
+                mensaje = 'La edad debe de ser de tipo numerico.';
+            }
+        }else{
+            mensaje = 'Debe seleccionar en el apartado ocupacion o departemento una opcion.';
+        }
+    }else{
+        mensaje = 'Debe completar todos los datos.';
+    }
+    
+    if(error){
+        document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
+        mostrar('.divMensajeFormulario');
+    }else{
+        mostrarMensaje(mensaje);
+    }
+   
+}
+
+function llamarEdiar(){
+    let nombre = document.querySelector('#txtNombreFormulario').value;
+    let apellido = document.querySelector('#txtApellidoFormulario').value;
+    let cedula = document.querySelector('#txtCedulaFormulario').value;
+    let edad = document.querySelector('#txtEdadFormulario').value;
+    let departamento = document.querySelector('#selDepartamentoFormulario').value;
+    let ocupacion = document.querySelector('#selOcupacionFormulario').value;
+    let checkValidar = document.querySelector('#chkValidarFormulario').checked;
+
+    modificarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar);
+}
+
+function llamarValidar(){
+    let nombre = document.querySelector('#txtNombreFormulario').value;
+    let apellido = document.querySelector('#txtApellidoFormulario').value;
+    let cedula = document.querySelector('#txtCedulaFormulario').value;
+    let edad = document.querySelector('#txtEdadFormulario').value;
+    let departamento = document.querySelector('#selDepartamentoFormulario').value;
+    let ocupacion = document.querySelector('#selOcupacionFormulario').value;
+    let checkValidar = document.querySelector('#chkValidarFormulario').checked;
+
+    modificarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar);
+}
+
 
 ////////////////////////////////////////////////////////////////////////
 //                                   
