@@ -22,16 +22,18 @@ class Sistema{
 
     precargarUsuario(){
         let Usuario1 = new Usuario();
-        Usuario1.nombre='Guille';
+        Usuario1.nombre='Guille Plisich';
         Usuario1.nombreUsuario='guillermo.plisich';
         Usuario1.password='123Guille';
         this.usuarios.push(Usuario1);
 
         let Usuario2 = new Usuario();
-        Usuario2.nombre='Leo';
+        Usuario2.nombre='Leo Fascendini';
         Usuario2.nombreUsuario='leo.fascendini';
         Usuario2.password='123Leo';
         this.usuarios.push(Usuario2);
+
+
 
     }
 
@@ -39,12 +41,12 @@ class Sistema{
         let Censo1 = new Censo();
         Censo1.nombre = 'Guillermo';
         Censo1.apellido= 'Plisich';
-        Censo1.edad = '23';
+        Censo1.edad = '15';
         Censo1.cedula = '52835922';
-        Censo1.departamento = '1';
+        Censo1.departamento = '9';
         Censo1.ocupacion = '2';
-        Censo1.idCensista=this.usuarios[1];
-        Censo1.checkCensado=false;
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
         this.censos.push(Censo1);
 
         let Censo2 = new Censo();
@@ -52,13 +54,13 @@ class Sistema{
         Censo2.apellido= 'Fascendini';
         Censo2.edad = '22';
         Censo2.cedula = '50633843';
-        Censo2.departamento = '1';
+        Censo2.departamento = '9';
         Censo2.ocupacion = '2';
-        Censo2.idCensista=this.usuarios[1];
+        Censo2.idCensista=this.usuarios[0];
         Censo2.checkCensado=true;
         this.censos.push(Censo2);
 
-        //this.usuarioLogin=this.usuarios[0];
+        
     }
 
     precargaDepartamentos(){
@@ -136,6 +138,19 @@ class Sistema{
         this.ocupaciones.push(ocup4);
     }
 
+    ////////////////////////// Censos para el censista
+    censosUsuarioNoValidados(){
+        let arrayCensos = new Array();
+
+        for (let i = 0; i < this.censos.length; i++) {
+            let objetoCenso = this.censos[i];
+            if(objetoCenso.idCensista.id === this.usuarioLogin.id && objetoCenso.checkCensado !== true){
+                arrayCensos.push(objetoCenso);
+            }
+        }
+
+        return arrayCensos;
+    }
 
 
     ///////////////////////// VALIDACIONES GLOBALES
@@ -261,10 +276,6 @@ class Sistema{
 
         return resultado;
     }
-
-
-
-
 
     ////////////////////////// USUARIO LOGIN 
 
@@ -427,7 +438,34 @@ class Sistema{
     }
 
     cedulaConFormato(cedula){
-        
+        let cedulaNueva = '';
+        if(cedula.length === 8){
+            for(let i=0; i<cedula.length; i++){
+                if(i === 1 || i === 4){
+                    cedulaNueva += '.';
+                    cedulaNueva += cedula.charAt(i);
+                }else if(i === cedula.length -1){
+                    cedulaNueva += '-';
+                    cedulaNueva += cedula.charAt(i);
+                }else{
+                    cedulaNueva +=cedula.charAt(i);
+                }
+            }
+        }else if(cedula.length === 7){
+            for(let i=0; i<cedula.length; i++){
+                if(i === 1){
+                    cedulaNueva += '.';
+                    cedulaNueva += cedula.charAt(i);
+                }else if(i === cedula.length -1){
+                    cedulaNueva += '-';
+                    cedulaNueva += cedula.charAt(i);
+                }else{
+                    cedulaNueva +=cedula.charAt(i);
+                }
+            }
+        }
+
+        return cedulaNueva;
     }
 
     rellenarFormulario(cedula){
@@ -435,40 +473,40 @@ class Sistema{
         document.querySelector('#txtNombreFormulario').value=censo.nombre;
         document.querySelector('#txtApellidoFormulario').value=censo.apellido;
         document.querySelector('#txtEdadFormulario').value=censo.edad;
-        let formatoCedula = this.cedulaConFormato(cedula);
-        document.querySelector('#txtCedulaFormulario').value=censo.cedula;
+        let formatoCedula = this.cedulaConFormato(censo.cedula);
+        document.querySelector('#txtCedulaFormulario').value=formatoCedula;
         document.querySelector('#selDepartamentoFormulario').value=censo.departamento;
         document.querySelector('#selOcupacionFormulario').value=censo.ocupacion;
         document.querySelector('#chkValidarFormulario').value=censo.checkCensado;
     }
 
     //Mostrar Formulario
-    mostrarFormulario(mensajeBusqueda, cedula){
+    mostrarFormulario(mensajeBusqueda, cedula, lugar){
         let mensaje = '';
         if(this.usuarioLogin === null){
                 
             if(mensajeBusqueda === 'Se le valido el censo! Ya no podra Modificarlo'){
                 mensaje = mensajeBusqueda;
-                mostrar('.buscarCenso');
+                mostrar('.divContenedorBuscarCenso');
             }else if(mensajeBusqueda === 'Su censo esta pendiente a validar! Puede realizar modificaciones'){
                 mensaje = mensajeBusqueda;
                 this.rellenarFormulario(cedula);
-                ocultar('.divVolverABuscar');
+                ocultar('.divContenedorVolverABuscar');
                 ocultar('.chck');
                 mostrar('.EliminarCenso');
                 mostrar('.EditarCenso');
                 ocultar('.ValidarCenso');
                 ocultar('.EnviarCenso');
-                mostrar('.divFormulario');
+                mostrar('.divContenedorFormulario');
             }else if(mensajeBusqueda === 'Realice el censo'){
                 mensaje = mensajeBusqueda;
-                ocultar('.divVolverABuscar');
+                ocultar('.divContenedorVolverABuscar');
                 ocultar('.chck');
                 ocultar('.EliminarCenso');
                 ocultar('.EditarCenso');
                 ocultar('.ValidarCenso');
                 mostrar('.EnviarCenso');
-                mostrar('.divFormulario');
+                mostrar('.divContenedorFormulario');
             }else{
                 mensaje = 'Hubo un error en el sistema';
             }
@@ -477,7 +515,7 @@ class Sistema{
 
             if(mensajeBusqueda === 'Esta persona tiene el censo validado! No se podra realizar un nuevo censo' && this.usuarioLogin !== null){
                 mensaje = mensajeBusqueda;
-                mostrar('.buscarCenso');
+                mostrar('.divContenedorBuscarCenso');
             }else if(mensajeBusqueda === 'Realice el censo' && this.usuarioLogin !== null){
                 mensaje = mensajeBusqueda;
                 mostrar('.EnviarCenso');
@@ -485,8 +523,10 @@ class Sistema{
                 ocultar('.EditarCenso');
                 ocultar('.ValidarCenso');
                 mostrar('.chck');
-                mostrar('.divVolverABuscar');
-                mostrar('.divFormulario');
+                if(lugar === 0){
+                    mostrar('.divContenedorVolverABuscar');
+                }
+                mostrar('.divContenedorFormulario');
             }else if(this.usuarioLogin !== null){
                 mensaje = mensajeBusqueda;
                 this.rellenarFormulario(cedula);
@@ -495,8 +535,10 @@ class Sistema{
                 ocultar('.EditarCenso');
                 mostrar('.ValidarCenso');
                 mostrar('.chck');
-                mostrar('.divVolverABuscar');
-                mostrar('.divFormulario');
+                if(lugar === 0){
+                    mostrar('.divContenedorVolverABuscar');
+                }
+                mostrar('.divContenedorFormulario');
             }
 
         }
@@ -589,7 +631,175 @@ class Sistema{
         return mensaje;
     }
 
+    // Reasignar Censo 
 
+    reasignar(censoCedula, censistaId) {
+        let cedulaConFormato = this.cedulaConFormato(censoCedula);
+        let objetoCenso = this.traerObjetoCenso(cedulaConFormato);
+        let objetoUsuario = this.obtenerUsuario(censistaId);
+
+        console.log(objetoCenso.idCensista);
+        objetoCenso.idCensista=objetoUsuario;
+        console.log(objetoCenso.idCensista);
+        return true;
+    }
+
+    // Tabla para Validar Censos
+    tablaParaValidar(){
+        let arrayCensos = this.censosUsuarioNoValidados();
+
+        let table = `<table border="1">`; //Contenedor tabla
+
+        table += `<thead><tr><th>Cedula</th><th>Nombre</th><th>Apellido</th><th>Accion</th></tr></thead>`; // Titulos Tablas
+
+        for (let i = 0; i < arrayCensos.length; i++) { // recorro el array previamente validado que sea del usuario.
+
+            let objetoCenso = arrayCensos[i]; // Tomo el objeto del array
+
+            table += `<tr><td>${objetoCenso.cedula}</td><td>${objetoCenso.nombre}</td><td>${objetoCenso.apellido}</td>`;                    
+            table += `<td><input type="button" value="Ver Censo" class="btn btnTableEvent" selectCenso="${objetoCenso.cedula}"/></td></tr>`;
+            
+
+        }
+
+
+        if (this.censos.length === 0){
+            table = `<tr><td>No hay censos aún</td></tr>`; // Mensaje en el caso de que no hay elementos 
+        }
+
+        table += `</table>`; //Contenedor tabla
+       
+        return table;
+    }
+
+    // ESTADISTICAS CENSISTAS
+
+    contadorCensosValidados(){
+        let newArray = new Array();
+        for (let i = 0; i < this.censos.length; i++) {
+            let objetoCenso = this.censos[i];
+            if(objetoCenso.checkCensado){
+                newArray.push(objetoCenso);
+            }
+            
+        }
+
+        return newArray;
+    }
+
+    contadorCensosNoValidados(){
+        let newArray = new Array();
+        for (let i = 0; i < this.censos.length; i++) {
+            let objetoCenso = this.censos[i];
+            if(!objetoCenso.checkCensado){
+                newArray.push(objetoCenso);
+            }
+            
+        }
+
+        return newArray;
+    }    
+
+    totalPersonasCensadasPorDep(){
+        let censosValidados = this.contadorCensosValidados();
+
+        let table = `<table border="1">`; //Contenedor tabla
+
+        table += `<thead><tr><th>Departamento</th><th>Cantidad Censados</th></tr></thead>`; // Titulos Tablas
+
+        if(censosValidados.length !== 0){
+            for (let i = 0; i < this.departamentos.length; i++) {
+                let n = 0;
+                let objetoDepartamento = this.departamentos[i];
+                for (let j = 0; j < censosValidados.length; j++) {
+                    let objetoCenso = censosValidados[j];
+                    if(objetoDepartamento.id === Number(objetoCenso.departamento)) {
+                        n++;
+                    }
+                }
+    
+                table += `<tr><td>${objetoDepartamento.nombre}</td><td>${n}</td></td>`;     
+    
+                
+            }
+        }else{
+            table += `<tr><td>No hay censos aún</td></tr>`; // Mensaje en el caso de que no hay elementos 
+        }
+
+        table += `</table>`; //Contenedor tabla
+
+        
+        return table;
+    }
+
+    porcentajePendienteAValidar(){
+        let pendientes = this.contadorCensosNoValidados().length;
+        let validadas = this.contadorCensosValidados().length;
+
+        let total = pendientes + validadas;
+
+        let porcentaje = (pendientes * 100)/total;
+
+        return porcentaje;
+    }
+
+
+    traerObjetoDepartamento(id){
+        let objetoDepartamento = null;
+        for (let i = 0; i < this.departamentos.length; i++) {
+            if(Number(id) === this.departamentos[i].id){
+                objetoDepartamento = this.departamentos[i];
+            }
+        }
+
+        return objetoDepartamento;
+    }
+
+    porcentajePersonasEdadDepartamento(departamento){
+        let censosValidados = this.contadorCensosValidados();
+        let mayores=0;
+        let menores=0;
+
+        let table = `<table border="1">`; //Contenedor tabla
+        table += `<thead><tr><th>Departamento</th><th>Mayores de Edad</th><th>Menores de edad</th></tr></thead>`; // Titulos Tablas
+
+        if(censosValidados.length !== 0){
+            for (let i = 0; i < censosValidados.length; i++) {
+                let objetoCenso = censosValidados[i];
+                if(Number(objetoCenso.departamento) === Number(departamento)){
+                    if(Number(objetoCenso.edad)>=18){
+                        mayores++;
+                    }else if(Number(objetoCenso.edad)<18){
+                        menores++;
+                    }
+                }
+                
+            }
+    
+            let total = mayores + menores;
+            let porcentajeMenores= 0;
+            let porcentajeMayores= 0;
+            if(mayores>0){
+                porcentajeMayores=(mayores * 100)/total;
+            }
+         
+            if(menores>0){
+                porcentajeMenores=(menores * 100)/total;
+            }
+
+            let objetoDepartamento = this.traerObjetoDepartamento(departamento);
+    
+            table += `<tr><td>${objetoDepartamento.nombre}</td><td>${porcentajeMayores}%</td><td>${porcentajeMenores}%</td></td>`;
+
+        }else{
+            table += `<tr><td>No hay censos aún</td></tr>`; // Mensaje en el caso de que no hay elementos 
+        }
+
+        table += `</table>`; //Contenedor tabla
+
+        
+        return table;
+    }
 
     
 }

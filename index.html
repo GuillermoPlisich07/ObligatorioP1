@@ -10,7 +10,7 @@
 <body>
     
     <!-- BARRA DE NAVEGACION -->
-    <div class="navContenedor">
+    <div class="divNavContenedor">
         <!-- Logo -->
         <a href=""><img class="logo" src="https://p1.develotion.com/2023_03/logo.jpg" alt="logo"></a>
         <ul class="navLi">
@@ -31,10 +31,6 @@
                 <input class="btn btn-Warning" id="btnIrAEstadisticas" type="button" value="Estadisticas">
             </li>
 
-
-
-
-
             <li>
                 <!-- Dashboard -->
                 <input class="btn btn-dashboard" id="btnDashbord" type="button" value="Dashboard">
@@ -52,22 +48,26 @@
     </div>
 
     <!--CONTENIDO PRINCIPAL  -->
-    <div class="contenedorPrincipal">
+    <div class="divContenedorPrincipal">
+
+
         <!-- Bienvenida y comienzo de censo-->
-        <div class="contendorBienvenida">
+        <div class="divContendorBienvenida">
             <h1>Bienvenido al Censo 2023</h1>
             <h2>Uruguay</h2>
             <!-- Boton Invitado -->
-            <input type="button" class="btn" id="btnIrAInvitado" value="Comenzar Censo">
+            <div class="inputs">
+                <input type="button" class="btn" id="btnIrAInvitado" value="Comenzar Censo">
+            </div>
+            <div class="inputs">
+                <input type="button" class="btn btn-Primary" id="btnIrAEstadisticasInvitado" value="Estadisticas Por Departamento">
+            </div>
+            
         </div>
 
 
-
-
-
-
         <!-- Login  -->
-        <div class="contendorLogin">
+        <div class="divContendorLogin">
             <h3>Iniciar Sesion</h3>
             <div class="inputs">
                 <label for="txtUsuario">Usuario: </label><input type="text" id="txtUsuario">
@@ -87,8 +87,9 @@
             
         </div>
 
+
         <!-- Crear Usuario -->
-        <div class="contendorCrearUsuario">
+        <div class="divContendorCrearUsuario">
             <div class="contendorRegistro">
                 <h3>Registrarse</h3>
                 <div class="inputs">
@@ -116,11 +117,8 @@
         </div>
 
 
-
-
-
         <!-- Buscar Censo  -->
-        <div class="buscarCenso">
+        <div class="divContenedorBuscarCenso">
             <h3>Buscar Censo</h3>
 
             <div class="inputs">
@@ -135,22 +133,21 @@
             </div>
         </div>
 
+
         <!-- Resultado DE LA BUSQUEDA DE CEDULA -->
         <div>
             <div id="divResultadoBusqueda"></div>
         </div>
+
         
         <!-- VOLVER AL BUSCAR PARA LOS CENSISTAS -->
-        <div class="inputs divVolverABuscar">
+        <div class="inputs divContenedorVolverABuscar">
             <input type="button" class="btn btn-Primary" value="Volver a buscar" id="btnVolverABuscarCensista">
         </div>
 
 
-
-
-
         <!-- FORMULARIO GENERAL-->
-        <div class="divFormulario">
+        <div class="divContenedorFormulario">
 
             <!-- FORMULARIO -->
             <h3>CENSO</h3>
@@ -204,8 +201,9 @@
             
         </div>
 
+
         <!-- RESULTADO FORMULARIO ELIMINAR -->
-        <div class="divResultadoEliminar">
+        <div class="divContenedorResultadoEliminar">
             <div>
                 <h3>Desea eliminar este censo?</h3>
             </div>
@@ -225,14 +223,69 @@
             </div>
         </div>
 
+
          <!-- RESULTADO FORMULARIO GENERAL-->
-        <div class="divMensajeFormulario">
+        <div class="divContenedorMensajeFormulario">
             <div class="inputs">
                 <div id="divResultadoFormulario"></div>
             </div>
         </div>
 
-        
+
+        <!-- REASIGNAR CENSISTA -->
+        <div class="divContenedorReasignar">
+            <h3>Reasignar Censo</h3>
+            <div class="parInput">
+                <div class="inputs">
+                    <label for="selCensos">Censos: </label><select id="selCensos"></select>
+                </div>
+                <div class="inputs">
+                    <label for="selUsuarios">Censista Usuario: </label><select id="selUsuarios"></select>
+                </div>
+            </div>
+            <div class="inputs">
+                <input type="button" class="btn" id="btnReasignar" value="Reasignar Censo">
+            </div>
+            <div class="inputs">
+                <div id="divResultadoReasignar"></div>
+            </div>
+        </div>
+
+        <!-- CENSOS PARA VALIDAR -->
+        <div id="divContenedorCensosParaValidar">
+            
+        </div>
+
+        <!-- ESTADISTICAS -->
+        <div class="divContenedorEstadisticasCensista">
+            <div id="divTotalPersonasCensadas">
+
+            </div>
+            <br>
+            <div id="divPorcentajePendienteAValidar">
+
+            </div>
+            <br>
+            <div>
+                <h3>Porcentaje de edades por Departamento</h3>
+                <div class="inputs">
+                    <label for="selDepartamentosEstadisticas">Seleccione Departamento: </label><select id="selDepartamentosEstadisticas"></select>
+                </div>
+                <br>
+                <div id="divTotalPersonasPorDepEdades">
+
+                </div>
+            </div>
+            <br>
+            <h3>Personas Censadas por Departamento</h3>
+            <div id="divTotalPersonasCensadasPorDep">
+
+            </div>
+
+            
+
+
+        </div>
         
     </div>
 

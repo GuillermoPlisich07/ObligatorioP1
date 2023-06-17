@@ -14,12 +14,19 @@ function eventos(){
     document.querySelector('#btnConfirmarEliminar').addEventListener('click', eliminarCenso);
     document.querySelector('#btnCancelarEliminar').addEventListener('click', cancelarEliminacion);
     document.querySelector('#btnVolverABuscarCensista').addEventListener('click', mostrarBuscarCenso);
-    document.querySelector('#btnEnviarCenso').addEventListener('click', llamarEnviar);
+    document.querySelector('#btnEnviarCenso').addEventListener('click', llamarEnviarCenso);
     document.querySelector('#btnEditarCenso').addEventListener('click', llamarEdiar);
     document.querySelector('#btnValidarCenso').addEventListener('click', llamarValidar);
     
+    //BOTONES CENSISTAS
+    document.querySelector('#btnIrAReasignarCenso').addEventListener('click',mostrarReasignarCenso);
+    document.querySelector('#btnReasignar').addEventListener('click',reasignarCenso);
+    document.querySelector('#btnIrValidarCenso').addEventListener('click',mostrarTablaParaValidar);
+    document.querySelector('#btnIrAEstadisticas').addEventListener('click',mostrarEstadisticas);
 
 
+    //SELECT ESTADISTICAS CENSISTA 
+    document.querySelector('#selDepartamentosEstadisticas').addEventListener('change',depEstadisticasEdades);
 
     //Menu Censista
     document.querySelector('#btnIrACenso').addEventListener('click',mostrarBuscarCenso);
@@ -57,9 +64,9 @@ function mostrar(p){
 
 // VOLVER AL DASHBOARD
 function volverAlDashboard(){
-    ocultar('.contendorLogin');
+    ocultar('.divContendorLogin');
     ocultar('#btnDashbord');
-    mostrar('.contendorBienvenida');
+    mostrar('.divContendorBienvenida');
     if(sis.usuarioLogin===null){
         mostrar('#btnIrALogin');
         ocultar('#btnLogout');
@@ -71,32 +78,39 @@ function volverAlDashboard(){
         mostrar('#btnIrAReasignarCenso');
         mostrar('#btnIrValidarCenso');
         mostrar('#btnIrAEstadisticas');
+
     }
-    ocultar('.buscarCenso');
-    ocultar('.contendorCrearUsuario');
-    ocultar('.divFormulario');
-    ocultar('.divVolverABuscar');
+    ocultar('.divContenedorBuscarCenso');
+    ocultar('.divContendorCrearUsuario');
+    ocultar('.divContenedorFormulario');
+    ocultar('.divContenedorVolverABuscar');
     ocultar('#divResultadoBusqueda');
-    ocultar('.divResultadoEliminar');
-    ocultar('.divMensajeFormulario');
+    ocultar('.divContenedorResultadoEliminar');
+    ocultar('.divContenedorMensajeFormulario');
+    ocultar('.divContenedorReasignar');
+    ocultar('#divContenedorCensosParaValidar');
+    ocultar('.divContenedorEstadisticasCensista');
 }
 
 // OCULTAR COSAS
 function onload(){
-    ocultar('.contendorLogin');
+    ocultar('.divContendorLogin');
     ocultar('#btnLogout');
     ocultar('#btnDashbord');
-    ocultar('.contendorCrearUsuario');
-    ocultar('.buscarCenso');
-    ocultar('.divFormulario');
-    ocultar('.divVolverABuscar');
+    ocultar('.divContendorCrearUsuario');
+    ocultar('.divContenedorBuscarCenso');
+    ocultar('.divContenedorFormulario');
+    ocultar('.divContenedorVolverABuscar');
     ocultar('#divResultadoBusqueda');
     ocultar('#btnIrACenso');
     ocultar('#btnIrAReasignarCenso');
     ocultar('#btnIrValidarCenso');
     ocultar('#btnIrAEstadisticas');
-    ocultar('.divResultadoEliminar');
-    ocultar('.divMensajeFormulario');
+    ocultar('.divContenedorResultadoEliminar');
+    ocultar('.divContenedorMensajeFormulario');
+    ocultar('.divContenedorReasignar');
+    ocultar('#divContenedorCensosParaValidar');
+    ocultar('.divContenedorEstadisticasCensista');
 }
 onload();
 
@@ -120,6 +134,8 @@ function limpiarFormulario(){
     limpiarCampo('chkValidarFormulario');
 }
 
+
+
 // CARGAR CAMPOS
 function cargarSelectDepartamento(){
     let opciones=`<option value="-1">Seleccione..</option>`;
@@ -131,6 +147,16 @@ function cargarSelectDepartamento(){
     document.querySelector('#selDepartamentoFormulario').innerHTML=opciones;
 }
 
+function cargarSelectDepartamentoEstadisticas(){
+    let opciones=`<option value="-1">Seleccione..</option>`;
+    for (let i = 0; i < sis.departamentos.length; i++) {
+        let objetoDepartamento = sis.departamentos[i];
+        opciones+=`<option value="${objetoDepartamento.id}">${objetoDepartamento.nombre}</option>`;
+        
+    }
+    document.querySelector('#selDepartamentosEstadisticas').innerHTML=opciones;
+}
+
 function cargarSelectOcupacion(){
     let opciones=`<option value="-1">Seleccione..</option>`;
     for (let i = 0; i < sis.ocupaciones.length; i++) {
@@ -139,6 +165,31 @@ function cargarSelectOcupacion(){
         
     }
     document.querySelector('#selOcupacionFormulario').innerHTML=opciones;
+}
+
+function cargarSelectCensos(){
+    let opciones=`<option value="-1">Seleccione..</option>`;
+
+    let arrayCensos = sis.censosUsuarioNoValidados();
+
+    for (let i = 0; i < arrayCensos.length; i++) {
+        let objetoCenso = arrayCensos[i];
+        opciones+=`<option value="${objetoCenso.cedula}">${objetoCenso.nombre} - ${objetoCenso.cedula}</option>`;
+    }
+
+    document.querySelector('#selCensos').innerHTML=opciones;
+}
+
+
+function cargarSelectCensistas(){
+    let opciones=`<option value="-1">Seleccione..</option>`;
+    for (let i = 0; i < sis.usuarios.length; i++) {
+        let objetoUsuario = sis.usuarios[i];
+        if(sis.usuarioLogin.nombreUsuario.toLowerCase() !== objetoUsuario.nombreUsuario.toLowerCase()){
+            opciones+=`<option value="${objetoUsuario.nombreUsuario}">${objetoUsuario.nombre}</option>`;
+        }
+    }
+    document.querySelector('#selUsuarios').innerHTML=opciones;
 }
 
 
@@ -163,11 +214,11 @@ function mostrarLogin(){
     // Cuando voy a loguearme oculto boton login
     ocultar('#btnIrALogin');
     // Ocular Registro de usuario si vengo desde ese apartado 
-    ocultar('.contendorCrearUsuario');    
+    ocultar('.divContendorCrearUsuario');    
     // Oculto bienvenida
-    ocultar('.contendorBienvenida');
+    ocultar('.divContendorBienvenida');
     // Muestro el login 
-    mostrar('.contendorLogin');
+    mostrar('.divContendorLogin');
     // Muestro boton para ir al dashboard
     mostrar('#btnDashbord');
 }
@@ -220,8 +271,8 @@ function mostrarCrearUsuario(){
 
     mostrar('.contendorRegistro');
     ocultar('.contendorRegistroExistoso');
-    mostrar('.contendorCrearUsuario');
-    ocultar('.contendorLogin');
+    mostrar('.divContendorCrearUsuario');
+    ocultar('.divContendorLogin');
 }
 
 function registrarse(){
@@ -273,22 +324,26 @@ function mostrarBuscarCenso(){
     // Cuando voy a buscar censo oculto boton login
     ocultar('#btnIrALogin');
     // Oculto bienvenida
-    ocultar('.contendorBienvenida');
+    ocultar('.divContendorBienvenida');
     // Muestro el buscar censo 
-    mostrar('.buscarCenso');
+    mostrar('.divContenedorBuscarCenso');
     // Muestro boton para ir al dashboard
     mostrar('#btnDashbord');
     // Ocultar si vengo de eliminar *(Invitado)
-    ocultar('.divMensajeFormulario');
+    ocultar('.divContenedorMensajeFormulario');
     // Ocultar Fomrulario si vengo del formulario *(Censista)
-    ocultar('.divFormulario');
+    ocultar('.divContenedorFormulario');
     ocultar('#divResultadoBusqueda');
-    ocultar('.divVolverABuscar');
+    ocultar('.divContenedorVolverABuscar');
+    ocultar('.divContenedorReasignar');
+    ocultar('#divContenedorCensosParaValidar');
+    ocultar('.divContenedorEstadisticasCensista');
     
 }
 
 function buscar(){
-    ocultar('.buscarCenso');
+    ocultar('.divContenedorBuscarCenso');
+
     limpiarFormulario();
    
     let cedula = document.querySelector("#txtBuscarCedula").value;
@@ -303,7 +358,7 @@ function buscar(){
             let mensajeBusqueda=sis.buscarCenso(cedula);
             cargarSelectDepartamento();
             cargarSelectOcupacion();
-            mensaje = sis.mostrarFormulario(mensajeBusqueda, cedula);
+            mensaje = sis.mostrarFormulario(mensajeBusqueda, cedula, 0);
         }else{
             mensaje = "El digito verificador es incorrecto";
         }
@@ -312,7 +367,7 @@ function buscar(){
     }
 
     if(mensaje==="La cédula ingresada no cumple con el formato 1.111.111-1" || mensaje==="El digito verificador es incorrecto"){
-        mostrar('.buscarCenso');
+        mostrar('.divContenedorBuscarCenso');
         document.querySelector("#divResultadoBusquedaError").innerHTML = mensaje;
     }else{
         mostrar("#divResultadoBusqueda");
@@ -334,18 +389,18 @@ function buscar(){
 function mostrarMensaje(mensaje){
     limpiarMensajes('divResultadoFormulario');
     document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
-    mostrar('.divMensajeFormulario');
-    ocultar('.divFormulario');
+    mostrar('.divContenedorMensajeFormulario');
+    ocultar('.divContenedorFormulario');
     ocultar('#divResultadoBusqueda');
-    ocultar('.divVolverABuscar');
+    ocultar('.divContenedorVolverABuscar');
     let temporizador = setTimeout(mostrarBuscarCenso, 4000);
 }
 
 //ELIMINAR
 function mostrarConfirmacionDeEliminar(){
-    ocultar('.divFormulario');
+    ocultar('.divContenedorFormulario');
     ocultar('#divResultadoBusqueda');
-    mostrar('.divResultadoEliminar');
+    mostrar('.divContenedorResultadoEliminar');
     
 }
 
@@ -364,8 +419,8 @@ function eliminarCenso(){
     }else{
         limpiarMensajes('divResultadoFormulario');
         document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
-        ocultar('.divResultadoEliminar');
-        mostrar('.divMensajeFormulario');
+        ocultar('.divContenedorResultadoEliminar');
+        mostrar('.divContenedorMensajeFormulario');
         
         let temporizador = setTimeout(mostrarBuscarCenso, 4000);
     }
@@ -374,8 +429,8 @@ function eliminarCenso(){
 
 function cancelarEliminacion(){
     mostrar('#divResultadoBusqueda')
-    mostrar('.divFormulario');
-    ocultar('.divResultadoEliminar');
+    mostrar('.divContenedorFormulario');
+    ocultar('.divContenedorResultadoEliminar');
 }
 
 //ENVIAR
@@ -420,7 +475,7 @@ function enviarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, ch
     console.log(sis.censos);
 }
 
-function llamarEnviar(){
+function llamarEnviarCenso(){
     let nombre = document.querySelector('#txtNombreFormulario').value;
     let apellido = document.querySelector('#txtApellidoFormulario').value;
     let cedula = document.querySelector('#txtCedulaFormulario').value;
@@ -432,7 +487,7 @@ function llamarEnviar(){
     enviarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar);
 }
 
-//EDITAR
+//EDITAR Y VALIDAR
 function modificarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar){
 
     let mensaje = '';
@@ -478,7 +533,7 @@ function modificarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion,
     
     if(error){
         document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
-        mostrar('.divMensajeFormulario');
+        mostrar('.divContenedorMensajeFormulario');
     }else{
         mostrarMensaje(mensaje);
     }
@@ -513,3 +568,140 @@ function llamarValidar(){
 ////////////////////////////////////////////////////////////////////////
 //                                   
 ////////////////////////////////////////////////////////////////////////    
+
+
+////////////////////////////////////////////////////////////////////////
+//                         REASIGNAR CENSOS
+////////////////////////////////////////////////////////////////////////
+
+
+function mostrarReasignarCenso(){
+    ocultar('.divContendorBienvenida');
+    ocultar('.divContenedorFormulario');
+    ocultar('#divResultadoBusqueda');
+    ocultar('.divContenedorVolverABuscar');
+    mostrar('#btnDashbord');
+    mostrar('.divContenedorReasignar');
+    ocultar('.divContenedorBuscarCenso');
+    ocultar('#divContenedorCensosParaValidar');
+    ocultar('.divContenedorEstadisticasCensista');
+    cargarSelectCensos();
+    cargarSelectCensistas();
+}
+
+
+function reasignarCenso(){
+    let censoCedula = document.querySelector('#selCensos').value;
+    let censistaId = document.querySelector('#selUsuarios').value;
+    let mensaje = '';
+
+    if(sis.esVacio(censoCedula) && sis.esVacio(censistaId)){
+        if(sis.esNumerico(censoCedula)){
+            if(sis.reasignar(censoCedula,censistaId)){
+                mensaje = 'Se reasignó el censo correctamente';
+            }else{
+                mensaje = 'Hubo un error de sistemas';
+            }
+            
+        }else{
+            mensaje = 'Hubo un error de sistemas';
+        }
+    }else{
+        mensaje = 'Debe completar todos los datos.';
+    }
+
+    limpiarCampo('selCensos');
+    limpiarCampo('selUsuarios');
+    cargarSelectCensos();
+    cargarSelectCensistas();
+
+    document.querySelector('#divResultadoReasignar').innerHTML = mensaje;
+    mostrar('#divResultadoReasignar');
+    let temporizador = setTimeout( function (){
+                                        ocultar('#divResultadoReasignar');
+                                    }, 4000);
+}
+
+////////////////////////////////////////////////////////////////////////
+//                                   
+////////////////////////////////////////////////////////////////////////    
+
+
+
+////////////////////////////////////////////////////////////////////////
+//                         CENSOS PARA VALIDAR
+////////////////////////////////////////////////////////////////////////
+
+
+function eventoBtn(){
+    let mensaje = ""
+    let censoCedula = this.getAttribute("selectCenso");
+
+    let cedula = sis.cedulaConFormato(censoCedula);
+
+    let mensajeBusqueda=sis.buscarCenso(cedula);
+    cargarSelectDepartamento();
+    cargarSelectOcupacion();
+    mensaje = sis.mostrarFormulario(mensajeBusqueda, cedula, 1);
+
+    ocultar('#divContenedorCensosParaValidar');
+    mostrar("#divResultadoBusqueda");
+    document.querySelector("#divResultadoBusqueda").innerHTML = mensaje;
+}
+
+
+function mostrarTablaParaValidar() {
+    ocultar('.divContendorBienvenida');
+    ocultar('.divContenedorBuscarCenso');
+    ocultar('.divContenedorReasignar');
+    ocultar('.divContenedorFormulario');
+    ocultar('#divResultadoBusqueda');
+    ocultar('.divContenedorVolverABuscar');
+    ocultar('.divContenedorEstadisticasCensista');
+    mostrar('#btnDashbord');
+    mostrar('#divContenedorCensosParaValidar');  // MUESTRO EL BLOQUE TABLA CENSOS PARA VALIDAR
+
+    let table = sis.tablaParaValidar(); // ARMO LA TABLA LLAMANDO A LA FUNCION QUE ESTA EN SISTEMAS
+
+    document.querySelector("#divContenedorCensosParaValidar").innerHTML = table; // ASIGNO LA TABLA QUE TRAIGO AL BLOQUE DEL CENSOS PARA VALIDAR
+
+   
+    let botones = document.querySelectorAll(".btnTableEvent"); // LLAMO A TODAS LAS FILAS QUE CONTENGAN LA CLASE .filaTablaVentas
+
+
+    for (btn of botones) {
+        btn.addEventListener("click", eventoBtn); // A TODAS LAS FILAS DE LA TABLA QUE ACABE DE CREAR QUE CONTENGAN LA CLASE .filaTablaVentas EL EVENTO 
+    }
+}
+
+////////////////////////////////////////////////////////////////////////
+//                                   
+////////////////////////////////////////////////////////////////////////  
+
+
+function recalcularEstadisticas(){
+    document.querySelector('#divTotalPersonasCensadas').innerHTML = `<h4>El total de personas censadas es: ${sis.contadorCensosValidados().length} </h4>`;
+    document.querySelector('#divTotalPersonasCensadasPorDep').innerHTML = sis.totalPersonasCensadasPorDep();
+    document.querySelector('#divPorcentajePendienteAValidar').innerHTML = `<h4>Porcentaje de personas pendiente a validar respecto al total: ${sis.porcentajePendienteAValidar()}%</h4>`;
+}
+
+function depEstadisticasEdades(){
+    let departamento = document.querySelector('#selDepartamentosEstadisticas').value;
+    document.querySelector('#divTotalPersonasPorDepEdades').innerHTML = sis.porcentajePersonasEdadDepartamento(departamento);
+}
+
+function mostrarEstadisticas(){
+    cargarSelectDepartamentoEstadisticas();
+    recalcularEstadisticas();
+    ocultar('.divContendorBienvenida');
+    ocultar('.divContenedorBuscarCenso');
+    ocultar('.divContenedorReasignar');
+    ocultar('.divContenedorFormulario');
+    ocultar('#divResultadoBusqueda');
+    ocultar('.divContenedorVolverABuscar');
+    ocultar('#divContenedorCensosParaValidar');  
+    mostrar('#btnDashbord');
+    mostrar('.divContenedorEstadisticasCensista');
+    
+}
+

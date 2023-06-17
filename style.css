@@ -13,7 +13,8 @@ h3{
     text-transform: uppercase;
 }
 
-#divResultadoBusqueda, #divResultadoFormulario, #divResultadoBusquedaError{
+#divResultadoBusqueda, #divResultadoFormulario, #divResultadoBusquedaError,
+#divResultadoReasignar{
     text-align: center;
 }
 
@@ -24,7 +25,7 @@ h3{
     justify-content: center;
 }
 
-.navContenedor{
+.divNavContenedor{
     width: 100%;
     position:fixed;
     top:0;
@@ -37,7 +38,7 @@ h3{
     box-shadow: -1px 17px 64px -7px rgba(126, 126, 126, 0.75);
 }
 
-.navContenedor .logo{
+.divNavContenedor .logo{
     text-align: start;
     width: 70px;
 }
@@ -51,7 +52,7 @@ h3{
     margin-right: 15px;
 }
 
-.contenedorPrincipal{
+.divContenedorPrincipal{
     background-color: rgba(255, 255, 255, 0.4);
     border-radius:10px;
     max-width:650px;
@@ -64,7 +65,7 @@ h3{
     box-shadow: 0px -1px 10px 5px rgb(167, 167, 167);
 }
 
-.contendorBienvenida{
+.divContendorBienvenida{
     text-align: center;
 }
 
@@ -162,6 +163,26 @@ h3{
 }
 
 
+table{
+	background-color: white;
+	text-align: left;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td{
+	padding: 20px;
+}
+
+thead{
+	background-color: #246355;
+	border-bottom: solid 5px #0F362D;
+	color: white;
+}
+
+tr:nth-child(even){
+	background-color: #ddd;
+}
 
 
 
