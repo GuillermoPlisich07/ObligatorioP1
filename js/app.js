@@ -23,14 +23,13 @@ function eventos(){
     document.querySelector('#btnReasignar').addEventListener('click',reasignarCenso);
     document.querySelector('#btnIrValidarCenso').addEventListener('click',mostrarTablaParaValidar);
     document.querySelector('#btnIrAEstadisticas').addEventListener('click',mostrarEstadisticas);
-
+    document.querySelector('#btnIrACenso').addEventListener('click',mostrarBuscarCenso);
 
     //SELECT ESTADISTICAS CENSISTA 
     document.querySelector('#selDepartamentosEstadisticas').addEventListener('change',depEstadisticasEdades);
 
-    //Menu Censista
-    document.querySelector('#btnIrACenso').addEventListener('click',mostrarBuscarCenso);
-
+    //BOTONES INVITADO DASHBOARD
+    document.querySelector('#btnIrAReporteInvitado').addEventListener('click',mostrarReporte);
 
     // Buscar Censo
     document.querySelector('#btnIrAInvitado').addEventListener('click', mostrarBuscarCenso);
@@ -47,70 +46,94 @@ function eventos(){
     document.querySelector('#btnIrACrearUsuario').addEventListener('click', mostrarCrearUsuario);
     document.querySelector('#btnRegistrarse').addEventListener('click', registrarse);
     document.querySelector('#btnVolverALogin').addEventListener('click', mostrarLogin);
+
+
+    // Logout
+    document.querySelector('#btnLogout').addEventListener('click', deslogueo);
 }
 
 eventos();
 
 
 // FUNCIONES OCULTAR Y MOSTRAR
-function ocultar(p) {
-    document.querySelector(`${p}`).style.display = "none";
+function ocultarClases(p) {
+    document.querySelector(`.${p}`).style.display = "none";
     
 }
 
-function mostrar(p){
-    document.querySelector(`${p}`).style.display = "";
+function ocultarID(p) {
+    document.querySelector(`#${p}`).style.display = "none";
+    
+}
+
+function mostrarClases(p){
+    document.querySelector(`.${p}`).style.display = "";
+}
+
+function mostrarID(p){
+    document.querySelector(`#${p}`).style.display = "";
 }
 
 // VOLVER AL DASHBOARD
 function volverAlDashboard(){
-    ocultar('.divContendorLogin');
-    ocultar('#btnDashbord');
-    mostrar('.divContendorBienvenida');
+    ocultarClases('divContenedorLogin');
+    ocultarID('btnDashbord');
+    mostrarClases('divContendorBienvenida');
     if(sis.usuarioLogin===null){
-        mostrar('#btnIrALogin');
-        ocultar('#btnLogout');
+        mostrarID('btnIrALogin');
+        mostrarID('btnIrAInvitado');
+        mostrarID('btnIrAReporteInvitado');
+        ocultarID('btnLogout');
+        ocultarID('btnIrACenso');
+        ocultarID('btnIrAReasignarCenso');
+        ocultarID('btnIrValidarCenso');
+        ocultarID('btnIrAEstadisticas');
     }else{
-        ocultar('#btnIrALogin');
-        ocultar('#btnIrAInvitado');
-        mostrar('#btnLogout');
-        mostrar('#btnIrACenso');
-        mostrar('#btnIrAReasignarCenso');
-        mostrar('#btnIrValidarCenso');
-        mostrar('#btnIrAEstadisticas');
+        ocultarID('btnIrALogin');
+        ocultarID('btnIrAInvitado');
+        ocultarID('btnIrAReporteInvitado');
+        mostrarID('btnLogout');
+        mostrarID('btnIrACenso');
+        mostrarID('btnIrAReasignarCenso');
+        mostrarID('btnIrValidarCenso');
+        mostrarID('btnIrAEstadisticas');
 
     }
-    ocultar('.divContenedorBuscarCenso');
-    ocultar('.divContendorCrearUsuario');
-    ocultar('.divContenedorFormulario');
-    ocultar('.divContenedorVolverABuscar');
-    ocultar('#divResultadoBusqueda');
-    ocultar('.divContenedorResultadoEliminar');
-    ocultar('.divContenedorMensajeFormulario');
-    ocultar('.divContenedorReasignar');
-    ocultar('#divContenedorCensosParaValidar');
-    ocultar('.divContenedorEstadisticasCensista');
+    ocultarClases('divContenedorBuscarCenso');
+    ocultarClases('divContenedorCrearUsuario');
+    ocultarClases('divContenedorFormulario');
+    ocultarClases('divContenedorVolverABuscar');
+    ocultarID('divResultadoBusqueda');
+    ocultarClases('divContenedorResultadoEliminar');
+    ocultarClases('divContenedorMensajeFormulario');
+    ocultarClases('divContenedorReasignar');
+    ocultarID('divContenedorCensosParaValidar');
+    ocultarClases('divContenedorEstadisticasCensista');
+    ocultarClases('divContenedorReporteInvitado');
 }
+    
+
 
 // OCULTAR COSAS
 function onload(){
-    ocultar('.divContendorLogin');
-    ocultar('#btnLogout');
-    ocultar('#btnDashbord');
-    ocultar('.divContendorCrearUsuario');
-    ocultar('.divContenedorBuscarCenso');
-    ocultar('.divContenedorFormulario');
-    ocultar('.divContenedorVolverABuscar');
-    ocultar('#divResultadoBusqueda');
-    ocultar('#btnIrACenso');
-    ocultar('#btnIrAReasignarCenso');
-    ocultar('#btnIrValidarCenso');
-    ocultar('#btnIrAEstadisticas');
-    ocultar('.divContenedorResultadoEliminar');
-    ocultar('.divContenedorMensajeFormulario');
-    ocultar('.divContenedorReasignar');
-    ocultar('#divContenedorCensosParaValidar');
-    ocultar('.divContenedorEstadisticasCensista');
+    ocultarClases('divContenedorLogin');
+    ocultarID('btnLogout');
+    ocultarID('btnDashbord');
+    ocultarClases('divContenedorCrearUsuario');
+    ocultarClases('divContenedorBuscarCenso');
+    ocultarClases('divContenedorFormulario');
+    ocultarClases('divContenedorVolverABuscar');
+    ocultarID('divResultadoBusqueda');
+    ocultarID('btnIrACenso');
+    ocultarID('btnIrAReasignarCenso');
+    ocultarID('btnIrValidarCenso');
+    ocultarID('btnIrAEstadisticas');
+    ocultarClases('divContenedorResultadoEliminar');
+    ocultarClases('divContenedorMensajeFormulario');
+    ocultarClases('divContenedorReasignar');
+    ocultarID('divContenedorCensosParaValidar');
+    ocultarClases('divContenedorEstadisticasCensista');
+    ocultarClases('divContenedorReporteInvitado');
 }
 onload();
 
@@ -131,7 +154,7 @@ function limpiarFormulario(){
     limpiarCampo('txtEdadFormulario');
     limpiarCampo('selDepartamentoFormulario');
     limpiarCampo('selOcupacionFormulario');
-    limpiarCampo('chkValidarFormulario');
+    document.querySelector(`#chkValidarFormulario`).checked=false;
 }
 
 
@@ -212,15 +235,15 @@ function mostrarLogin(){
     limpiarMensajes('divMostrarErrorLogin');
 
     // Cuando voy a loguearme oculto boton login
-    ocultar('#btnIrALogin');
+    ocultarID('btnIrALogin');
     // Ocular Registro de usuario si vengo desde ese apartado 
-    ocultar('.divContendorCrearUsuario');    
+    ocultarClases('divContenedorCrearUsuario');    
     // Oculto bienvenida
-    ocultar('.divContendorBienvenida');
+    ocultarClases('divContendorBienvenida');
     // Muestro el login 
-    mostrar('.divContendorLogin');
+    mostrarClases('divContenedorLogin');
     // Muestro boton para ir al dashboard
-    mostrar('#btnDashbord');
+    mostrarID('btnDashbord');
 }
 
 function login(){
@@ -269,10 +292,10 @@ function mostrarCrearUsuario(){
     limpiarMensajes('divMostrarErrorRegistrarse');
 
 
-    mostrar('.contendorRegistro');
-    ocultar('.contendorRegistroExistoso');
-    mostrar('.divContendorCrearUsuario');
-    ocultar('.divContendorLogin');
+    mostrarClases('contendorRegistro');
+    ocultarClases('contendorRegistroExistoso');
+    mostrarClases('divContenedorCrearUsuario');
+    ocultarClases('divContenedorLogin');
 }
 
 function registrarse(){
@@ -297,8 +320,8 @@ function registrarse(){
     }
 
     if(mensaje === 'Bien'){
-        ocultar('.contendorRegistro');
-        mostrar('.contendorRegistroExistoso');
+        ocultarClases('contendorRegistro');
+        mostrarClases('contendorRegistroExistoso');
         document.querySelector("#divMostrarRegistrarse").innerHTML = 'El registro se realizo exitosamente!';
     }else{
         document.querySelector("#divMostrarErrorRegistrarse").innerHTML = mensaje;
@@ -322,27 +345,27 @@ function mostrarBuscarCenso(){
     limpiarMensajes('divResultadoBusqueda');
 
     // Cuando voy a buscar censo oculto boton login
-    ocultar('#btnIrALogin');
+    ocultarID('btnIrALogin');
     // Oculto bienvenida
-    ocultar('.divContendorBienvenida');
+    ocultarClases('divContendorBienvenida');
     // Muestro el buscar censo 
-    mostrar('.divContenedorBuscarCenso');
+    mostrarClases('divContenedorBuscarCenso');
     // Muestro boton para ir al dashboard
-    mostrar('#btnDashbord');
+    mostrarID('btnDashbord');
     // Ocultar si vengo de eliminar *(Invitado)
-    ocultar('.divContenedorMensajeFormulario');
+    ocultarClases('divContenedorMensajeFormulario');
     // Ocultar Fomrulario si vengo del formulario *(Censista)
-    ocultar('.divContenedorFormulario');
-    ocultar('#divResultadoBusqueda');
-    ocultar('.divContenedorVolverABuscar');
-    ocultar('.divContenedorReasignar');
-    ocultar('#divContenedorCensosParaValidar');
-    ocultar('.divContenedorEstadisticasCensista');
+    ocultarClases('divContenedorFormulario');
+    ocultarID('divResultadoBusqueda');
+    ocultarClases('divContenedorVolverABuscar');
+    ocultarClases('divContenedorReasignar');
+    ocultarID('divContenedorCensosParaValidar');
+    ocultarClases('divContenedorEstadisticasCensista');
     
 }
 
 function buscar(){
-    ocultar('.divContenedorBuscarCenso');
+    ocultarClases('divContenedorBuscarCenso');
 
     limpiarFormulario();
    
@@ -367,10 +390,10 @@ function buscar(){
     }
 
     if(mensaje==="La cédula ingresada no cumple con el formato 1.111.111-1" || mensaje==="El digito verificador es incorrecto"){
-        mostrar('.divContenedorBuscarCenso');
+        mostrarClases('divContenedorBuscarCenso');
         document.querySelector("#divResultadoBusquedaError").innerHTML = mensaje;
     }else{
-        mostrar("#divResultadoBusqueda");
+        mostrarID("divResultadoBusqueda");
         document.querySelector("#divResultadoBusqueda").innerHTML = mensaje;
     }
     
@@ -389,18 +412,18 @@ function buscar(){
 function mostrarMensaje(mensaje){
     limpiarMensajes('divResultadoFormulario');
     document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
-    mostrar('.divContenedorMensajeFormulario');
-    ocultar('.divContenedorFormulario');
-    ocultar('#divResultadoBusqueda');
-    ocultar('.divContenedorVolverABuscar');
+    mostrarClases('divContenedorMensajeFormulario');
+    ocultarClases('divContenedorFormulario');
+    ocultarID('divResultadoBusqueda');
+    ocultarClases('divContenedorVolverABuscar');
     let temporizador = setTimeout(mostrarBuscarCenso, 4000);
 }
 
 //ELIMINAR
 function mostrarConfirmacionDeEliminar(){
-    ocultar('.divContenedorFormulario');
-    ocultar('#divResultadoBusqueda');
-    mostrar('.divContenedorResultadoEliminar');
+    ocultarClases('divContenedorFormulario');
+    ocultarID('divResultadoBusqueda');
+    mostrarClases('divContenedorResultadoEliminar');
     
 }
 
@@ -419,8 +442,8 @@ function eliminarCenso(){
     }else{
         limpiarMensajes('divResultadoFormulario');
         document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
-        ocultar('.divContenedorResultadoEliminar');
-        mostrar('.divContenedorMensajeFormulario');
+        ocultarClases('divContenedorResultadoEliminar');
+        mostrarClases('divContenedorMensajeFormulario');
         
         let temporizador = setTimeout(mostrarBuscarCenso, 4000);
     }
@@ -428,15 +451,16 @@ function eliminarCenso(){
 }
 
 function cancelarEliminacion(){
-    mostrar('#divResultadoBusqueda')
-    mostrar('.divContenedorFormulario');
-    ocultar('.divContenedorResultadoEliminar');
+    mostrarID('divResultadoBusqueda')
+    mostrarClases('divContenedorFormulario');
+    ocultarClases('divContenedorResultadoEliminar');
 }
 
 //ENVIAR
 function enviarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar){
 
     let mensaje = '';
+    let error = true;
 
     if(sis.esVacio(nombre) && sis.esVacio(apellido) && sis.esVacio(cedula) && sis.esVacio(edad)){
         if(departamento>=0 && ocupacion>=0){
@@ -446,9 +470,13 @@ function enviarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, ch
                         if(sis.validarDigitoVerificador(cedula)){
                             if(sis.usuarioLogin === null){
                                 mensaje = sis.enviar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar);
+                                mensaje += '<br> Se le retornara a buscar censo';
+                                error = false;
                             }else{
                                 if(checkValidar===true){
                                     mensaje = sis.enviar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar);
+                                    mensaje += '<br> Se le retornara a buscar censo';
+                                    error = false;
                                 }else{
                                     mensaje = 'Debe validar el censo.'
                                 }
@@ -471,8 +499,13 @@ function enviarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, ch
     }else{
         mensaje = 'Debe completar todos los datos.';
     }
-    console.log(mensaje);
-    console.log(sis.censos);
+
+    if(error){
+        document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
+        mostrarClases('divContenedorMensajeFormulario');
+    }else{
+        mostrarMensaje(mensaje);
+    }
 }
 
 function llamarEnviarCenso(){
@@ -533,7 +566,7 @@ function modificarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion,
     
     if(error){
         document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
-        mostrar('.divContenedorMensajeFormulario');
+        mostrarClases('divContenedorMensajeFormulario');
     }else{
         mostrarMensaje(mensaje);
     }
@@ -576,15 +609,16 @@ function llamarValidar(){
 
 
 function mostrarReasignarCenso(){
-    ocultar('.divContendorBienvenida');
-    ocultar('.divContenedorFormulario');
-    ocultar('#divResultadoBusqueda');
-    ocultar('.divContenedorVolverABuscar');
-    mostrar('#btnDashbord');
-    mostrar('.divContenedorReasignar');
-    ocultar('.divContenedorBuscarCenso');
-    ocultar('#divContenedorCensosParaValidar');
-    ocultar('.divContenedorEstadisticasCensista');
+    ocultarClases('divContendorBienvenida');
+    ocultarClases('divContenedorFormulario');
+    ocultarID('divResultadoBusqueda');
+    ocultarID('divTotalPersonasPorDepEdades');  
+    ocultarClases('divContenedorVolverABuscar');
+    mostrarID('btnDashbord');
+    mostrarClases('divContenedorReasignar');
+    ocultarClases('divContenedorBuscarCenso');
+    ocultarID('divContenedorCensosParaValidar');
+    ocultarClases('divContenedorEstadisticasCensista');
     cargarSelectCensos();
     cargarSelectCensistas();
 }
@@ -616,9 +650,9 @@ function reasignarCenso(){
     cargarSelectCensistas();
 
     document.querySelector('#divResultadoReasignar').innerHTML = mensaje;
-    mostrar('#divResultadoReasignar');
+    mostrarID('divResultadoReasignar');
     let temporizador = setTimeout( function (){
-                                        ocultar('#divResultadoReasignar');
+                                        ocultarID('divResultadoReasignar');
                                     }, 4000);
 }
 
@@ -644,33 +678,38 @@ function eventoBtn(){
     cargarSelectOcupacion();
     mensaje = sis.mostrarFormulario(mensajeBusqueda, cedula, 1);
 
-    ocultar('#divContenedorCensosParaValidar');
-    mostrar("#divResultadoBusqueda");
+    ocultarID('divContenedorCensosParaValidar');
+    mostrarID("divResultadoBusqueda");
     document.querySelector("#divResultadoBusqueda").innerHTML = mensaje;
 }
 
 
 function mostrarTablaParaValidar() {
-    ocultar('.divContendorBienvenida');
-    ocultar('.divContenedorBuscarCenso');
-    ocultar('.divContenedorReasignar');
-    ocultar('.divContenedorFormulario');
-    ocultar('#divResultadoBusqueda');
-    ocultar('.divContenedorVolverABuscar');
-    ocultar('.divContenedorEstadisticasCensista');
-    mostrar('#btnDashbord');
-    mostrar('#divContenedorCensosParaValidar');  // MUESTRO EL BLOQUE TABLA CENSOS PARA VALIDAR
+    ocultarClases('divContendorBienvenida');
+    ocultarClases('divContenedorBuscarCenso');
+    ocultarClases('divContenedorReasignar');
+    ocultarID('divTotalPersonasPorDepEdades');  
+    ocultarClases('divContenedorFormulario');
+    ocultarID('divResultadoBusqueda');
+    ocultarClases('divContenedorVolverABuscar');
+    ocultarClases('divContenedorEstadisticasCensista');
+    mostrarID('btnDashbord');
+    mostrarID('divContenedorCensosParaValidar');  // MUESTRO EL BLOQUE TABLA CENSOS PARA VALIDAR
 
     let table = sis.tablaParaValidar(); // ARMO LA TABLA LLAMANDO A LA FUNCION QUE ESTA EN SISTEMAS
 
-    document.querySelector("#divContenedorCensosParaValidar").innerHTML = table; // ASIGNO LA TABLA QUE TRAIGO AL BLOQUE DEL CENSOS PARA VALIDAR
+    if(table !== '<h2>No tiene censos asignados!</h2>'){
+        document.querySelector("#divContenedorCensosParaValidar").innerHTML = table; // ASIGNO LA TABLA QUE TRAIGO AL BLOQUE DEL CENSOS PARA VALIDAR
 
    
-    let botones = document.querySelectorAll(".btnTableEvent"); // LLAMO A TODAS LAS FILAS QUE CONTENGAN LA CLASE .filaTablaVentas
+        let botones = document.querySelectorAll(".btnTableEvent"); // LLAMO A TODAS LAS FILAS QUE CONTENGAN LA CLASE .filaTablaVentas
 
 
-    for (btn of botones) {
-        btn.addEventListener("click", eventoBtn); // A TODAS LAS FILAS DE LA TABLA QUE ACABE DE CREAR QUE CONTENGAN LA CLASE .filaTablaVentas EL EVENTO 
+        for (btn of botones) {
+            btn.addEventListener("click", eventoBtn); // A TODAS LAS FILAS DE LA TABLA QUE ACABE DE CREAR QUE CONTENGAN LA CLASE .filaTablaVentas EL EVENTO 
+        }
+    }else{
+        document.querySelector("#divContenedorCensosParaValidar").innerHTML = table;
     }
 }
 
@@ -678,6 +717,10 @@ function mostrarTablaParaValidar() {
 //                                   
 ////////////////////////////////////////////////////////////////////////  
 
+
+////////////////////////////////////////////////////////////////////////
+//                           ESTADISTICA CENSISTA        
+//////////////////////////////////////////////////////////////////////// 
 
 function recalcularEstadisticas(){
     document.querySelector('#divTotalPersonasCensadas').innerHTML = `<h4>El total de personas censadas es: ${sis.contadorCensosValidados().length} </h4>`;
@@ -687,21 +730,63 @@ function recalcularEstadisticas(){
 
 function depEstadisticasEdades(){
     let departamento = document.querySelector('#selDepartamentosEstadisticas').value;
+    mostrarID('divTotalPersonasPorDepEdades');
     document.querySelector('#divTotalPersonasPorDepEdades').innerHTML = sis.porcentajePersonasEdadDepartamento(departamento);
 }
 
 function mostrarEstadisticas(){
     cargarSelectDepartamentoEstadisticas();
     recalcularEstadisticas();
-    ocultar('.divContendorBienvenida');
-    ocultar('.divContenedorBuscarCenso');
-    ocultar('.divContenedorReasignar');
-    ocultar('.divContenedorFormulario');
-    ocultar('#divResultadoBusqueda');
-    ocultar('.divContenedorVolverABuscar');
-    ocultar('#divContenedorCensosParaValidar');  
-    mostrar('#btnDashbord');
-    mostrar('.divContenedorEstadisticasCensista');
+    ocultarClases('divContendorBienvenida');
+    ocultarClases('divContenedorBuscarCenso');
+    ocultarClases('divContenedorReasignar');
+    ocultarClases('divContenedorFormulario');
+    ocultarID('divResultadoBusqueda');
+    ocultarClases('divContenedorVolverABuscar');
+    ocultarID('divContenedorCensosParaValidar');  
+    ocultarID('divTotalPersonasPorDepEdades');  
+    mostrarID('btnDashbord');
+    mostrarClases('divContenedorEstadisticasCensista');
     
 }
 
+////////////////////////////////////////////////////////////////////////
+//                                   
+//////////////////////////////////////////////////////////////////////// 
+
+
+////////////////////////////////////////////////////////////////////////
+//                          REPORTE INVITADO
+//////////////////////////////////////////////////////////////////////// 
+
+function recalcularReporte(){
+    document.querySelector('#divReporteInvitado').innerHTML = sis.reporteCenso();
+}
+
+function mostrarReporte(){
+    ocultarClases('divContendorBienvenida');
+    ocultarID('divTotalPersonasPorDepEdades');  
+    ocultarID('btnIrALogin');
+    mostrarID('btnDashbord');
+    mostrarClases('divContenedorReporteInvitado');
+
+    recalcularReporte();
+}
+
+////////////////////////////////////////////////////////////////////////
+//                                   
+//////////////////////////////////////////////////////////////////////// 
+
+
+////////////////////////////////////////////////////////////////////////
+//                                  LOGOUT
+//////////////////////////////////////////////////////////////////////// 
+
+function deslogueo(){
+    sis.logout();
+    volverAlDashboard();
+}
+
+////////////////////////////////////////////////////////////////////////
+//                                   
+//////////////////////////////////////////////////////////////////////// 

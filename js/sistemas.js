@@ -487,26 +487,26 @@ class Sistema{
                 
             if(mensajeBusqueda === 'Se le valido el censo! Ya no podra Modificarlo'){
                 mensaje = mensajeBusqueda;
-                mostrar('.divContenedorBuscarCenso');
+                mostrarClases('divContenedorBuscarCenso');
             }else if(mensajeBusqueda === 'Su censo esta pendiente a validar! Puede realizar modificaciones'){
                 mensaje = mensajeBusqueda;
                 this.rellenarFormulario(cedula);
-                ocultar('.divContenedorVolverABuscar');
-                ocultar('.chck');
-                mostrar('.EliminarCenso');
-                mostrar('.EditarCenso');
-                ocultar('.ValidarCenso');
-                ocultar('.EnviarCenso');
-                mostrar('.divContenedorFormulario');
+                ocultarClases('divContenedorVolverABuscar');
+                ocultarClases('chck');
+                mostrarClases('EliminarCenso');
+                mostrarClases('EditarCenso');
+                ocultarClases('ValidarCenso');
+                ocultarClases('EnviarCenso');
+                mostrarClases('divContenedorFormulario');
             }else if(mensajeBusqueda === 'Realice el censo'){
                 mensaje = mensajeBusqueda;
-                ocultar('.divContenedorVolverABuscar');
-                ocultar('.chck');
-                ocultar('.EliminarCenso');
-                ocultar('.EditarCenso');
-                ocultar('.ValidarCenso');
-                mostrar('.EnviarCenso');
-                mostrar('.divContenedorFormulario');
+                ocultarClases('divContenedorVolverABuscar');
+                ocultarClases('chck');
+                ocultarClases('EliminarCenso');
+                ocultarClases('EditarCenso');
+                ocultarClases('ValidarCenso');
+                mostrarClases('EnviarCenso');
+                mostrarClases('divContenedorFormulario');
             }else{
                 mensaje = 'Hubo un error en el sistema';
             }
@@ -515,30 +515,30 @@ class Sistema{
 
             if(mensajeBusqueda === 'Esta persona tiene el censo validado! No se podra realizar un nuevo censo' && this.usuarioLogin !== null){
                 mensaje = mensajeBusqueda;
-                mostrar('.divContenedorBuscarCenso');
+                mostrarClases('divContenedorBuscarCenso');
             }else if(mensajeBusqueda === 'Realice el censo' && this.usuarioLogin !== null){
                 mensaje = mensajeBusqueda;
-                mostrar('.EnviarCenso');
-                ocultar('.EliminarCenso');
-                ocultar('.EditarCenso');
-                ocultar('.ValidarCenso');
-                mostrar('.chck');
+                mostrarClases('EnviarCenso');
+                ocultarClases('EliminarCenso');
+                ocultarClases('EditarCenso');
+                ocultarClases('ValidarCenso');
+                mostrarClases('chck');
                 if(lugar === 0){
-                    mostrar('.divContenedorVolverABuscar');
+                    mostrarClases('divContenedorVolverABuscar');
                 }
-                mostrar('.divContenedorFormulario');
+                mostrarClases('divContenedorFormulario');
             }else if(this.usuarioLogin !== null){
                 mensaje = mensajeBusqueda;
                 this.rellenarFormulario(cedula);
-                ocultar('.EnviarCenso');
-                ocultar('.EliminarCenso');
-                ocultar('.EditarCenso');
-                mostrar('.ValidarCenso');
-                mostrar('.chck');
+                ocultarClases('EnviarCenso');
+                ocultarClases('EliminarCenso');
+                ocultarClases('EditarCenso');
+                mostrarClases('ValidarCenso');
+                mostrarClases('chck');
                 if(lugar === 0){
-                    mostrar('.divContenedorVolverABuscar');
+                    mostrarClases('divContenedorVolverABuscar');
                 }
-                mostrar('.divContenedorFormulario');
+                mostrarClases('divContenedorFormulario');
             }
 
         }
@@ -601,6 +601,7 @@ class Sistema{
 
         this.censos.push(censosNuevo);
 
+        limpiarFormulario();
         return mensaje;
 
     }
@@ -663,11 +664,14 @@ class Sistema{
         }
 
 
-        if (this.censos.length === 0){
-            table = `<tr><td>No hay censos aún</td></tr>`; // Mensaje en el caso de que no hay elementos 
+        if (arrayCensos.length === 0){
+            table = `<h2>No tiene censos asignados!</h2>`; // Mensaje en el caso de que no hay elementos 
+            
+        }else{
+            table += `</table>`; //Contenedor tabla
         }
 
-        table += `</table>`; //Contenedor tabla
+        
        
         return table;
     }
@@ -718,7 +722,7 @@ class Sistema{
                     }
                 }
     
-                table += `<tr><td>${objetoDepartamento.nombre}</td><td>${n}</td></td>`;     
+                table += `<tr><td>${objetoDepartamento.nombre}</td><td>${n}</td></tr>`;     
     
                 
             }
@@ -742,7 +746,6 @@ class Sistema{
 
         return porcentaje;
     }
-
 
     traerObjetoDepartamento(id){
         let objetoDepartamento = null;
@@ -789,7 +792,7 @@ class Sistema{
 
             let objetoDepartamento = this.traerObjetoDepartamento(departamento);
     
-            table += `<tr><td>${objetoDepartamento.nombre}</td><td>${porcentajeMayores}%</td><td>${porcentajeMenores}%</td></td>`;
+            table += `<tr><td>${objetoDepartamento.nombre}</td><td>${porcentajeMayores}%</td><td>${porcentajeMenores}%</td></tr>`;
 
         }else{
             table += `<tr><td>No hay censos aún</td></tr>`; // Mensaje en el caso de que no hay elementos 
@@ -801,5 +804,56 @@ class Sistema{
         return table;
     }
 
-    
+    // REPORTE CENSO
+    reporteCenso(){
+
+        let total = this.censos.length;
+
+        let table = `<table border="1">`; //Contenedor tabla
+        table += `<thead><tr><th>Departamento</th><th>Estudian</th><th>No Trabajan</th><th>Dependientes o independientes</th><th>Porcentaje del total de censados</th></tr></thead>`; // Titulos Tablas
+
+        for (let i = 0; i < this.departamentos.length; i++) {
+            let estudian = 0;
+            let trabajan = 0;
+            let noTrabajan = 0;
+            let personasConCenso= 0;
+            let objetoDepartamento = this.departamentos[i];
+            
+            for (let j = 0; j < this.censos.length; j++) {
+                let objetoCenso = this.censos[j];
+                if(Number(objetoCenso.departamento) === Number(objetoDepartamento.id)){
+
+                    if(Number(objetoCenso.ocupacion) === 2){
+                        estudian++;
+                    }else if(Number(objetoCenso.ocupacion) === 3){
+                        noTrabajan++;
+                    }else{
+                        trabajan++;
+                    }
+                    personasConCenso++;
+
+
+                }
+            }
+
+            let porcentajeDep = (personasConCenso * 100)/total;
+
+            table += `<tr><td>${objetoDepartamento.nombre}</td><td>${estudian}</td><td>${noTrabajan}</td><td>${trabajan}</td><td>${porcentajeDep}%</td></tr>`;
+            
+        }
+
+        table += `</table>`; //Contenedor tabla
+
+        return table;
+
+    }
+
+    // LOGOUT
+
+    logout(){
+        this.usuarioLogin = null;
+        console.log(this.usuarioLogin);
+    }
+
+
 }
