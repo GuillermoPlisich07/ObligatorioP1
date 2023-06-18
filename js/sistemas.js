@@ -33,34 +33,313 @@ class Sistema{
         Usuario2.password='123Leo';
         this.usuarios.push(Usuario2);
 
-
-
+        let Usuario3 = new Usuario();
+        Usuario2.nombre='Gonzalo Gentile';
+        Usuario2.nombreUsuario='Gonza.Gentile';
+        Usuario2.password='123Gonza';
+        this.usuarios.push(Usuario3);
     }
 
     precargarCensos(){
         let Censo1 = new Censo();
-        Censo1.nombre = 'Guillermo';
-        Censo1.apellido= 'Plisich';
+        Censo1.nombre = 'Juan';
+        Censo1.apellido= 'Fernandez';
+        Censo1.edad = '25';
+        Censo1.cedula = '1234567-8';
+        Censo1.departamento = '7';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+        
+        let Censo2 = new Censo();
+        Censo2.nombre = 'Maria';
+        Censo2.apellido= 'Ramirez';
+        Censo2.edad = '22';
+        Censo2.cedula = '2345678-9';
+        Censo2.departamento = '13';
+        Censo2.ocupacion = '1';
+        Censo2.idCensista=this.usuarios[0];
+        Censo2.checkCensado=true;
+
+        let Censo3 = new Censo();
+        Censo1.nombre = 'Carlos';
+        Censo1.apellido= 'Rodriguez';
         Censo1.edad = '15';
-        Censo1.cedula = '52835922';
+        Censo1.cedula = '3456789-0';
+        Censo1.departamento = '6';
+        Censo1.ocupacion = '4';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo4 = new Censo();
+        Censo1.nombre = 'Laura';
+        Censo1.apellido= 'Martinez';
+        Censo1.edad = '17';
+        Censo1.cedula = '4567890-1';
+        Censo1.departamento = '19';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo5 = new Censo();
+        Censo1.nombre = 'Alejandro';
+        Censo1.apellido= 'Vargas';
+        Censo1.edad = '18';
+        Censo1.cedula = '5678901-2';
+        Censo1.departamento = '2';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo6 = new Censo();
+        Censo1.nombre = 'Ana';
+        Censo1.apellido= 'Navarro';
+        Censo1.edad = '15';
+        Censo1.cedula = '6789012';
+        Censo1.departamento = '11';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo7 = new Censo();
+        Censo1.nombre = 'Andrés';
+        Censo1.apellido= 'Mendoza';
+        Censo1.edad = '16';
+        Censo1.cedula = '7890123-4';
+        Censo1.departamento = '2';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo8 = new Censo();
+        Censo1.nombre = 'Carolina';
+        Censo1.apellido= 'Silva';
+        Censo1.edad = '13';
+        Censo1.cedula = '8901234-5';
+        Censo1.departamento = '6';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo9 = new Censo();
+        Censo1.nombre = 'David';
+        Censo1.apellido= 'Paredes';
+        Censo1.edad = '12';
+        Censo1.cedula = '9012345-6';
         Censo1.departamento = '9';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo10 = new Censo();
+        Censo1.nombre = 'Gabriela';
+        Censo1.apellido= 'Cordero';
+        Censo1.edad = '16';
+        Censo1.cedula = '0123456-7';
+        Censo1.departamento = '8';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo11 = new Censo();
+        Censo1.nombre = 'Javier';
+        Censo1.apellido= 'Reyes';
+        Censo1.edad = '17';
+        Censo1.cedula = '1122334-4';
+        Censo1.departamento = '14';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo12 = new Censo();
+        Censo1.nombre = 'Paula';
+        Censo1.apellido= 'Acosta';
+        Censo1.edad = '16';
+        Censo1.cedula = '2233445-5';
+        Censo1.departamento = '3';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo13 = new Censo();
+        Censo1.nombre = 'Diego';
+        Censo1.apellido= 'Rojas';
+        Censo1.edad = '24';
+        Censo1.cedula = '3344556-6';
+        Censo1.departamento = '5';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo14= new Censo();
+        Censo1.nombre = 'Valentina';
+        Censo1.apellido= 'Castro';
+        Censo1.edad = '22';
+        Censo1.cedula = '4455667-7';
+        Censo1.departamento = '18';
         Censo1.ocupacion = '2';
         Censo1.idCensista=this.usuarios[0];
         Censo1.checkCensado=true;
-        this.censos.push(Censo1);
 
-        let Censo2 = new Censo();
-        Censo2.nombre = 'Leo';
-        Censo2.apellido= 'Fascendini';
-        Censo2.edad = '22';
-        Censo2.cedula = '50633843';
-        Censo2.departamento = '9';
-        Censo2.ocupacion = '2';
-        Censo2.idCensista=this.usuarios[0];
-        Censo2.checkCensado=true;
-        this.censos.push(Censo2);
+        let Censo15 = new Censo();
+        Censo1.nombre = 'Luisa';
+        Censo1.apellido= 'Duarte';
+        Censo1.edad = '31';
+        Censo1.cedula = '5566778-8';
+        Censo1.departamento = '4';
+        Censo1.ocupacion = '1';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
 
-        
+        let Censo16 = new Censo();
+        Censo1.nombre = 'Sebastián';
+        Censo1.apellido= 'García';
+        Censo1.edad = '35';
+        Censo1.cedula = '6677889-9';
+        Censo1.departamento = '9';
+        Censo1.ocupacion = '4';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo17 = new Censo();
+        Censo1.nombre = 'Natalia';
+        Censo1.apellido= 'Ortega';
+        Censo1.edad = '51';
+        Censo1.cedula = '7788990-0';
+        Censo1.departamento = '12';
+        Censo1.ocupacion = '1';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo18 = new Censo();
+        Censo1.nombre = 'Felipe';
+        Censo1.apellido= 'Torres';
+        Censo1.edad = '55';
+        Censo1.cedula = '8899001-1';
+        Censo1.departamento = '1';
+        Censo1.ocupacion = '2';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo19 = new Censo();
+        Censo1.nombre = 'Sofía';
+        Censo1.apellido= 'Miranda';
+        Censo1.edad = '88';
+        Censo1.cedula = '9900112-2';
+        Censo1.departamento = '7';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo20 = new Censo();
+        Censo1.nombre = 'Martín';
+        Censo1.apellido= 'Pérez';
+        Censo1.edad = '63';
+        Censo1.cedula = '0011223-3';
+        Censo1.departamento = '15';
+        Censo1.ocupacion = '1';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo21 = new Censo();
+        Censo1.nombre = 'Lucía';
+        Censo1.apellido= 'Fuentes';
+        Censo1.edad = '34';
+        Censo1.cedula = '3216549-8';
+        Censo1.departamento = '6';
+        Censo1.ocupacion = '4';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo22 = new Censo();
+        Censo1.nombre = 'Ernesto';
+        Censo1.apellido= 'Hernández';
+        Censo1.edad = '25';
+        Censo1.cedula = '9876543-2';
+        Censo1.departamento = '17';
+        Censo1.ocupacion = '2';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo23 = new Censo();
+        Censo1.nombre = 'Isabella';
+        Censo1.apellido= 'González';
+        Censo1.edad = '33';
+        Censo1.cedula = '4567890-1';
+        Censo1.departamento = '5';
+        Censo1.ocupacion = '1';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo24 = new Censo();
+        Censo1.nombre = 'Ricardo';
+        Censo1.apellido= 'Herrera';
+        Censo1.edad = '13';
+        Censo1.cedula = '1357924-6';
+        Censo1.departamento = '10';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo25 = new Censo();
+        Censo1.nombre = 'Camila';
+        Censo1.apellido= 'Sotto';
+        Censo1.edad = '66';
+        Censo1.cedula = '2468135-7';
+        Censo1.departamento = '13';
+        Censo1.ocupacion = '1';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo26 = new Censo();
+        Censo1.nombre = 'Guillermo';
+        Censo1.apellido= 'Plisich';
+        Censo1.edad = '54';
+        Censo1.cedula = '52835922';
+        Censo1.departamento = '7';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo27 = new Censo();
+        Censo1.nombre = 'Andres';
+        Censo1.apellido= 'Acosta';
+        Censo1.edad = '62';
+        Censo1.cedula = '8642093-8';
+        Censo1.departamento = '4';
+        Censo1.ocupacion = '2';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo28 = new Censo();
+        Censo1.nombre = 'Valeria';
+        Censo1.apellido= 'Navarro';
+        Censo1.edad = '71';
+        Censo1.cedula = '7531982-7';
+        Censo1.departamento = '2';
+        Censo1.ocupacion = '3';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo29 = new Censo();
+        Censo1.nombre = 'Eduardo';
+        Censo1.apellido= 'Palacios';
+        Censo1.edad = '38';
+        Censo1.cedula = '5792468-0';
+        Censo1.departamento = '16';
+        Censo1.ocupacion = '1';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
+
+        let Censo30 = new Censo();
+        Censo1.nombre = 'Manuel';
+        Censo1.apellido= 'Plisich';
+        Censo1.edad = '46';
+        Censo1.cedula = '1324596-8';
+        Censo1.departamento = '7';
+        Censo1.ocupacion = '4';
+        Censo1.idCensista=this.usuarios[0];
+        Censo1.checkCensado=true;
     }
 
     precargaDepartamentos(){
