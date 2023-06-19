@@ -1,226 +1,228 @@
 ////////////////////////////////////////////////////////////////////////
 //                             GENERAL FUNCIONES        
 ////////////////////////////////////////////////////////////////////////
-let sis = new Sistema();
-sis.precargarUsuario();
-sis.precargarCensos();
-sis.precargaDepartamentos();
-sis.precargaOcupacion();
+let sis = new Sistema();        //CREO EL EL OBJETO SISTEMA ESTO NOS VA SERVIR PARA TODA LA LOGICA DE NUESTRA APLICACION
+sis.precargarUsuario();         //PRECARGO LOS USUARIOS DE LOS CENSISTAS
+sis.precargarCensos();          //PRECARGO LOS CENSOS
+sis.precargaDepartamentos();    //PRECARGO LOS DEPARTAMENTOS
+sis.precargaOcupacion();        //PRECARGO LA OCUPACION
 
 function eventos(){
 
     // BOTONES FORMULARIO    
-    document.querySelector('#btnEliminarCenso').addEventListener('click', mostrarConfirmacionDeEliminar);
-    document.querySelector('#btnConfirmarEliminar').addEventListener('click', eliminarCenso);
-    document.querySelector('#btnCancelarEliminar').addEventListener('click', cancelarEliminacion);
-    document.querySelector('#btnVolverABuscarCensista').addEventListener('click', mostrarBuscarCenso);
-    document.querySelector('#btnEnviarCenso').addEventListener('click', llamarEnviarCenso);
-    document.querySelector('#btnEditarCenso').addEventListener('click', llamarEdiar);
-    document.querySelector('#btnValidarCenso').addEventListener('click', llamarValidar);
+    document.querySelector('#btnEliminarCenso').addEventListener('click', mostrarConfirmacionDeEliminar);   //BTN PARA CONFIRMAR LA ELIMINAR DEL CENSO (INVITADO)
+    document.querySelector('#btnConfirmarEliminar').addEventListener('click', eliminarCenso);               //BTN PARA ELIMINAR CENSO (INVITADO)
+    document.querySelector('#btnCancelarEliminar').addEventListener('click', cancelarEliminacion);          //BTN PARA CENCELAR LA ELIMINACION (INVITADO)
+    document.querySelector('#btnVolverABuscarCensista').addEventListener('click', mostrarBuscarCenso);      //MOSTRAR BUSCAR CENSO DESDE EL FORMULARIO (CENSISTA)
+    document.querySelector('#btnEnviarCenso').addEventListener('click', llamarEnviarCenso);                 //LLAMAR ENVIAR CENSO (INVITADO / CENSISTA)
+    document.querySelector('#btnEditarCenso').addEventListener('click', llamarEdiar);                       //LLAMAR EDITA CENSO  (INVITADO)
+    document.querySelector('#btnValidarCenso').addEventListener('click', llamarValidar);                    //LLAMAR VALIDAR CENSO (CENSISTA)
     
     //BOTONES CENSISTAS
-    document.querySelector('#btnIrAReasignarCenso').addEventListener('click',mostrarReasignarCenso);
-    document.querySelector('#btnReasignar').addEventListener('click',reasignarCenso);
-    document.querySelector('#btnIrValidarCenso').addEventListener('click',mostrarTablaParaValidar);
-    document.querySelector('#btnIrAEstadisticas').addEventListener('click',mostrarEstadisticas);
-    document.querySelector('#btnIrACenso').addEventListener('click',mostrarBuscarCenso);
+    document.querySelector('#btnIrAReasignarCenso').addEventListener('click',mostrarReasignarCenso);    //MOSTRAR EL BLOQUE REASIGNAR CENSO (CENSISTA)
+    document.querySelector('#btnReasignar').addEventListener('click',reasignarCenso);                   //REASIGNAR CENSO (CENSISTA)
+    document.querySelector('#btnIrValidarCenso').addEventListener('click',mostrarTablaParaValidar);     //MOSTRAR EL BLOQUE CENSOS PARA VALIDAR (CENSISTA)
+    document.querySelector('#btnIrAEstadisticas').addEventListener('click',mostrarEstadisticas);        //MOSTRAR EL BLOQUE ESTADISTICAS (CENSISTA)
+    document.querySelector('#btnIrACenso').addEventListener('click',mostrarBuscarCenso);                //MOSTRAR BUSCAR DESDE (CENSISTA)
 
     //SELECT ESTADISTICAS CENSISTA 
-    document.querySelector('#selDepartamentosEstadisticas').addEventListener('change',depEstadisticasEdades);
+    document.querySelector('#selDepartamentosEstadisticas').addEventListener('change',depEstadisticasEdades);       //SELECT PARA CAMBIAR LA TABLA DE ESTADISTICAS (CENSISTA)
 
-    //BOTONES INVITADO DASHBOARD
-    document.querySelector('#btnIrAReporteInvitado').addEventListener('click',mostrarReporte);
+    //BOTONES INVITADO
+    document.querySelector('#btnIrAReporteInvitado').addEventListener('click',mostrarReporte);      //MOSTRAR REPORTE (INVITADO)
+    document.querySelector('#btnIrAInvitado').addEventListener('click', mostrarBuscarCenso);        //MOSTRAR BUSCAR CENSO (INVITADO)
 
-    // Buscar Censo
-    document.querySelector('#btnIrAInvitado').addEventListener('click', mostrarBuscarCenso);
-    document.querySelector('#btnBuscarCedula').addEventListener('click', buscar);
+    //BUSCAR CENSO
+    document.querySelector('#btnBuscarCedula').addEventListener('click', buscar);           //BUSCAR CENSO (INVITADO / CENSISTA)
 
     // Volver al dashboard
-    document.querySelector('#btnDashbord').addEventListener('click', volverAlDashboard);
+    document.querySelector('#btnDashbord').addEventListener('click', volverAlDashboard);        //VOLVER AL DASHBOARD (INVITADO / CENSISTA)
 
-    //Login
-    document.querySelector('#btnLogin').addEventListener('click', login);
-    document.querySelector('#btnIrALogin').addEventListener('click', mostrarLogin);
+    //LOGIN
+    document.querySelector('#btnLogin').addEventListener('click', login);                   //LOGUEARSE (CENSISTA)
+    document.querySelector('#btnIrALogin').addEventListener('click', mostrarLogin);         //MOSTRAR LOGIN (CENSISTA)
 
     //Crear Usuario
-    document.querySelector('#btnIrACrearUsuario').addEventListener('click', mostrarCrearUsuario);
-    document.querySelector('#btnRegistrarse').addEventListener('click', registrarse);
-    document.querySelector('#btnVolverALogin').addEventListener('click', mostrarLogin);
+    document.querySelector('#btnIrACrearUsuario').addEventListener('click', mostrarCrearUsuario);       //MOSTRAR CREAR USUARIO (CENSISTA)
+    document.querySelector('#btnRegistrarse').addEventListener('click', registrarse);                   //REGISTRARSE (CENSISTA)
+    document.querySelector('#btnVolverALogin').addEventListener('click', mostrarLogin);                 //MOSTRAR LOGIN UNA VEZ REGISTRADO (CENSISTA)
 
 
     // Logout
-    document.querySelector('#btnLogout').addEventListener('click', deslogueo);
+    document.querySelector('#btnLogout').addEventListener('click', deslogueo);          // SE DESLOGUEA (CENSISTA)
 }
 
-eventos();
+eventos(); //LLAMO A EVENTOS PARA CARGAR TODOS LOS BOTONES
 
+// OCULTAR AL CARGAR LA PAGINA
+function onload(){
+    ocultarID('btnLogout');                                 //
+    ocultarID('btnDashbord');                               //
+    ocultarID('divResultadoBusqueda');                      //
+    ocultarID('btnIrACenso');                               //
+    ocultarID('btnIrAReasignarCenso');                      //
+    ocultarID('btnIrValidarCenso');                         //
+    ocultarID('btnIrAEstadisticas');                        //
+    ocultarID('divContenedorCensosParaValidar');            //
+    ocultarClases('divContenedorLogin');                    //OCULAR EL BLOQUE LOGIN
+    ocultarClases('divContenedorCrearUsuario');             //OCULAR EL BLOQUE CREAR USUARIO
+    ocultarClases('divContenedorBuscarCenso');              //OCULAR EL BLOQUE BUSCAE CENSO
+    ocultarClases('divContenedorFormulario');               //OCULAR EL BLOQUE FORMULARIO
+    ocultarClases('divContenedorVolverABuscar');            //OCULAR EL BLOQUE VOLVER A BUSCAR
+    ocultarClases('divContenedorResultadoEliminar');        //OCULAR EL BLOQUE RESULTADO DE ELIMINAR 
+    ocultarClases('divContenedorMensajeFormulario');        //OCULAR EL BLOQUE MENSAJE DEL FORMULARIO
+    ocultarClases('divContenedorReasignar');                //OCULAR EL BLOQUE REASIGNAR
+    ocultarClases('divContenedorEstadisticasCensista');     //OCULAR EL BLOQUE ESTADISTADICAS CENSISTA
+    ocultarClases('divContenedorReporteInvitado');          //OCULAR EL BLOQUE REPORTE INVITADO
+}
+onload(); //LLAMO A LA FUNCION PARA CARGAR TODA LA PAGINA
 
-// FUNCIONES OCULTAR Y MOSTRAR
+// FUNCION PARA OCULAR CLASES
 function ocultarClases(p) {
     document.querySelector(`.${p}`).style.display = "none";
     
 }
 
+// FUNCION PARA OCULTAR ID
 function ocultarID(p) {
     document.querySelector(`#${p}`).style.display = "none";
     
 }
 
+// FUNCION PARA MOSTRAR CLASES
 function mostrarClases(p){
     document.querySelector(`.${p}`).style.display = "";
 }
 
+// FUNCION PARA MOSTRAR ID
 function mostrarID(p){
     document.querySelector(`#${p}`).style.display = "";
 }
 
 // VOLVER AL DASHBOARD
 function volverAlDashboard(){
-    ocultarClases('divContenedorLogin');
-    ocultarID('btnDashbord');
-    mostrarClases('divContendorBienvenida');
-    if(sis.usuarioLogin===null){
-        mostrarID('btnIrALogin');
-        mostrarID('btnIrAInvitado');
-        mostrarID('btnIrAReporteInvitado');
-        ocultarID('btnLogout');
-        ocultarID('btnIrACenso');
-        ocultarID('btnIrAReasignarCenso');
-        ocultarID('btnIrValidarCenso');
-        ocultarID('btnIrAEstadisticas');
-    }else{
-        ocultarID('btnIrALogin');
-        ocultarID('btnIrAInvitado');
-        ocultarID('btnIrAReporteInvitado');
-        mostrarID('btnLogout');
-        mostrarID('btnIrACenso');
-        mostrarID('btnIrAReasignarCenso');
-        mostrarID('btnIrValidarCenso');
-        mostrarID('btnIrAEstadisticas');
+    ocultarClases('divContenedorLogin');        //OCULTAR BLOQUE LOGIN
+    ocultarID('btnDashbord');                   //OCULTAR BOTON DASHBOARD
+    mostrarClases('divContendorBienvenida');    //MOSTRAR BLOQUE BIENVENDIA
+    if(sis.usuarioLogin===null){ //CONTROLO SI SOY INVITADO
+        mostrarID('btnIrALogin');               //MOSTRAR EL BOTON DE LOGIN
+        mostrarID('btnIrAInvitado');            //MOSTRAR BOTON COMENZAR CENSO
+        mostrarID('btnIrAReporteInvitado');     //MOSTRAR BOTON REPORTE
+        ocultarID('btnLogout');                 //OCULTAR BOTON LOGOUT
+        ocultarID('btnIrACenso');               //OCULTAR BOTON BUSCAR CENSO - NUEVO CENSO
+        ocultarID('btnIrAReasignarCenso');      //OCULTAR BOTON REASIGNAR CENSO
+        ocultarID('btnIrValidarCenso');         //OCULTAR BOTON CENSOS PARA VALIDAR
+        ocultarID('btnIrAEstadisticas');        //OCULTAR BOTON ESTADISTICAS
+    }else{ //CASO DE QUE SEA USUARIO CENSISTA                                      
+        ocultarID('btnIrALogin');               //OCULTAR BOTON LOGIN
+        ocultarID('btnIrAInvitado');            //OCULTAR BOTON COMENZAR CENSO
+        ocultarID('btnIrAReporteInvitado');     //OCULTAR BOTON REPORTE
+        mostrarID('btnLogout');                 //MOSTRAR BOTON LOGOUT
+        mostrarID('btnIrACenso');               //MOSTRAR BOTON BUSCAR CENSO - NUEVO CENSO
+        mostrarID('btnIrAReasignarCenso');      //MOSTRAR BOTON REASIGNAR CENSO
+        mostrarID('btnIrValidarCenso');         //MOSTRAR BOTON CENSOS PARA VALIDAR
+        mostrarID('btnIrAEstadisticas');        //MOSTRAR BOTON ESTADISTICAS
 
     }
-    ocultarClases('divContenedorBuscarCenso');
-    ocultarClases('divContenedorCrearUsuario');
-    ocultarClases('divContenedorFormulario');
-    ocultarClases('divContenedorVolverABuscar');
-    ocultarID('divResultadoBusqueda');
-    ocultarClases('divContenedorResultadoEliminar');
-    ocultarClases('divContenedorMensajeFormulario');
-    ocultarClases('divContenedorReasignar');
-    ocultarID('divContenedorCensosParaValidar');
-    ocultarClases('divContenedorEstadisticasCensista');
-    ocultarClases('divContenedorReporteInvitado');
+    ocultarClases('divContenedorBuscarCenso');              //OCULAR EL BLOQUE BUSCAR CENSO
+    ocultarClases('divContenedorCrearUsuario');             //OCULAR EL BLOQUE CREAR USUARIO
+    ocultarClases('divContenedorFormulario');               //OCULAR EL BLOQUE FORMULARIO
+    ocultarClases('divContenedorVolverABuscar');            //OCULAR EL BLOQUE VOLVER A BUSCAR
+    ocultarID('divResultadoBusqueda');                      //OCULAR EL BLOQUE RESULTADO DE BUSQUEDA CENSO
+    ocultarClases('divContenedorResultadoEliminar');        //OCULAR EL BLOQUE RESULTADO ELIMAR CENSO
+    ocultarClases('divContenedorMensajeFormulario');        //OCULAR EL BLOQUE MENSAJE DEL FORMULARIO
+    ocultarClases('divContenedorReasignar');                //OCULAR EL BLOQUE REASIGNAR CENSO
+    ocultarID('divContenedorCensosParaValidar');            //OCULAR EL BLOQUE CENSOS PARA VALIDAR
+    ocultarClases('divContenedorEstadisticasCensista');     //OCULAR EL BLOQUE ESTADISTICAS CENSISTA
+    ocultarClases('divContenedorReporteInvitado');          //OCULAR EL BLOQUE REPORTE INVITADO
 }
-    
 
-
-// OCULTAR COSAS
-function onload(){
-    ocultarClases('divContenedorLogin');
-    ocultarID('btnLogout');
-    ocultarID('btnDashbord');
-    ocultarClases('divContenedorCrearUsuario');
-    ocultarClases('divContenedorBuscarCenso');
-    ocultarClases('divContenedorFormulario');
-    ocultarClases('divContenedorVolverABuscar');
-    ocultarID('divResultadoBusqueda');
-    ocultarID('btnIrACenso');
-    ocultarID('btnIrAReasignarCenso');
-    ocultarID('btnIrValidarCenso');
-    ocultarID('btnIrAEstadisticas');
-    ocultarClases('divContenedorResultadoEliminar');
-    ocultarClases('divContenedorMensajeFormulario');
-    ocultarClases('divContenedorReasignar');
-    ocultarID('divContenedorCensosParaValidar');
-    ocultarClases('divContenedorEstadisticasCensista');
-    ocultarClases('divContenedorReporteInvitado');
-}
-onload();
-
-
-// FUNCION PARA LIMPIAR CAMPOS
+// FUNCION PARA CAMPOS
 function limpiarCampo(campo){
     document.querySelector(`#${campo}`).value='';
 }
 
+// FUNCION PARA LIMPIAR MENSAJES
 function limpiarMensajes(campo){
     document.querySelector(`#${campo}`).innerHTML='';
 }
 
+// LIMPIAR FORMULARIO
 function limpiarFormulario(){
-    limpiarCampo('txtNombreFormulario');
-    limpiarCampo('txtApellidoFormulario');
-    limpiarCampo('txtCedulaFormulario');
-    limpiarCampo('txtEdadFormulario');
-    limpiarCampo('selDepartamentoFormulario');
-    limpiarCampo('selOcupacionFormulario');
-    document.querySelector(`#chkValidarFormulario`).checked=false;
+    limpiarCampo('txtNombreFormulario');                                //LIMPIAR NOMBRE
+    limpiarCampo('txtApellidoFormulario');                              //LIMPIAR APELLIDO
+    limpiarCampo('txtCedulaFormulario');                                //LIMPIAR CEDULA
+    limpiarCampo('txtEdadFormulario');                                  //LIMPIAR EDAD
+    limpiarCampo('selDepartamentoFormulario');                          //LIMPIAR DEPARTAMENTO
+    limpiarCampo('selOcupacionFormulario');                             //LIMPIAR OCUPACION
+    document.querySelector(`#chkValidarFormulario`).checked=false;      //RESETEAR CHECK A FALSE
 }
 
 
 
-// CARGAR CAMPOS
+// CARGAR DEPARTAMENTO FORMULARIO
 function cargarSelectDepartamento(){
-    let opciones=`<option value="-1">Seleccione..</option>`;
-    for (let i = 0; i < sis.departamentos.length; i++) {
-        let objetoDepartamento = sis.departamentos[i];
-        opciones+=`<option value="${objetoDepartamento.id}">${objetoDepartamento.nombre}</option>`;
+    let opciones=`<option value="-1">Seleccione..</option>`;    //MUESRTRO LA PRIMERA OPCION
+    for (let i = 0; i < sis.departamentos.length; i++) {        //RECORRO EL ARREGLO DE DEPARTAMENTO
+        let objetoDepartamento = sis.departamentos[i];          //TOMO EL OBJETO DEPARTAMENTO
+        opciones+=`<option value="${objetoDepartamento.id}">${objetoDepartamento.nombre}</option>`; //LE ASIGNO EL VALOR DEL ID DEL DEPARTAMENTO Y MUESTRO EL NOMBRE AL OPTION
         
     }
-    document.querySelector('#selDepartamentoFormulario').innerHTML=opciones;
+    document.querySelector('#selDepartamentoFormulario').innerHTML=opciones;    //LAS OPCIONES AL SELECT
 }
 
+// CARGAR DEPARTAMENTO ESTADISTICAS 
 function cargarSelectDepartamentoEstadisticas(){
-    let opciones=`<option value="-1">Seleccione..</option>`;
-    for (let i = 0; i < sis.departamentos.length; i++) {
-        let objetoDepartamento = sis.departamentos[i];
-        opciones+=`<option value="${objetoDepartamento.id}">${objetoDepartamento.nombre}</option>`;
+    let opciones=`<option value="-1">Seleccione..</option>`;    //MUESRTRO LA PRIMERA OPCION
+    for (let i = 0; i < sis.departamentos.length; i++) {        //RECORRO EL ARREGLO DE DEPARTAMENTO
+        let objetoDepartamento = sis.departamentos[i];          //TOMO EL OBJETO DEPARTAMENTO
+        opciones+=`<option value="${objetoDepartamento.id}">${objetoDepartamento.nombre}</option>`;  //LE ASIGNO EL VALOR DEL ID DEL DEPARTAMENTO Y MUESTRO EL NOMBRE AL OPTION
         
     }
-    document.querySelector('#selDepartamentosEstadisticas').innerHTML=opciones;
+    document.querySelector('#selDepartamentosEstadisticas').innerHTML=opciones;     //LAS OPCIONES AL SELECT
 }
 
+// CARGAR OCUPACION FORMULARIO
 function cargarSelectOcupacion(){
-    let opciones=`<option value="-1">Seleccione..</option>`;
-    for (let i = 0; i < sis.ocupaciones.length; i++) {
-        let objetoOcupacion = sis.ocupaciones[i];
-        opciones+=`<option value="${objetoOcupacion.id}">${objetoOcupacion.nombre}</option>`;
+    let opciones=`<option value="-1">Seleccione..</option>`;    //MUESRTRO LA PRIMERA OPCION
+    for (let i = 0; i < sis.ocupaciones.length; i++) {          //RECORRO EL ARREGLO DE OCUPACION
+        let objetoOcupacion = sis.ocupaciones[i];               //TOMO EL OBJETO OCUPACION
+        opciones+=`<option value="${objetoOcupacion.id}">${objetoOcupacion.nombre}</option>`;  //LE ASIGNO EL VALOR DEL ID DEL OCUPACION Y MUESTRO EL NOMBRE AL OPTION
         
     }
-    document.querySelector('#selOcupacionFormulario').innerHTML=opciones;
+    document.querySelector('#selOcupacionFormulario').innerHTML=opciones;   //LAS OPCIONES AL SELECT
 }
 
+// CARGAR CENSOS DEL USUARIO PARA REASIGNAR
 function cargarSelectCensos(){
-    let opciones=`<option value="-1">Seleccione..</option>`;
-
-    let arrayCensos = sis.censosUsuarioNoValidados();
-
-    for (let i = 0; i < arrayCensos.length; i++) {
-        let objetoCenso = arrayCensos[i];
-        opciones+=`<option value="${objetoCenso.cedula}">${objetoCenso.nombre} - ${objetoCenso.cedula}</option>`;
+    let opciones=`<option value="-1">Seleccione..</option>`;    //MUESRTRO LA PRIMERA OPCION
+    let arrayCensos = sis.censosUsuarioNoValidados();           //TRAIGO LOS CENSOS NO VALIDADOS
+    for (let i = 0; i < arrayCensos.length; i++) {              //RECORRO EL ARRAY DE LOS CENSOS NO VALIDADOS
+        let objetoCenso = arrayCensos[i];                       //TOMO EL OBJETO CENSO
+        opciones+=`<option value="${objetoCenso.cedula}">${objetoCenso.nombre} - ${objetoCenso.cedula}</option>`; //CARGO EL ID DEL CENSO Y MUESTRO EL NOMBRE DE LA PERSONA Y LA CEDULA
     }
 
-    document.querySelector('#selCensos').innerHTML=opciones;
+    document.querySelector('#selCensos').innerHTML=opciones;    //LAS OPCIONES AL SELECT
 }
 
-
+// CARGAR USUARIOS PARA REASIGNAR
 function cargarSelectCensistas(){
-    let opciones=`<option value="-1">Seleccione..</option>`;
-    for (let i = 0; i < sis.usuarios.length; i++) {
-        let objetoUsuario = sis.usuarios[i];
-        if(sis.usuarioLogin.nombreUsuario.toLowerCase() !== objetoUsuario.nombreUsuario.toLowerCase()){
-            opciones+=`<option value="${objetoUsuario.nombreUsuario}">${objetoUsuario.nombre}</option>`;
+    let opciones=`<option value="-1">Seleccione..</option>`;    //MUESRTRO LA PRIMERA OPCION
+    for (let i = 0; i < sis.usuarios.length; i++) {             //RECORRO EL USUARIOS
+        let objetoUsuario = sis.usuarios[i];                    //TOMO EL OBJETO USUARIO
+        if(sis.usuarioLogin.nombreUsuario.toLowerCase() !== objetoUsuario.nombreUsuario.toLowerCase()){     //COMPARO SI EL USUARIO ES DISTINTO CON EL USUARIO LOGUEADO
+            opciones+=`<option value="${objetoUsuario.nombreUsuario}">${objetoUsuario.nombre}</option>`;    //AGREGO EL USUARIO A LAS OPCION CON SU NOMBRE USUARIO Y MUESTRO EL NOMBRE
         }
     }
-    document.querySelector('#selUsuarios').innerHTML=opciones;
-}
+    document.querySelector('#selUsuarios').innerHTML=opciones;  //LAS OPCIONES AL SELECT
+}  
 
 
 
 
 
 ////////////////////////////////////////////////////////////////////////
-//                      GENERAL FUNCIONES END       
+//                        
 ////////////////////////////////////////////////////////////////////////
 
 
@@ -230,28 +232,20 @@ function cargarSelectCensistas(){
 ////////////////////////////////////////////////////////////////////////
 
 function mostrarLogin(){
-    limpiarCampo('txtUsuario');
-    limpiarCampo('txtPassword');
-    limpiarMensajes('divMostrarErrorLogin');
-
-    // Cuando voy a loguearme oculto boton login
-    ocultarID('btnIrALogin');
-    // Ocular Registro de usuario si vengo desde ese apartado 
-    ocultarClases('divContenedorCrearUsuario');    
-    // Oculto bienvenida
-    ocultarClases('divContendorBienvenida');
-    // Muestro el login 
-    mostrarClases('divContenedorLogin');
-    // Muestro boton para ir al dashboard
-    mostrarID('btnDashbord');
+    limpiarCampo('txtUsuario');                 //Limpio el campo de usuario cada vez que entro al login
+    limpiarCampo('txtPassword');                //Limpio el campo de password cada vez que entro al login
+    limpiarMensajes('divMostrarErrorLogin');    //Limpio el mensaje de error por si quedo puesto del anterior login
+    ocultarID('btnIrALogin');                   // Cuando voy a loguearme oculto boton login
+    ocultarClases('divContenedorCrearUsuario'); // Ocular Registro de usuario si vengo desde ese apartado     
+    ocultarClases('divContendorBienvenida');    // Oculto bienvenida
+    mostrarClases('divContenedorLogin');        // Muestro el login
+    mostrarID('btnDashbord');                   // Muestro boton para ir al dashboard
 }
 
 function login(){
     let mensaje = '';
-    // Capturo el usario 
-    let usuario = document.querySelector("#txtUsuario").value;
-    // Capturo la password
-    let password = document.querySelector("#txtPassword").value;
+    let usuario = document.querySelector("#txtUsuario").value;// Capturo el usario     
+    let password = document.querySelector("#txtPassword").value;// Capturo la password
     // Compruebo que ningun campo este vacio, en el caso de que no
     // se le retornara el mensaje `Debe ingresar usuario y contrasena`
     if (sis.esVacio(usuario) && sis.esVacio(password)) {
@@ -267,11 +261,12 @@ function login(){
         mensaje = `Debe ingresar usuario y contrasena.`;
     }
 
+    //Si el mensaje en 'Bien' vuelvo a dashboard pero contodas las opciones de censista
     if(mensaje === 'Bien'){
         volverAlDashboard();
     }
 
-    document.querySelector("#divMostrarErrorLogin").innerHTML = mensaje;
+    document.querySelector("#divMostrarErrorLogin").innerHTML = mensaje; //Retorno el campo de mensaje
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -285,29 +280,28 @@ function login(){
 ////////////////////////////////////////////////////////////////////////
 
 function mostrarCrearUsuario(){
-    limpiarCampo('txtCrearUsuarioNombre');
-    limpiarCampo('txtCrearUsuarioUser');
-    limpiarCampo('txtCrearUsuarioPassword');
-    limpiarMensajes('divMostrarRegistrarse');
-    limpiarMensajes('divMostrarErrorRegistrarse');
+    limpiarCampo('txtCrearUsuarioNombre');          //Limpio el campo de nombre
+    limpiarCampo('txtCrearUsuarioUser');            //Limpio el campo de user
+    limpiarCampo('txtCrearUsuarioPassword');        //Limpio el campo de password
+    limpiarMensajes('divMostrarRegistrarse');       //Limpio el mensaje por si quedo de la anterior creacion
+    limpiarMensajes('divMostrarErrorRegistrarse');  //Limpio el mensaje por si quedo del anterior error
 
 
-    mostrarClases('contendorRegistro');
-    ocultarClases('contendorRegistroExistoso');
-    mostrarClases('divContenedorCrearUsuario');
-    ocultarClases('divContenedorLogin');
+    mostrarClases('contendorRegistro');             //Muestro el contenedor registro
+    ocultarClases('contendorRegistroExistoso');     //Oculto el contenedor de mensajes ya que en este punto no puedo saber si se logueo correctamente
+    mostrarClases('divContenedorCrearUsuario');     //Muestro el bloque entero de crear usuario
+    ocultarClases('divContenedorLogin');            //Oculto el contenedor de login ya que vengo desde ahi 
 }
 
-function registrarse(){
+function crearUsuario(nombre,nombreUsuario,password){
     let mensaje = '';
-    let nombre = document.querySelector('#txtCrearUsuarioNombre').value;
-    let nombreUsuario = document.querySelector('#txtCrearUsuarioUser').value;
-    let password = document.querySelector('#txtCrearUsuarioPassword').value;
-
-    if(sis.esVacio(nombre) && sis.esVacio(nombreUsuario) && sis.esVacio(password)){
+    //Me pregunto si todos los campos son vacios, en el caso de no: entra en el if, en el caso de que si: mensaje de error
+    if(sis.esVacio(nombre) && sis.esVacio(nombreUsuario) && sis.esVacio(password)){ 
+        // Verifico que el usuario no intente repetir un user ya registrado, en el caso de que esto se cumpla la funcion retorna false
         if(sis.usuarioRepetido(nombreUsuario)){
-            if(sis.validarContrasenia(password)){
-                sis.ingresarRegistro(nombre,nombreUsuario,password);
+            // Valido que la contraseña se correcta y cumpla todas las condiciones, en el caso de que no muestra mensaje de error
+            if(sis.validarContrasenia(password)){ 
+                sis.ingresarRegistro(nombre,nombreUsuario,password); //ingreso al usuario como un usuario nuevo
                 mensaje = 'Bien'; 
             }else{
                 mensaje = 'La contraseña deberá tener un mínimo de 5 caracteres, contando con al menos una mayúscula, una minúscula y un número.';
@@ -318,13 +312,23 @@ function registrarse(){
     }else{
         mensaje = `Debe ingresar nombre, nombre usuario y contrasena.`;
     }
+    return mensaje; // retorno mensaje
+}
+    
 
-    if(mensaje === 'Bien'){
-        ocultarClases('contendorRegistro');
-        mostrarClases('contendorRegistroExistoso');
-        document.querySelector("#divMostrarRegistrarse").innerHTML = 'El registro se realizo exitosamente!';
+function registrarse(){
+    let mensaje = '';                                               
+    let nombre = document.querySelector('#txtCrearUsuarioNombre').value;        //Tomo el valor nombre
+    let nombreUsuario = document.querySelector('#txtCrearUsuarioUser').value;   //Tomo el valor nombre usuario
+    let password = document.querySelector('#txtCrearUsuarioPassword').value;    //Tomo el password
+
+    mensaje=crearUsuario(nombre, nombreUsuario, password);      //Llamo a la funcion crearUsuario anteriormente creada, esta retorna un mensaje
+    if(mensaje === 'Bien'){     //Me pregunto si el mensaje es igual a 'Bien'
+        ocultarClases('contendorRegistro');         //Oculto el contenedor Registro
+        mostrarClases('contendorRegistroExistoso'); //Muestro el contenedor del Registro exitoso
+        document.querySelector("#divMostrarRegistrarse").innerHTML = 'El registro se realizo exitosamente!';   //Le asigno el mensaje exitoso
     }else{
-        document.querySelector("#divMostrarErrorRegistrarse").innerHTML = mensaje;
+        document.querySelector("#divMostrarErrorRegistrarse").innerHTML = mensaje; //En este mensaje doy el error
     }
 
 }
@@ -340,8 +344,11 @@ function registrarse(){
 ////////////////////////////////////////////////////////////////////////
 
 function mostrarBuscarCenso(){
+    //Limpio el campo de la cedula
     limpiarCampo('txtBuscarCedula');
+    // limpio el mensaje de error de la busqueda
     limpiarMensajes('divResultadoBusquedaError');
+    // limpio el mensaje de la busqueda
     limpiarMensajes('divResultadoBusqueda');
 
     // Cuando voy a buscar censo oculto boton login
@@ -356,32 +363,37 @@ function mostrarBuscarCenso(){
     ocultarClases('divContenedorMensajeFormulario');
     // Ocultar Fomrulario si vengo del formulario *(Censista)
     ocultarClases('divContenedorFormulario');
+    // Oculto el resultado de la busqueda por si quedo anteriormente cargado
     ocultarID('divResultadoBusqueda');
+    // Oculto el volver a buscar que puede ser que venga de formulario
     ocultarClases('divContenedorVolverABuscar');
+    // Oculto el bloque reasignar censo
     ocultarClases('divContenedorReasignar');
+    // Oculto el bloque censos para validar
     ocultarID('divContenedorCensosParaValidar');
+    //  Oculto el bloque estadisticas
     ocultarClases('divContenedorEstadisticasCensista');
     
 }
 
 function buscar(){
-    ocultarClases('divContenedorBuscarCenso');
+    ocultarClases('divContenedorBuscarCenso'); //Oculto el bloque de buscar censo 
 
-    limpiarFormulario();
+    limpiarFormulario();   //Limpio el formulario entero
    
-    let cedula = document.querySelector("#txtBuscarCedula").value;
+    let cedula = document.querySelector("#txtBuscarCedula").value;  //Tomo el valor de la cedula
     let mensaje = "";
 
-    limpiarCampo('txtBuscarCedula');
-    limpiarMensajes('divResultadoBusquedaError');
-    limpiarMensajes('divResultadoBusqueda');
+    limpiarCampo('txtBuscarCedula');                //limpio el campo cedula
+    limpiarMensajes('divResultadoBusquedaError');   //limpio el mensaje de error de la busqueda
+    limpiarMensajes('divResultadoBusqueda');        //limpio el mensaje de la busqueda
 
-    if (sis.validarFormatoCedula(cedula)) {
-        if(sis.validarDigitoVerificador(cedula)){
-            let mensajeBusqueda=sis.buscarCenso(cedula);
-            cargarSelectDepartamento();
-            cargarSelectOcupacion();
-            mensaje = sis.mostrarFormulario(mensajeBusqueda, cedula, 0);
+    if (sis.validarFormatoCedula(cedula)) {                                     //Me pregunto si el formato de la cedula es correcto en caso de que no retorno mensaje de error
+        if(sis.validarDigitoVerificador(cedula)){                               //Valido que el numero verificador es correcto en caso de que no retorno mensaje de error
+            let mensajeBusqueda=sis.buscarCenso(cedula);                        //Busco el censo en los censos que estan cargados
+            cargarSelectDepartamento();                                         //Cargo los departamentos
+            cargarSelectOcupacion();                                            //Cargo las ocupaciones
+            mensaje = sis.mostrarFormulario(mensajeBusqueda, cedula, 0);        //paso la variable cedula, mensaje de la busqueda, y el valor 0 para avisarle a funcion que no muestre el volvera buscar
         }else{
             mensaje = "El digito verificador es incorrecto";
         }
@@ -389,12 +401,12 @@ function buscar(){
         mensaje = "La cédula ingresada no cumple con el formato 1.111.111-1";
     }
 
-    if(mensaje==="La cédula ingresada no cumple con el formato 1.111.111-1" || mensaje==="El digito verificador es incorrecto"){
-        mostrarClases('divContenedorBuscarCenso');
-        document.querySelector("#divResultadoBusquedaError").innerHTML = mensaje;
+    if(mensaje==="La cédula ingresada no cumple con el formato 1.111.111-1" || mensaje==="El digito verificador es incorrecto"){ // si el mensaje retornado es algunas de las dos opciones
+        mostrarClases('divContenedorBuscarCenso');                                  //Muestro nuevamente el bloque de busqueda
+        document.querySelector("#divResultadoBusquedaError").innerHTML = mensaje;   //Muestro el mensaje de error
     }else{
-        mostrarID("divResultadoBusqueda");
-        document.querySelector("#divResultadoBusqueda").innerHTML = mensaje;
+        document.querySelector("#divResultadoBusqueda").innerHTML = mensaje;        //Muestro el resultado de la busqueda
+        mostrarID("divResultadoBusqueda");  //                                      //Muestro el contenedor de la busqueda
     }
     
 }
@@ -609,32 +621,32 @@ function llamarValidar(){
 
 
 function mostrarReasignarCenso(){
-    ocultarClases('divContendorBienvenida');
-    ocultarClases('divContenedorFormulario');
-    ocultarID('divResultadoBusqueda');
-    ocultarID('divTotalPersonasPorDepEdades');  
-    ocultarClases('divContenedorVolverABuscar');
-    mostrarID('btnDashbord');
-    mostrarClases('divContenedorReasignar');
-    ocultarClases('divContenedorBuscarCenso');
-    ocultarID('divContenedorCensosParaValidar');
-    ocultarClases('divContenedorEstadisticasCensista');
-    cargarSelectCensos();
-    cargarSelectCensistas();
+    ocultarClases('divContendorBienvenida');                    //OCULTO EL BLOQUE BIENVENIDA
+    ocultarClases('divContenedorFormulario');                   //OCULTO EL BLOQUE FORMULARIO
+    ocultarClases('divContenedorVolverABuscar');                //OCULTO EL BLOQUE VOLVER A BUSCAR
+    ocultarClases('divContenedorBuscarCenso');                  //OCULTO EL BLOQUE BUSCAR CENSO
+    ocultarClases('divContenedorEstadisticasCensista');         //OCULTO EL BLOQUE ESTADISTICAS
+    mostrarClases('divContenedorReasignar');                    //MOSTRAR EL BLOQUE REASIGINAR
+    ocultarID('divResultadoBusqueda');                          //OCULTAR EL RESULTADO DE BUSQUEDA
+    ocultarID('divTotalPersonasPorDepEdades');                  //OCULTAR RESULTADO DE PERSONAS POR DEPARTAMENTO EDAD
+    ocultarID('divContenedorCensosParaValidar');                //OCULTAR EL BLOQUE CENSO PARA VALIDAR
+    mostrarID('btnDashbord');                                   //MOSTRAR BOTON DASHBORD
+    cargarSelectCensos();                                       //CARGAR LOS SELECT DE CENSOS QUE TENGA EL USUARIO
+    cargarSelectCensistas();                                    //CARGAR LOS CENSISTAS PARA ASIGNARLES LOS CENSOS
 }
 
 
 function reasignarCenso(){
-    let censoCedula = document.querySelector('#selCensos').value;
-    let censistaId = document.querySelector('#selUsuarios').value;
+    let censoCedula = document.querySelector('#selCensos').value;   //Tomo el valor censoCedula
+    let usuarioNombre = document.querySelector('#selUsuarios').value;  //Tomo el usuarioNombre del usuario
     let mensaje = '';
 
-    if(sis.esVacio(censoCedula) && sis.esVacio(censistaId)){
-        if(sis.esNumerico(censoCedula)){
-            if(sis.reasignar(censoCedula,censistaId)){
-                mensaje = 'Se reasignó el censo correctamente';
-            }else{
-                mensaje = 'Hubo un error de sistemas';
+    if(sis.esVacio(censoCedula) && sis.esVacio(usuarioNombre)){     //Valido que ningun campo es vacio en el caso de que sae algun caso vacio retorno mensaje de error
+        if(sis.esNumerico(censoCedula)){                            //Valido que el censo cedula es de tipo numerico en el caso de que esto no se cumpla retorno mensaje de error
+            if(sis.reasignar(censoCedula,usuarioNombre)){           //Llamo a la funcion reasignar censo la cual en caso del que el censo se haya asignado correctamente me retorna true, en caso contrario falso y muestro el mensaje de error
+                mensaje = 'Se reasignó el censo correctamente';     //Mensaje que se asigni correctamente
+            }else{              
+                mensaje = 'Hubo un error de sistemas';              
             }
             
         }else{
@@ -644,16 +656,16 @@ function reasignarCenso(){
         mensaje = 'Debe completar todos los datos.';
     }
 
-    limpiarCampo('selCensos');
-    limpiarCampo('selUsuarios');
-    cargarSelectCensos();
-    cargarSelectCensistas();
+    limpiarCampo('selCensos');                                      //
+    limpiarCampo('selUsuarios');                                    //
+    cargarSelectCensos();                                           //
+    cargarSelectCensistas();                                        //
 
-    document.querySelector('#divResultadoReasignar').innerHTML = mensaje;
-    mostrarID('divResultadoReasignar');
-    let temporizador = setTimeout( function (){
-                                        ocultarID('divResultadoReasignar');
-                                    }, 4000);
+    document.querySelector('#divResultadoReasignar').innerHTML = mensaje;   //
+    mostrarID('divResultadoReasignar');                                     //
+    let temporizador = setTimeout( function (){                             
+                                        ocultarID('divResultadoReasignar'); // 
+                                    }, 4000);                               // a los 4 segundos
 }
 
 ////////////////////////////////////////////////////////////////////////
