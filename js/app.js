@@ -56,14 +56,14 @@ eventos(); //LLAMO A EVENTOS PARA CARGAR TODOS LOS BOTONES
 
 // OCULTAR AL CARGAR LA PAGINA
 function onload(){
-    ocultarID('btnLogout');                                 //
-    ocultarID('btnDashbord');                               //
-    ocultarID('divResultadoBusqueda');                      //
-    ocultarID('btnIrACenso');                               //
-    ocultarID('btnIrAReasignarCenso');                      //
-    ocultarID('btnIrValidarCenso');                         //
-    ocultarID('btnIrAEstadisticas');                        //
-    ocultarID('divContenedorCensosParaValidar');            //
+    ocultarID('btnLogout');                                 //OCULTO EL BOTON LOGOUT
+    ocultarID('btnDashbord');                               //OCULTO EL BOTON DASHBOARD
+    ocultarID('divResultadoBusqueda');                      //OCULTO EL BLOQUE RESULTADO
+    ocultarID('btnIrACenso');                               //OCULTO EL BOTON IR A CENSOS
+    ocultarID('btnIrAReasignarCenso');                      //OCULTO EL BOTON REASIGNAR CENSOS
+    ocultarID('btnIrValidarCenso');                         //OCULTO EL BOTON VALIDAR CENSOS
+    ocultarID('btnIrAEstadisticas');                        //OCULTO EL BOTON ESTADISTICAS
+    ocultarID('divContenedorCensosParaValidar');            //OCULTO EL BLOQUE DE CENSOS PARA VALIDAR
     ocultarClases('divContenedorLogin');                    //OCULAR EL BLOQUE LOGIN
     ocultarClases('divContenedorCrearUsuario');             //OCULAR EL BLOQUE CREAR USUARIO
     ocultarClases('divContenedorBuscarCenso');              //OCULAR EL BLOQUE BUSCAE CENSO
@@ -479,24 +479,24 @@ function cancelarEliminacion(){
 function enviarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar){
 
     let mensaje = '';
-    let error = true; //TOMO EL
+    let error = true; 
 
-    if(sis.esVacio(nombre) && sis.esVacio(apellido) && sis.esVacio(cedula) && sis.esVacio(edad)){
-        if(departamento>=0 && ocupacion>=0){
-            if (sis.esNumerico(edad)) {
-                if(edad>=0 && edad<=130){
-                    if(sis.validarFormatoCedula(cedula)) {
-                        if(sis.validarDigitoVerificador(cedula)){
-                            if(sis.usuarioLogin === null){
-                                mensaje = sis.enviar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar);
-                                mensaje += '<br> Se le retornara a buscar censo';
+    if(sis.esVacio(nombre) && sis.esVacio(apellido) && sis.esVacio(cedula) && sis.esVacio(edad)){   //Me pregunto si los campos son vacios en caso de que ai retorno error
+        if(departamento>=0 && ocupacion>=0){    //Me preunto si el departamento y ocupacion no es la seleccion por default, sino retorno mensaje de error avisando de esto
+            if (sis.esNumerico(edad)) {         //Me pregunto si la edad es de tipo numerico, sino retorno mensaje de error avisando de esto
+                if(edad>=0 && edad<=130){       //Me pregunto si la edad esta entre 0 y 130, sino retorno mensaje de error avisando de esto
+                    if(sis.validarFormatoCedula(cedula)) {  //Verifico si la cedula cumple el formato adecuado
+                        if(sis.validarDigitoVerificador(cedula)){   //Verifico si el numero verificador es correcto 
+                            if(sis.usuarioLogin === null){          //Me pregunto si el usuario esta logueado, en caso que no entro al if
+                                mensaje = sis.enviar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar); //llamo a la funcion enviar, que retorna un mensaje
+                                mensaje += '<br> Se le retornara a buscar censo';                                       
                                 error = false;
-                            }else{
-                                if(checkValidar===true){
-                                    mensaje = sis.enviar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar);
+                            }else{  //Caso en que el usuario esta logueado
+                                if(checkValidar){   //Verifico si esta validado, en caso que si entro
+                                    mensaje = sis.enviar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar); //llamo a la funcion enviar, que retorna un mensaje
                                     mensaje += '<br> Se le retornara a buscar censo';
                                     error = false;
-                                }else{
+                                }else{ //caso en que no se valido el formulario
                                     mensaje = 'Debe validar el censo.'
                                 }
                             }
@@ -519,14 +519,13 @@ function enviarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, ch
         mensaje = 'Debe completar todos los datos.';
     }
     
-    console.log(cedula,mensaje);
-    if(error){
-        document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
-        mostrarClases('divContenedorMensajeFormulario');
-        return '';
+    if(error){//pregunto si tiene error
+        document.querySelector('#divResultadoFormulario').innerHTML=mensaje; //Paso el mensaje de error
+        mostrarClases('divContenedorMensajeFormulario');                     //muestro el mensaje
+        return '';                                                           //retorno mensaje vacio
     }else{
-        return mensaje;
-    }
+        return mensaje; //retorno el mensaje de que paso correctamente
+    }   
 }
 
 function llamarEnviarCenso(){
@@ -551,22 +550,22 @@ function modificarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion,
     let mensaje = '';
     let error = true;
 
-    if(sis.esVacio(nombre) && sis.esVacio(apellido) && sis.esVacio(cedula) && sis.esVacio(edad)){
-        if(departamento>=0 && ocupacion>=0){
-            if (sis.esNumerico(edad)) {
-                if(edad>=0 && edad<=130){
-                    if(sis.validarFormatoCedula(cedula)) {
-                        if(sis.validarDigitoVerificador(cedula)){
-                            if(sis.usuarioLogin === null){
-                                mensaje = sis.modificar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar);
+    if(sis.esVacio(nombre) && sis.esVacio(apellido) && sis.esVacio(cedula) && sis.esVacio(edad)){   //Me pregunto si los campos son vacios en caso de que ai retorno error
+        if(departamento>=0 && ocupacion>=0){    //Me preunto si el departamento y ocupacion no es la seleccion por default, sino retorno mensaje de error avisando de esto
+            if (sis.esNumerico(edad)) {         //Me pregunto si la edad es de tipo numerico, sino retorno mensaje de error avisando de esto
+                if(edad>=0 && edad<=130){       //Me pregunto si la edad esta entre 0 y 130, sino retorno mensaje de error avisando de esto
+                    if(sis.validarFormatoCedula(cedula)) {  //Verifico si la cedula cumple el formato adecuado
+                        if(sis.validarDigitoVerificador(cedula)){   //Verifico si el numero verificador es correcto 
+                            if(sis.usuarioLogin === null){      //Me pregunto si el usuario esta logueado, en caso que no entro al if
+                                mensaje = sis.modificar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar);   //llamo a la funcion enviar, que retorna un mensaje
                                 mensaje += '<br> Se le retornara a buscar censo';
                                 error = false;
-                            }else{
-                                if(checkValidar===true){
-                                    mensaje = sis.modificar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar);
+                            }else{  //Caso en que el usuario esta logueado
+                                if(checkValidar===true){    //Verifico si esta validado, en caso que si entro
+                                    mensaje = sis.modificar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar);   //llamo a la funcion enviar, que retorna un mensaje
                                     mensaje += '<br> Se le retornara a buscar censo';
                                     error = false;
-                                }else{
+                                }else{  //caso en que no se valido el formulario
                                     mensaje = 'Debe validar el censo.'
                                 }
                             }
@@ -574,7 +573,7 @@ function modificarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion,
                             mensaje = 'El digito verificador es incorrecto.';
                         }
                     }else{
-                        mensaje = 'La cédula ingresada no cumple con el formato 1.111.111-1.';
+                        mensaje = 'La cédula ingresada no cumple con el formato 1.111.111-1 o 1.11111-1';
                     }
                 }else{
                     mensaje = 'La edad debe de estar en el rango de 0 a 130 años.';
@@ -589,11 +588,11 @@ function modificarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion,
         mensaje = 'Debe completar todos los datos.';
     }
     
-    if(error){
-        document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
-        mostrarClases('divContenedorMensajeFormulario');
+    if(error){  //pregunto si tiene error
+        document.querySelector('#divResultadoFormulario').innerHTML=mensaje; //Paso el mensaje de error
+        mostrarClases('divContenedorMensajeFormulario');    //muestro el mensaje
     }else{
-        mostrarMensaje(mensaje);
+        mostrarMensaje(mensaje); //llamo a la funcion mostrar con el mensaje
     }
    
 }
