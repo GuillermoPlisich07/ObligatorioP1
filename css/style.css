@@ -55,7 +55,7 @@ h3, h2, h5, h4, #divMostrarErrorLogin{
 .divContenedorPrincipal{
     background-color: rgba(255, 255, 255, 0.4);
     border-radius:10px;
-    max-width:650px;
+    max-width:780px;
     display:flex;
     flex-direction:column;
     padding:40px;
@@ -185,6 +185,7 @@ tr:nth-child(even){
 }
 
 #divReporteInvitado{
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;

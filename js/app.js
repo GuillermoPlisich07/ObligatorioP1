@@ -314,7 +314,7 @@ function crearUsuario(nombre,nombreUsuario,password){
                 mensaje = 'La contraseña deberá tener un mínimo de 5 caracteres, contando con al menos una mayúscula, una minúscula y un número.';
             }
         }else{
-            mensaje = `Ya existe un usuario con el nombre ${nombreUsuario}.`;
+            mensaje = `Ya existe un usuario con el nombre: ${nombreUsuario}.`;
         }
     }else{
         mensaje = `Debe ingresar nombre, nombre usuario y contrasena.`;
@@ -654,7 +654,7 @@ function reasignarCenso(){
     let usuarioNombre = document.querySelector('#selUsuarios').value;  //Tomo el usuarioNombre del usuario
     let mensaje = '';
 
-    if(sis.esVacio(censoCedula) && sis.esVacio(usuarioNombre)){     //Valido que ningun campo es vacio en el caso de que sae algun caso vacio retorno mensaje de error
+    if(sis.esVacio(censoCedula) && sis.esVacio(usuarioNombre) && censoCedula!=-1 && usuarioNombre!=-1){     //Valido que ningun campo es vacio en el caso de que sae algun caso vacio retorno mensaje de error
         if(sis.esNumerico(censoCedula)){                            //Valido que el censo cedula es de tipo numerico en el caso de que esto no se cumpla retorno mensaje de error
             if(sis.reasignar(censoCedula,usuarioNombre)){           //Llamo a la funcion reasignar censo la cual en caso del que el censo se haya asignado correctamente me retorna true, en caso contrario falso y muestro el mensaje de error
                 mensaje = 'Se reasignó el censo correctamente';     //Mensaje que se asigni correctamente
@@ -669,10 +669,8 @@ function reasignarCenso(){
         mensaje = 'Debe completar todos los datos.';
     }
 
-    limpiarCampo('selCensos');                                      //Limpiar el campo selCensos
-    limpiarCampo('selUsuarios');                                    //Limpiar el campo selUsuarios
-    cargarSelectCensos();                                           //CARGAR LOS SELECT DE CENSOS QUE TENGA EL USUARIO
-    cargarSelectCensistas();                                        //CARGAR LOS CENSISTAS PARA ASIGNARLES LOS CENSOS
+    cargarSelectCensos();                                   //CARGAR LOS SELECT DE CENSOS QUE TENGA EL USUARIO
+    cargarSelectCensistas();                                //CARGAR LOS CENSISTAS PARA ASIGNARLES LOS CENSOS
 
     document.querySelector('#divResultadoReasignar').innerHTML = mensaje;   // Asigno el mensaje obtenido anteriormente
     mostrarID('divResultadoReasignar');                                     //Muestro el bloque del resultado

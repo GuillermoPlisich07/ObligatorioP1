@@ -451,9 +451,9 @@ class Sistema{
             }
         }
 
-        if(carCedula === 9) { //Si tiene un largo de 9
+        if(carCedula === 9) { //Si tiene un largo de 9  //1.11111-1
             if(this.contarCaracteres(cedula, ".") === 1 && this.contarCaracteres(cedula, "-") === 1) { // Compruebo si tiene un guion y un punto
-                if(cedula.charAt(3)==="." && cedula.charAt(7)==="-"){   //Si los caracteres 3 es '.' y si el caracter 7 es '-'
+                if(cedula.charAt(1)==="." && cedula.charAt(7)==="-"){   //Si los caracteres 3 es '.' y si el caracter 7 es '-'
                     bander = true;
                 }
             }
@@ -827,28 +827,28 @@ class Sistema{
         let cedulaNueva = this.formatearCedula(cedula);     //formateo la cedula
         let mensaje = '';                                   
 
-        let censosNuevo = new Censo();              //
-        censosNuevo.nombre = nombre;                //
-        censosNuevo.apellido= apellido;             //
-        censosNuevo.edad = edad;                    //
-        censosNuevo.cedula = cedulaNueva;           //
-        censosNuevo.departamento = departamento;    //
-        censosNuevo.ocupacion = ocupacion;          //
-        censosNuevo.checkCensado=checkValidar;      //
+        let censosNuevo = new Censo();              //creo un censo nuevo
+        censosNuevo.nombre = nombre;                //asigno el nombre
+        censosNuevo.apellido= apellido;             //asigno el apellido
+        censosNuevo.edad = edad;                    //asigno la edad
+        censosNuevo.cedula = cedulaNueva;           //asigno la cedula
+        censosNuevo.departamento = departamento;    //asigno el departemento
+        censosNuevo.ocupacion = ocupacion;          //asigno la ocupacion
+        censosNuevo.checkCensado=checkValidar;      //asigno el check
 
 
-        if(this.usuarioLogin === null){
-            let objetoUsuario = this.usuarios[[Math.floor(Math.random() * this.usuarios.length)]];
-            censosNuevo.idCensista=objetoUsuario;
+        if(this.usuarioLogin === null){            //Me pregunto si el usuario no esta logueado
+            let objetoUsuario = this.usuarios[[Math.floor(Math.random() * this.usuarios.length)]]; // tomo todos los usuarios y eligo uno random dentro del arreglo y lo asigno a una variable
+            censosNuevo.idCensista=objetoUsuario;   // asigno el censista al censo
             mensaje=`El censo se proceso correctamente! El cenisista asingnado es: ${objetoUsuario.nombre}`;
-        }else{
-            censosNuevo.idCensista=this.usuarioLogin;
-            mensaje='EL censo se proceso correctamente!';
+        }else{  // caso en que el censista esta logueado
+            censosNuevo.idCensista=this.usuarioLogin; // asigno el censista
+            mensaje='EL censo se proceso correctamente!'; 
         }
 
-        this.censos.push(censosNuevo);
+        this.censos.push(censosNuevo); // agrego el censo
 
-        limpiarFormulario();
+        limpiarFormulario(); // limpio el formulario
         return mensaje;
 
     }
@@ -1007,40 +1007,39 @@ class Sistema{
     }
 
     porcentajePersonasEdadDepartamento(departamento){
-        let censosValidados = this.contadorCensosValidados();
-        let mayores=0;
-        let menores=0;
+        let censosValidados = this.contadorCensosValidados(); //traigo censos validados
+        let mayores=0;  //creo variable para calcular los mayores
+        let menores=0;  //creo variable para calcular los menores
 
         let table = `<table border="1">`; //Contenedor tabla
         table += `<thead><tr><th>Departamento</th><th>Mayores de Edad</th><th>Menores de edad</th></tr></thead>`; // Titulos Tablas
 
-        if(censosValidados.length !== 0){
-            for (let i = 0; i < censosValidados.length; i++) {
-                let objetoCenso = censosValidados[i];
-                if(Number(objetoCenso.departamento) === Number(departamento)){
-                    if(Number(objetoCenso.edad)>=18){
-                        mayores++;
-                    }else if(Number(objetoCenso.edad)<18){
-                        menores++;
+        if(censosValidados.length !== 0){                                       //pregunto si hay censos validados
+            for (let i = 0; i < censosValidados.length; i++) {                  //recorro los censos validados
+                let objetoCenso = censosValidados[i];                           //traigo el objeto censo
+                if(Number(objetoCenso.departamento) === Number(departamento)){  //Pregunto si el departamento coincide
+                    if(Number(objetoCenso.edad)>=18){                           //pregunto si la edad es mayor a 18
+                        mayores++;                                              //aumento la variable mayores
+                    }else if(Number(objetoCenso.edad)<18){                      //pregunto si la edad menor a 18
+                        menores++;                                              //aumento la variable menores
                     }
                 }
                 
             }
     
-            let total = mayores + menores;
-            let porcentajeMenores= 0;
-            let porcentajeMayores= 0;
-            if(mayores>0){
-                porcentajeMayores=(mayores * 100)/total;
+            let total = mayores + menores; //Hago el total
+            let porcentajeMenores= 0;   //creo la variable para luego ponerle el porcentaje calculado
+            let porcentajeMayores= 0;   //creo la variable para luego ponerle el porcentaje calculado
+            if(mayores>0){ //En el caso de que los 'mayores' sean menores a 0 sigue de largo y no modifica la variable 
+                porcentajeMayores=(mayores * 100)/total; 
             }
-         
-            if(menores>0){
+            if(menores>0){//En el caso de que los 'menores' sean menores a 0 sigue de largo y no modifica la variable 
                 porcentajeMenores=(menores * 100)/total;
             }
 
-            let objetoDepartamento = this.traerObjetoDepartamento(departamento);
+            let objetoDepartamento = this.traerObjetoDepartamento(departamento); //ontengo el objeto del departamento
     
-            table += `<tr><td>${objetoDepartamento.nombre}</td><td>${porcentajeMayores}%</td><td>${porcentajeMenores}%</td></tr>`;
+            table += `<tr><td>${objetoDepartamento.nombre}</td><td>${porcentajeMayores}%</td><td>${porcentajeMenores}%</td></tr>`; //Armo la fila con los valores
 
 
             table += `</table>`; //Contenedor tabla
@@ -1060,39 +1059,43 @@ class Sistema{
         let table = `<table border="1">`; //Contenedor tabla
         table += `<thead><tr><th>Departamento</th><th>Estudian</th><th>No Trabajan</th><th>Dependientes o independientes</th><th>Porcentaje del total de censados</th></tr></thead>`; // Titulos Tablas
 
-        for (let i = 0; i < this.departamentos.length; i++) {
-            let estudian = 0;
-            let trabajan = 0;
-            let noTrabajan = 0;
-            let personasConCenso= 0;
-            let objetoDepartamento = this.departamentos[i];
-            
-            for (let j = 0; j < this.censos.length; j++) {
-                let objetoCenso = this.censos[j];
-                if(Number(objetoCenso.departamento) === Number(objetoDepartamento.id)){
-
-                    if(Number(objetoCenso.ocupacion) === 2){
-                        estudian++;
-                    }else if(Number(objetoCenso.ocupacion) === 3){
-                        noTrabajan++;
-                    }else{
-                        trabajan++;
+        if(total>0){
+            for (let i = 0; i < this.departamentos.length; i++) {
+                let estudian = 0;
+                let trabajan = 0;
+                let noTrabajan = 0;
+                let personasConCenso= 0;
+                let objetoDepartamento = this.departamentos[i];
+                
+                for (let j = 0; j < this.censos.length; j++) {
+                    let objetoCenso = this.censos[j];
+                    if(Number(objetoCenso.departamento) === Number(objetoDepartamento.id)){
+    
+                        if(Number(objetoCenso.ocupacion) === 2){
+                            estudian++;
+                        }else if(Number(objetoCenso.ocupacion) === 3){
+                            noTrabajan++;
+                        }else{
+                            trabajan++;
+                        }
+                        personasConCenso++;
+    
+    
                     }
-                    personasConCenso++;
-
-
                 }
+                let porcentajeDep = 0;
+                if(personasConCenso!==0){
+                    porcentajeDep = (personasConCenso * 100)/total;
+                }
+    
+                table += `<tr><td>${objetoDepartamento.nombre}</td><td>${estudian}</td><td>${noTrabajan}</td><td>${trabajan}</td><td>${porcentajeDep}%</td></tr>`;
+                
             }
-            let porcentajeDep = 0;
-            if(personasConCenso!==0){
-                porcentajeDep = (personasConCenso * 100)/total;
-            }
-
-            table += `<tr><td>${objetoDepartamento.nombre}</td><td>${estudian}</td><td>${noTrabajan}</td><td>${trabajan}</td><td>${porcentajeDep}%</td></tr>`;
-            
+    
+            table += `</table>`; //Contenedor tabla
+        }else{
+            table = `<h5>No hay censos aún</h5>`; // Mensaje en el caso de que no hay elementos
         }
-
-        table += `</table>`; //Contenedor tabla
 
         return table;
 
