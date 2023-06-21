@@ -239,7 +239,7 @@ class Sistema{
         nombre = 'Isabella';
         apellido= 'González';
         edad = '33';
-        cedula = '4.567.890-5';
+        cedula = '2.764.510-4';
         departamento = '5';
         ocupacion = '1';
         checkCensado=true;
@@ -1057,7 +1057,7 @@ class Sistema{
     reporteCenso(){
 
         let total = this.censos.length; //SACO EL LARGO DEL ARRAY CENSOS
-
+        let totalSumaPorcentaje=0;  //Creo el total del porcentaje
         let table = `<table border="1">`; //Contenedor tabla
         table += `<thead><tr><th>Departamento</th><th>Estudian</th><th>No Trabajan</th><th>Dependientes o independientes</th><th>Porcentaje del total de censados</th></tr></thead>`; // Titulos Tablas
 
@@ -1089,11 +1089,12 @@ class Sistema{
                 if(personasConCenso!==0){//ME PREGUNTO SI HAY CENSOS EN EL DEPARTAMENTO
                     porcentajeDep = Number(((personasConCenso * 100)/total).toFixed(2)); //CALCULO EL PORCENTAJE DE LOS CENSOS EN EL DEPARTAMENTO RESPECTO AL TOTAL
                 }
+                totalSumaPorcentaje += porcentajeDep; //sumo el porcentaje al total
     
                 table += `<tr><td>${objetoDepartamento.nombre}</td><td>${estudian}</td><td>${noTrabajan}</td><td>${trabajan}</td><td>${porcentajeDep}%</td></tr>`; //AGREGO LOS DATOS OBTENIDOS
                 
             }
-    
+            table += `<tr><td>${totalSumaPorcentaje}%</td></tr>`;  //fila total
             table += `</table>`; //Contenedor tabla
         }else{ //caso en el que el total sea cero, no hay casis
             table = `<h5>No hay censos aún</h5>`; // Mensaje en el caso de que no hay elementos
