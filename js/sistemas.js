@@ -69,7 +69,7 @@ class Sistema{
         apellido= 'Martinez';
         edad = '17';
         cedula = '4.567.890-5';
-        departamento = '19';
+        departamento = '0';
         ocupacion = '3';
         checkCensado=false;
         enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
@@ -753,6 +753,7 @@ class Sistema{
                 ocultarClases('EditarCenso');               //OCULTO EL BOTON EDITAR CENSO
                 ocultarClases('ValidarCenso');              //OCULTO EL BOTON DE VALIDAR
                 mostrarClases('EnviarCenso');               //MUESTRO EL BOTON DE ENVIAR
+                document.querySelector('#txtCedulaFormulario').value=cedula; //CARGO LA CEDULA
                 mostrarClases('divContenedorFormulario');   //MUESTRO EL FORMULARIO
             }else{//CASO DE ERROR
                 mensaje = 'Hubo un error en el sistema';
@@ -773,6 +774,7 @@ class Sistema{
                 if(lugar === 0){  //Pregunto si vengo de buscar         
                     mostrarClases('divContenedorVolverABuscar');    //MUESTRO EL CONTENEDOR DE VOLVER A BUSCAR YA QUE ES EL CENSISTA
                 }
+                document.querySelector('#txtCedulaFormulario').value=cedula; //CARGO LA CEDULA
                 mostrarClases('divContenedorFormulario');   //MUESTRO EL FORMULARIO
             }else if(this.usuarioLogin !== null){ //CASO QUE EL CENSO ESTA PRECOMPLETADO
                 mensaje = mensajeBusqueda;              
@@ -797,10 +799,11 @@ class Sistema{
     buscarPosicionCenso(cedula){
         let i=0;                                            //creo un variable
         let bandera=false;                                  //creo una bandera
+        let cedulaFomateada = this.formatearCedula(cedula);  //Formateo la cedula
         while(i<this.censos.length && bandera === false){   //Recorren el array de censos
             let objetoCenso = this.censos[i];               //Tomo el objeto del censo
-            if(objetoCenso.cedula === cedula){              //Pregunto si la cedulas son iguales
-                bandera=true;                               //cambio el valor de la bandera
+            if(objetoCenso.cedula === cedulaFomateada){     //Pregunto si la cedulas son iguales
+                bandera=true;                                 //cambio el valor de la bandera
             }       
             i++; //aumento el valor
         }
@@ -810,7 +813,6 @@ class Sistema{
 
     eliminar(cedula){
         let posicion = this.buscarPosicionCenso(cedula);                        //busco la posicion del la cedula
-        let censosNuevos= new Array();                                          //creo un nuevo array
         let mensaje = '';                                                       //creo la variable mensaje
         if(posicion>=0){                                                        //si la posicion es mayo o igual a 0 
             this.censos.splice(posicion, 1);                                    //elimino la posicion encontrada
@@ -992,7 +994,7 @@ class Sistema{
             porcentaje = (pendientes * 100)/total;                  //calculo el porcentaje
         }
 
-        return porcentaje;
+        return Number(porcentaje.toFixed(2));
     }
 
     traerObjetoDepartamento(id){
@@ -1031,10 +1033,10 @@ class Sistema{
             let porcentajeMenores= 0;   //creo la variable para luego ponerle el porcentaje calculado
             let porcentajeMayores= 0;   //creo la variable para luego ponerle el porcentaje calculado
             if(mayores>0){ //En el caso de que los 'mayores' sean menores a 0 sigue de largo y no modifica la variable 
-                porcentajeMayores=(mayores * 100)/total; 
+                porcentajeMayores=Number(((mayores * 100)/total).toFixed(2)); 
             }
             if(menores>0){//En el caso de que los 'menores' sean menores a 0 sigue de largo y no modifica la variable 
-                porcentajeMenores=(menores * 100)/total;
+                porcentajeMenores=Number(((menores * 100)/total).toFixed(2));
             }
 
             let objetoDepartamento = this.traerObjetoDepartamento(departamento); //ontengo el objeto del departamento
@@ -1085,7 +1087,7 @@ class Sistema{
                 }
                 let porcentajeDep = 0; //INICIALIZO EL PORCENTAJE DEL DEPARTAMENTO
                 if(personasConCenso!==0){//ME PREGUNTO SI HAY CENSOS EN EL DEPARTAMENTO
-                    porcentajeDep = (personasConCenso * 100)/total; //CALCULO EL PORCENTAJE DE LOS CENSOS EN EL DEPARTAMENTO RESPECTO AL TOTAL
+                    porcentajeDep = Number(((personasConCenso * 100)/total).toFixed(2)); //CALCULO EL PORCENTAJE DE LOS CENSOS EN EL DEPARTAMENTO RESPECTO AL TOTAL
                 }
     
                 table += `<tr><td>${objetoDepartamento.nombre}</td><td>${estudian}</td><td>${noTrabajan}</td><td>${trabajan}</td><td>${porcentajeDep}%</td></tr>`; //AGREGO LOS DATOS OBTENIDOS

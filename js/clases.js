@@ -1,3 +1,4 @@
+//Clase para el censista
 class Usuario{
     static idUsuario= 0;
     constructor(){
@@ -8,7 +9,7 @@ class Usuario{
     }
 }
 
-
+//Clase para los censos
 class Censo{
     static idCenso= 0;
     constructor(){
@@ -24,6 +25,7 @@ class Censo{
     }
 }
 
+//Clase para la ocupacion
 class Ocupacion{
     static idOcupacion = 0;
     constructor(){
@@ -32,6 +34,7 @@ class Ocupacion{
     }
 }
 
+//Clase para el departamento
 class Departamento{
     static idDepartamento = 0;
     constructor(){
