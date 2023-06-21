@@ -8,7 +8,7 @@ html, .btn, body{
     font-family: "Poppins", sans-serif;
 }
 
-h3, h2{
+h3, h2, h5, h4, #divMostrarErrorLogin{
     text-align: center;
     text-transform: uppercase;
 }

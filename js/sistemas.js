@@ -21,325 +21,292 @@ class Sistema{
     ///////////////////////// PRECARGAS
 
     precargarUsuario(){
-        let Usuario1 = new Usuario();
-        Usuario1.nombre='Guille Plisich';
-        Usuario1.nombreUsuario='guillermo.plisich';
-        Usuario1.password='123Guille';
-        this.usuarios.push(Usuario1);
-
-        let Usuario2 = new Usuario();
-        Usuario2.nombre='Leo Fascendini';
-        Usuario2.nombreUsuario='leo.fascendini';
-        Usuario2.password='123Leo';
-        this.usuarios.push(Usuario2);
-
-        let Usuario3 = new Usuario();
-        Usuario3.nombre='Gonzalo Gentile';
-        Usuario3.nombreUsuario='gonza.gentile';
-        Usuario3.password='123Gonza';
-        this.usuarios.push(Usuario3);
+        let nombre='Guille Plisich';
+        let nombreUsuario='guillermo.plisich';
+        let password='123Guille';
+        crearUsuario(nombre,nombreUsuario,password);
+        
+        nombre='Leo Fascendini';
+        nombreUsuario='leo.fascendini';
+        password='123Leo';
+        crearUsuario(nombre,nombreUsuario,password);
+        
+        nombre='Gonzalo Gentile';
+        nombreUsuario='gonza.gentile';
+        password='123Gonza';
+        crearUsuario(nombre,nombreUsuario,password);
     }
 
     precargarCensos(){
-        let Censo1 = new Censo();
-        Censo1.nombre = 'Juan';
-        Censo1.apellido= 'Fernandez';
-        Censo1.edad = '25';
-        Censo1.cedula = '1234567-8';
-        Censo1.departamento = '7';
-        Censo1.ocupacion = '3';
-        Censo1.idCensista=this.usuarios[0];
-        Censo1.checkCensado=true;
+        let nombre = 'Juan';
+        let apellido= 'Fernandez';
+        let edad = '25';
+        let cedula = '1.234.567-2';
+        let departamento = '7';
+        let ocupacion = '3';
+        let checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
         
-        let Censo2 = new Censo();
-        Censo2.nombre = 'Maria';
-        Censo2.apellido= 'Ramirez';
-        Censo2.edad = '22';
-        Censo2.cedula = '2345678-9';
-        Censo2.departamento = '13';
-        Censo2.ocupacion = '1';
-        Censo2.idCensista=this.usuarios[0];
-        Censo2.checkCensado=true;
+        nombre = 'Maria';
+        apellido= 'Ramirez';
+        edad = '22';
+        cedula = '2.345.678-3';
+        departamento = '13';
+        ocupacion = '1';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo3 = new Censo();
-        Censo3.nombre = 'Carlos';
-        Censo3.apellido= 'Rodriguez';
-        Censo3.edad = '15';
-        Censo3.cedula = '3456789-0';
-        Censo3.departamento = '6';
-        Censo3.ocupacion = '4';
-        Censo3.idCensista=this.usuarios[0];
-        Censo3.checkCensado=true;
+        nombre = 'Carlos';
+        apellido= 'Rodriguez';
+        edad = '15';
+        cedula = '3.456.789-4';
+        departamento = '6';
+        ocupacion = '4';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo4 = new Censo();
-        Censo4.nombre = 'Laura';
-        Censo4.apellido= 'Martinez';
-        Censo4.edad = '17';
-        Censo4.cedula = '4567890-1';
-        Censo4.departamento = '19';
-        Censo4.ocupacion = '3';
-        Censo4.idCensista=this.usuarios[0];
-        Censo4.checkCensado=true;
+        nombre = 'Laura';
+        apellido= 'Martinez';
+        edad = '17';
+        cedula = '4.567.890-5';
+        departamento = '19';
+        ocupacion = '3';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo5 = new Censo();
-        Censo5.nombre = 'Alejandro';
-        Censo5.apellido= 'Vargas';
-        Censo5.edad = '18';
-        Censo5.cedula = '5678901-2';
-        Censo5.departamento = '2';
-        Censo5.ocupacion = '3';
-        Censo5.idCensista=this.usuarios[0];
-        Censo5.checkCensado=true;
+        nombre = 'Alejandro';
+        apellido= 'Vargas';
+        edad = '18';
+        cedula = '5.678.901-6';
+        departamento = '2';
+        ocupacion = '3';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo6 = new Censo();
-        Censo6.nombre = 'Ana';
-        Censo6.apellido= 'Navarro';
-        Censo6.edad = '15';
-        Censo6.cedula = '6789012';
-        Censo6.departamento = '11';
-        Censo6.ocupacion = '3';
-        Censo6.idCensista=this.usuarios[0];
-        Censo6.checkCensado=true;
+        nombre = 'Ana';
+        apellido= 'Navarro';
+        edad = '15';
+        cedula = '6.789.012-7';
+        departamento = '11';
+        ocupacion = '3';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo7 = new Censo();
-        Censo7.nombre = 'Andrés';
-        Censo7.apellido= 'Mendoza';
-        Censo7.edad = '16';
-        Censo7.cedula = '7890123-4';
-        Censo7.departamento = '2';
-        Censo7.ocupacion = '3';
-        Censo7.idCensista=this.usuarios[0];
-        Censo7.checkCensado=true;
+        nombre = 'Andrés';
+        apellido= 'Mendoza';
+        edad = '16';
+        cedula = '7.890.123-8';
+        departamento = '2';
+        ocupacion = '3';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo8 = new Censo();
-        Censo8.nombre = 'Carolina';
-        Censo8.apellido= 'Silva';
-        Censo8.edad = '13';
-        Censo8.cedula = '8901234-5';
-        Censo8.departamento = '6';
-        Censo8.ocupacion = '3';
-        Censo8.idCensista=this.usuarios[0];
-        Censo8.checkCensado=true;
+        nombre = 'Carolina';
+        apellido= 'Silva';
+        edad = '13';
+        cedula = '8.901.234-9';
+        departamento = '6';
+        ocupacion = '3';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo9 = new Censo();
-        Censo9.nombre = 'David';
-        Censo9.apellido= 'Paredes';
-        Censo9.edad = '12';
-        Censo9.cedula = '9012345-6';
-        Censo9.departamento = '9';
-        Censo9.ocupacion = '3';
-        Censo9.idCensista=this.usuarios[0];
-        Censo9.checkCensado=true;
+        nombre = 'David';
+        apellido= 'Paredes';
+        edad = '12';
+        cedula = '9.012.345-0';
+        departamento = '9';
+        ocupacion = '3';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo10 = new Censo();
-        Censo10.nombre = 'Gabriela';
-        Censo10.apellido= 'Cordero';
-        Censo10.edad = '16';
-        Censo10.cedula = '0123456-7';
-        Censo10.departamento = '8';
-        Censo10.ocupacion = '3';
-        Censo10.idCensista=this.usuarios[0];
-        Censo10.checkCensado=true;
+        nombre = 'Gabriela';
+        apellido= 'Cordero';
+        edad = '16';
+        cedula = '1.23456-1';
+        departamento = '8';
+        ocupacion = '3';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo11 = new Censo();
-        Censo11.nombre = 'Javier';
-        Censo11.apellido= 'Reyes';
-        Censo11.edad = '17';
-        Censo11.cedula = '1122334-4';
-        Censo11.departamento = '14';
-        Censo11.ocupacion = '3';
-        Censo11.idCensista=this.usuarios[0];
-        Censo11.checkCensado=true;
+        nombre = 'Javier';
+        apellido= 'Reyes';
+        edad = '17';
+        cedula = '1.122.334-6';
+        departamento = '14';
+        ocupacion = '3';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo12 = new Censo();
-        Censo12.nombre = 'Paula';
-        Censo12.apellido= 'Acosta';
-        Censo12.edad = '16';
-        Censo12.cedula = '2233445-5';
-        Censo12.departamento = '3';
-        Censo12.ocupacion = '3';
-        Censo12.idCensista=this.usuarios[0];
-        Censo12.checkCensado=true;
+        nombre = 'Paula';
+        apellido= 'Acosta';
+        edad = '16';
+        cedula = '2.233.445-7';
+        departamento = '3';
+        ocupacion = '3';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo13 = new Censo();
-        Censo13.nombre = 'Diego';
-        Censo13.apellido= 'Rojas';
-        Censo13.edad = '24';
-        Censo13.cedula = '3344556-6';
-        Censo13.departamento = '5';
-        Censo13.ocupacion = '3';
-        Censo13.idCensista=this.usuarios[0];
-        Censo13.checkCensado=true;
+        nombre = 'Diego';
+        apellido= 'Rojas';
+        edad = '24';
+        cedula = '3.344.556-8';
+        departamento = '5';
+        ocupacion = '3';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo14= new Censo();
-        Censo14.nombre = 'Valentina';
-        Censo14.apellido= 'Castro';
-        Censo14.edad = '22';
-        Censo14.cedula = '4455667-7';
-        Censo14.departamento = '18';
-        Censo14.ocupacion = '2';
-        Censo14.idCensista=this.usuarios[0];
-        Censo14.checkCensado=true;
+        nombre = 'Valentina';
+        apellido= 'Castro';
+        edad = '22';
+        cedula = '4.455.667-9';
+        departamento = '18';
+        ocupacion = '2';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo15 = new Censo();
-        Censo15.nombre = 'Luisa';
-        Censo15.apellido= 'Duarte';
-        Censo15.edad = '31';
-        Censo15.cedula = '5566778-8';
-        Censo15.departamento = '4';
-        Censo15.ocupacion = '1';
-        Censo15.idCensista=this.usuarios[0];
-        Censo15.checkCensado=true;
+        nombre = 'Luisa';
+        apellido= 'Duarte';
+        edad = '31';
+        cedula = '5.566.778-0';
+        departamento = '4';
+        ocupacion = '1';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo16 = new Censo();
-        Censo16.nombre = 'Sebastián';
-        Censo16.apellido= 'García';
-        Censo16.edad = '35';
-        Censo16.cedula = '6677889-9';
-        Censo16.departamento = '9';
-        Censo16.ocupacion = '4';
-        Censo16.idCensista=this.usuarios[0];
-        Censo16.checkCensado=true;
+        nombre = 'Sebastián';
+        apellido= 'García';
+        edad = '35';
+        cedula = '6.677.889-1';
+        departamento = '9';
+        ocupacion = '4';
+        checkCensado=false;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo17 = new Censo();
-        Censo17.nombre = 'Natalia';
-        Censo17.apellido= 'Ortega';
-        Censo17.edad = '51';
-        Censo17.cedula = '7788990-0';
-        Censo17.departamento = '12';
-        Censo17.ocupacion = '1';
-        Censo17.idCensista=this.usuarios[0];
-        Censo17.checkCensado=true;
+        nombre = 'Natalia';
+        apellido= 'Ortega';
+        edad = '51';
+        cedula = '7.788.990-2';
+        departamento = '12';
+        ocupacion = '1';
+        checkCensado=true;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo18 = new Censo();
-        Censo18.nombre = 'Felipe';
-        Censo18.apellido= 'Torres';
-        Censo18.edad = '55';
-        Censo18.cedula = '8899001-1';
-        Censo18.departamento = '1';
-        Censo18.ocupacion = '2';
-        Censo18.idCensista=this.usuarios[0];
-        Censo18.checkCensado=true;
+        nombre = 'Felipe';
+        apellido= 'Torres';
+        edad = '55';
+        cedula = '8.899.001-3';
+        departamento = '1';
+        ocupacion = '2';
+        checkCensado=true;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo19 = new Censo();
-        Censo19.nombre = 'Sofía';
-        Censo19.apellido= 'Miranda';
-        Censo19.edad = '88';
-        Censo19.cedula = '9900112-2';
-        Censo19.departamento = '7';
-        Censo19.ocupacion = '3';
-        Censo19.idCensista=this.usuarios[0];
-        Censo19.checkCensado=true;
+        nombre = 'Sofía';
+        apellido= 'Miranda';
+        edad = '88';
+        cedula = '9.900.112-4';
+        departamento = '7';
+        ocupacion = '3';
+        checkCensado=true;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo20 = new Censo();
-        Censo20.nombre = 'Martín';
-        Censo20.apellido= 'Pérez';
-        Censo20.edad = '63';
-        Censo20.cedula = '0011223-3';
-        Censo20.departamento = '15';
-        Censo20.ocupacion = '1';
-        Censo20.idCensista=this.usuarios[0];
-        Censo20.checkCensado=true;
+        nombre = 'Martín';
+        apellido= 'Pérez';
+        edad = '63';
+        cedula = '0.11223-5';
+        departamento = '15';
+        ocupacion = '1';
+        checkCensado=true;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo21 = new Censo();
-        Censo21.nombre = 'Lucía';
-        Censo21.apellido= 'Fuentes';
-        Censo21.edad = '34';
-        Censo21.cedula = '3216549-8';
-        Censo21.departamento = '6';
-        Censo21.ocupacion = '4';
-        Censo21.idCensista=this.usuarios[0];
-        Censo21.checkCensado=true;
+        nombre = 'Lucía';
+        apellido= 'Fuentes';
+        edad = '34';
+        cedula = '3.216.549-8';
+        departamento = '6';
+        ocupacion = '4';
+        checkCensado=true;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo22 = new Censo();
-        Censo22.nombre = 'Ernesto';
-        Censo22.apellido= 'Hernández';
-        Censo22.edad = '25';
-        Censo22.cedula = '9876543-2';
-        Censo22.departamento = '17';
-        Censo22.ocupacion = '2';
-        Censo22.idCensista=this.usuarios[0];
-        Censo22.checkCensado=true;
+        nombre = 'Ernesto';
+        apellido= 'Hernández';
+        edad = '25';
+        cedula = '9.876.543-8';
+        departamento = '17';
+        ocupacion = '2';
+        checkCensado=true;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo23 = new Censo();
-        Censo23.nombre = 'Isabella';
-        Censo23.apellido= 'González';
-        Censo23.edad = '33';
-        Censo23.cedula = '4567890-1';
-        Censo23.departamento = '5';
-        Censo23.ocupacion = '1';
-        Censo23.idCensista=this.usuarios[0];
-        Censo23.checkCensado=true;
+        nombre = 'Isabella';
+        apellido= 'González';
+        edad = '33';
+        cedula = '4.567.890-5';
+        departamento = '5';
+        ocupacion = '1';
+        checkCensado=true;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo24 = new Censo();
-        Censo24.nombre = 'Ricardo';
-        Censo24.apellido= 'Herrera';
-        Censo24.edad = '13';
-        Censo24.cedula = '1357924-6';
-        Censo24.departamento = '10';
-        Censo24.ocupacion = '3';
-        Censo24.idCensista=this.usuarios[0];
-        Censo24.checkCensado=true;
+        nombre = 'Ricardo';
+        apellido= 'Herrera';
+        edad = '13';
+        cedula = '1.357.924-6';
+        departamento = '10';
+        ocupacion = '3';
+        checkCensado=true;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo25 = new Censo();
-        Censo25.nombre = 'Camila';
-        Censo25.apellido= 'Sotto';
-        Censo25.edad = '66';
-        Censo25.cedula = '2468135-7';
-        Censo25.departamento = '13';
-        Censo25.ocupacion = '1';
-        Censo25.idCensista=this.usuarios[0];
-        Censo25.checkCensado=true;
+        nombre = 'Camila';
+        apellido= 'Sotto';
+        edad = '66';
+        cedula = '2.468.135-1';
+        departamento = '13';
+        ocupacion = '1';
+        checkCensado=true;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo26 = new Censo();
-        Censo26.nombre = 'Guillermo';
-        Censo26.apellido= 'Plisich';
-        Censo26.edad = '54';
-        Censo26.cedula = '52835922';
-        Censo26.departamento = '7';
-        Censo26.ocupacion = '3';
-        Censo26.idCensista=this.usuarios[0];
-        Censo26.checkCensado=true;
+        nombre = 'Guillermo';
+        apellido= 'Plisich';
+        edad = '54';
+        cedula = '5.283.592-2';
+        departamento = '7';
+        ocupacion = '3';
+        checkCensado=true;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo27 = new Censo();
-        Censo27.nombre = 'Andres';
-        Censo27.apellido= 'Acosta';
-        Censo27.edad = '62';
-        Censo27.cedula = '8642093-8';
-        Censo27.departamento = '4';
-        Censo27.ocupacion = '2';
-        Censo27.idCensista=this.usuarios[0];
-        Censo27.checkCensado=true;
+        nombre = 'Andres';
+        apellido= 'Acosta';
+        edad = '62';
+        cedula = '8.642.093-5';
+        departamento = '4';
+        ocupacion = '2';
+        checkCensado=true;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo28 = new Censo();
-        Censo28.nombre = 'Valeria';
-        Censo28.apellido= 'Navarro';
-        Censo28.edad = '71';
-        Censo28.cedula = '7531982-7';
-        Censo28.departamento = '2';
-        Censo28.ocupacion = '3';
-        Censo28.idCensista=this.usuarios[0];
-        Censo28.checkCensado=true;
+        nombre = 'Valeria';
+        apellido= 'Navarro';
+        edad = '71';
+        cedula = '7.531.982-4';
+        departamento = '2';
+        ocupacion = '3';
+        checkCensado=true;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo29 = new Censo();
-        Censo29.nombre = 'Eduardo';
-        Censo29.apellido= 'Palacios';
-        Censo29.edad = '38';
-        Censo29.cedula = '5792468-0';
-        Censo29.departamento = '16';
-        Censo29.ocupacion = '1';
-        Censo29.idCensista=this.usuarios[0];
-        Censo29.checkCensado=true;
+        nombre = 'Eduardo';
+        apellido= 'Palacios';
+        edad = '38';
+        cedula = '5.792.468-7';
+        departamento = '16';
+        ocupacion = '1';
+        checkCensado=true;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
-        let Censo30 = new Censo();
-        Censo30.nombre = 'Manuel';
-        Censo30.apellido= 'Plisich';
-        Censo30.edad = '46';
-        Censo30.cedula = '1324596-8';
-        Censo30.departamento = '7';
-        Censo30.ocupacion = '4';
-        Censo30.idCensista=this.usuarios[0];
-        Censo30.checkCensado=true;
+        nombre = 'Manuel';
+        apellido= 'Plisich';
+        edad = '46';
+        cedula = '1.324.596-6';
+        departamento = '7';
+        ocupacion = '4';
+        checkCensado=true;
+        enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
     }
 
     precargaDepartamentos(){
@@ -419,16 +386,16 @@ class Sistema{
 
     ////////////////////////// Censos para el censista
     censosUsuarioNoValidados(){
-        let arrayCensos = new Array();
+        let arrayCensos = new Array();      //Creo un nuevo array
 
-        for (let i = 0; i < this.censos.length; i++) {
-            let objetoCenso = this.censos[i];
-            if(objetoCenso.idCensista.id === this.usuarioLogin.id && objetoCenso.checkCensado !== true){
-                arrayCensos.push(objetoCenso);
+        for (let i = 0; i < this.censos.length; i++) {  //recorro el array de Censos
+            let objetoCenso = this.censos[i];           //tomo el objeto censo
+            if(objetoCenso.idCensista.id === this.usuarioLogin.id && objetoCenso.checkCensado !== true){ //me pregunto si ese censo esta asignado al censista logueado
+                arrayCensos.push(objetoCenso);                                                           //lo pusheo al arrayCensos en caso de que el usuario este asignado
             }
         }
 
-        return arrayCensos;
+        return arrayCensos;     //retorno el array
     }
 
 
@@ -440,22 +407,22 @@ class Sistema{
     }
     
     esNumerico(dato){
+        //compruebo si el valor es numero 
         return !isNaN(Number(dato));
     }
 
 
     ///////////////////////// CEDULA OPERACIONES
-
     formatearCedula(cedula){
-        let cedulaNueva = '';
+        let cedulaNueva = '';   //creo euna variable para guardar la cedula sin formato    
 
-        for (let i = 0; i < cedula.length; i++) {
-            if (cedula[i] !== '.' && cedula[i] !== '-') {
-                cedulaNueva += cedula[i];
+        for (let i = 0; i < cedula.length; i++) {           //recorro el string de la cedula
+            if (cedula[i] !== '.' && cedula[i] !== '-') {   //pregunto si el caracter es distino a '.' o y '-'
+                cedulaNueva += cedula[i];                   //
             }
         }
 
-        return cedulaNueva;
+        return cedulaNueva; //devuelvo la nueva cedula
     }
 
     contarCaracteres(cedula, caracter) {
@@ -468,7 +435,7 @@ class Sistema{
             }
         }
     
-        return contadorCaracter;
+        return contadorCaracter; 
     }
 
     validarFormatoCedula(cedula){
@@ -477,7 +444,7 @@ class Sistema{
 
         if(carCedula === 11) { //Si tiene un largo de 11
             if(this.contarCaracteres(cedula, ".") === 2 && this.contarCaracteres(cedula, "-") === 1) { // Compruebo si tiene dos guion y un punto
-                if(cedula.charAt(1)==="." && cedula.charAt(5)==="." && cedula.charAt(9)==="-"){
+                if(cedula.charAt(1)==="." && cedula.charAt(5)==="." && cedula.charAt(9)==="-"){ //Si los caracteres 1 y 5 son '.' y si el caracter 9 es '-'
                     bander = true;
                 }
                 
@@ -486,7 +453,7 @@ class Sistema{
 
         if(carCedula === 9) { //Si tiene un largo de 9
             if(this.contarCaracteres(cedula, ".") === 1 && this.contarCaracteres(cedula, "-") === 1) { // Compruebo si tiene un guion y un punto
-                if(cedula.charAt(3)==="." && cedula.charAt(7)==="-"){
+                if(cedula.charAt(3)==="." && cedula.charAt(7)==="-"){   //Si los caracteres 3 es '.' y si el caracter 7 es '-'
                     bander = true;
                 }
             }
@@ -503,9 +470,9 @@ class Sistema{
 
         //Hago la recorrida para quedarme solo con los numeros
         for (let i = 0; i < cedula.length; i++) {
-            let caracter = cedula.charAt(i);
-            if(!isNaN(caracter)) {
-                numeros += caracter;
+            let caracter = cedula.charAt(i);        //tomo el caracter de la cedula
+            if(!isNaN(caracter)) {                  //pregunto si es caracter
+                numeros += caracter;                //asigno el caracter
             }
         }
 
@@ -520,31 +487,32 @@ class Sistema{
             multiplicadores = "2" + multiplicadores;
         }
         let sumaMultiplicacionesCedula = 0;
-        //multiplico cada termino y los sumo a la variable sumaMultiplicacionesCedula
+
+        //recorro cada termino de los numeros obtenidos con anteracion
         for (let i = 0; i < numeros.length -1; i++) {
-            let caracterRecorridoCedula = numeros.charAt(i); 
-            let caracterRecorridoPatron = multiplicadores.charAt(i);
+            let caracterRecorridoCedula = numeros.charAt(i);            //tomo el caracter
+            let caracterRecorridoPatron = multiplicadores.charAt(i);    //tomo el caracter del multiplicador 
 
-            let resultadoMultiplicacion = Number(caracterRecorridoCedula) * Number(caracterRecorridoPatron);
-            sumaMultiplicacionesCedula += resultadoMultiplicacion;
-        }
+            let resultadoMultiplicacion = Number(caracterRecorridoCedula) * Number(caracterRecorridoPatron);    //multiplico el caracter por el caracter de multiplicador
+            sumaMultiplicacionesCedula += resultadoMultiplicacion;                                              //lo sumo al total
+        }   
 
 
-        let verificadorObtenido = 0;
-        let siguienteNumeroMayorEnCero = sumaMultiplicacionesCedula;
+        let verificadorObtenido = 0;                                    //creo el verificador obtenido
+        let siguienteNumeroMayorEnCero = sumaMultiplicacionesCedula;    //asigno la suma anterior a una nueva variable
 
         //pregunto si el valor obtenido en sumaMultiplicacionesCedula es 0. si no es cero entonces tengo que buscar
         if(sumaMultiplicacionesCedula % 10 > 0) {
             let encontrado = false;
             while(!encontrado){
-                if(siguienteNumeroMayorEnCero % 10 === 0) {
+                if(siguienteNumeroMayorEnCero % 10 === 0) {     //Pregunto si es multiplo de 10
                     encontrado = true;
                 }
                 else {
-                    siguienteNumeroMayorEnCero++;
+                    siguienteNumeroMayorEnCero++;               //Sino aumento
                 }
             }
-            verificadorObtenido = siguienteNumeroMayorEnCero - sumaMultiplicacionesCedula;
+            verificadorObtenido = siguienteNumeroMayorEnCero - sumaMultiplicacionesCedula; //RESTO EL VALOR ORIGINAL AL AUMENTADO
         }
 
         //valido que el numero que obtuve  verificadorObtenido = siguienteNumeroMayorEnCero - 
@@ -661,26 +629,26 @@ class Sistema{
     ////////////////////////// BUSCAR CENSO
 
     buscarCenso(cedula){
-        let cedulaFomateada=this.formatearCedula(cedula);
-        let i=0;
-        let mensaje = '';
+        let cedulaFomateada=this.formatearCedula(cedula);      //FORMATEO LA CEDULA QUE TRAIGO
+        let i=0;                                               //INICIALISO EL I PARA EL WHILE
+        let mensaje = '';                                      //INICIALISO EL MENSAJE                           
 
-        while (i< this.censos.length && mensaje === '') {
-            let objetoCenso = this.censos[i];
-            if(objetoCenso.cedula===cedulaFomateada){
-                if(objetoCenso.checkCensado===true){
-                    if(this.usuarioLogin==null){
+        while (i< this.censos.length && mensaje === '') {      //recorrro el censo hasta encontrarlo o no
+            let objetoCenso = this.censos[i];                  //tomo el objeto del arreglo de censos
+            if(objetoCenso.cedula===cedulaFomateada){          //Me pregunto si las cedulas coinciden
+                if(objetoCenso.checkCensado===true){           //Me pregunto esta censado, en caso de que no voy al else
+                    if(this.usuarioLogin==null){               //Me pregunto si es el censista es el que esta buscando el censo, en el caso que no entro en el if
                         mensaje= 'Se le valido el censo! Ya no podra Modificarlo';
-                    }else{
+                    }else{                                     //Caso en el que el cenista busca el censo
                         mensaje= 'Esta persona tiene el censo validado! No se podra realizar un nuevo censo';
                     }
                     
-                }else{
-                    if(this.usuarioLogin==null){
-                        mensaje = 'Su censo esta pendiente a validar! Puede realizar modificaciones';
-                    }else{
-                        mensaje = 'Tiene el censo por validar!';
-                        if(objetoCenso.idCensista.id !== this.usuarioLogin.id){
+                }else{  // CASO QUE NO ESTA CENSADO
+                    if(this.usuarioLogin==null){                                                                                    //Me pregunto si es el censista es el que esta buscando el censo, en el caso que no entro en el if
+                        mensaje = 'Su censo esta pendiente a validar! Puede realizar modificaciones';                               
+                    }else{                                                                                                          //Caso en el que el cenista busca el censo
+                        mensaje = 'Tiene el censo por validar!';                                                                      
+                        if(objetoCenso.idCensista.id !== this.usuarioLogin.id){                                                     //Me pregunto si el cenista no es el asignado al censo
                             mensaje += `<br> Advertencia! Este censo esta asignado a la persona: ${objetoCenso.idCensista.nombre}.`
                         }
                     }
@@ -688,11 +656,11 @@ class Sistema{
                     
                 }
             }
-            i++;
+            i++; //Aumentoel valor para avanzar en el arreglo
         }
 
-        if(mensaje === ''){
-            mensaje = 'Realice el censo';
+        if(mensaje === ''){                 //Me pregunto si el mensaje es nulo, caso en el que no se encuentra el censo. Censo nuevo
+            mensaje = 'Realice el censo';   
         }
 
         return mensaje;
@@ -703,60 +671,60 @@ class Sistema{
 
     //Rellenar Formulario
     traerObjetoCenso(cedula){
-        let cedulaFomateada = this.formatearCedula(cedula);
-        let censo = null;
-        let i=0;
-        while (i< this.censos.length && censo === null) {
-            let objetoCenso = this.censos[i];
-            if(objetoCenso.cedula === cedulaFomateada){
-                censo=objetoCenso;
+        let cedulaFomateada = this.formatearCedula(cedula); //formateo el cedula
+        let censo = null;                                   //creo una variable nula
+        let i=0;                                            //creo un contador
+        while (i< this.censos.length && censo === null) {   //recorro el arreglo de censos
+            let objetoCenso = this.censos[i];               //tomo el objeto censo
+            if(objetoCenso.cedula === cedulaFomateada){     //me pregunto si la cedula coincide 
+                censo=objetoCenso;                          //tomo el censo
             }
-            i++;
+            i++; //aumento la variable
         }
-        return censo;
+        return censo; //retorno el censo
     }
 
     cedulaConFormato(cedula){
-        let cedulaNueva = '';
-        if(cedula.length === 8){
-            for(let i=0; i<cedula.length; i++){
-                if(i === 1 || i === 4){
-                    cedulaNueva += '.';
-                    cedulaNueva += cedula.charAt(i);
-                }else if(i === cedula.length -1){
-                    cedulaNueva += '-';
-                    cedulaNueva += cedula.charAt(i);
-                }else{
-                    cedulaNueva +=cedula.charAt(i);
+        let cedulaNueva = ''; // creo una variable para la cedula nueva
+        if(cedula.length === 8){    //pregunto si la cedula tiene largo 8
+            for(let i=0; i<cedula.length; i++){ //recorro la cedula
+                if(i === 1 || i === 4){                 //en la posicion 1 y 4 de la cedula
+                    cedulaNueva += '.';                 //le concateno el '.'
+                    cedulaNueva += cedula.charAt(i);    //luego concateno el caracter de la cedula
+                }else if(i === cedula.length -1){       //a la penultima posicion
+                    cedulaNueva += '-';                 //le concateno el '-'
+                    cedulaNueva += cedula.charAt(i);    //luego concateno el caracter de la cedula
+                }else{                                  //en caso de que no sea ninguno de los dos casos
+                    cedulaNueva +=cedula.charAt(i);     //concateno el caracter
                 }
             }
-        }else if(cedula.length === 7){
-            for(let i=0; i<cedula.length; i++){
-                if(i === 1){
-                    cedulaNueva += '.';
-                    cedulaNueva += cedula.charAt(i);
-                }else if(i === cedula.length -1){
-                    cedulaNueva += '-';
-                    cedulaNueva += cedula.charAt(i);
-                }else{
-                    cedulaNueva +=cedula.charAt(i);
+        }else if(cedula.length === 7){  //pregunto si la cedula tiene largo 7
+            for(let i=0; i<cedula.length; i++){ //recorro la cedula
+                if(i === 1){                            //en la posicion 1 y 4 de la cedula
+                    cedulaNueva += '.';                 //le concateno el '.'
+                    cedulaNueva += cedula.charAt(i);    //luego concateno el caracter de la cedula
+                }else if(i === cedula.length -1){       //a la penultima posicion
+                    cedulaNueva += '-';                 //le concateno el '-'
+                    cedulaNueva += cedula.charAt(i);    //luego concateno el caracter de la cedula
+                }else{                                  //en caso de que no sea ninguno de los dos casos
+                    cedulaNueva +=cedula.charAt(i);     //concateno el caracter
                 }
             }
         }
 
-        return cedulaNueva;
+        return cedulaNueva; //retorno cedula
     }
 
     rellenarFormulario(cedula){
-        let censo = this.traerObjetoCenso(cedula);
-        document.querySelector('#txtNombreFormulario').value=censo.nombre;
-        document.querySelector('#txtApellidoFormulario').value=censo.apellido;
-        document.querySelector('#txtEdadFormulario').value=censo.edad;
-        let formatoCedula = this.cedulaConFormato(censo.cedula);
-        document.querySelector('#txtCedulaFormulario').value=formatoCedula;
-        document.querySelector('#selDepartamentoFormulario').value=censo.departamento;
-        document.querySelector('#selOcupacionFormulario').value=censo.ocupacion;
-        document.querySelector('#chkValidarFormulario').value=censo.checkCensado;
+        let censo = this.traerObjetoCenso(cedula);                                      //Traigo el objeto censo con la cedula
+        document.querySelector('#txtNombreFormulario').value=censo.nombre;              //asigno el valor del nombre
+        document.querySelector('#txtApellidoFormulario').value=censo.apellido;          //asigno el valor del apellido
+        document.querySelector('#txtEdadFormulario').value=censo.edad;                  //asigno el valor de la edad
+        let formatoCedula = this.cedulaConFormato(censo.cedula);                        //a la cedula le pongo el formato
+        document.querySelector('#txtCedulaFormulario').value=formatoCedula;             //asigno el valor de la cedula con formato
+        document.querySelector('#selDepartamentoFormulario').value=censo.departamento;  //asigno el valor del departamento
+        document.querySelector('#selOcupacionFormulario').value=censo.ocupacion;        //asigno el valor de la ocupacion
+        document.querySelector('#chkValidarFormulario').value=censo.checkCensado;       //asigno el valor del check
     }
 
     //Mostrar Formulario
@@ -827,46 +795,46 @@ class Sistema{
     //Eliminar
 
     buscarPosicionCenso(cedula){
-        let i=0;
-        let bandera=false;
-        while(i<this.censos.length && bandera === false){
-            let objetoCenso = this.censos[i];
-            if(objetoCenso.cedula === cedula){
-                bandera=true;
-            }
-            i++;
+        let i=0;                                            //creo un variable
+        let bandera=false;                                  //creo una bandera
+        while(i<this.censos.length && bandera === false){   //Recorren el array de censos
+            let objetoCenso = this.censos[i];               //Tomo el objeto del censo
+            if(objetoCenso.cedula === cedula){              //Pregunto si la cedulas son iguales
+                bandera=true;                               //cambio el valor de la bandera
+            }       
+            i++; //aumento el valor
         }
-        i--;
-        return i;
+        i--;    //desminuye el valor
+        return i;   //retorno la posicion
     }
 
     eliminar(cedula){
-        let posicion = this.buscarPosicionCenso(cedula);
-        let censosNuevos= new Array();
-        let mensaje = '';
-        if(posicion>=0){
-            censosNuevos=this.censos.splice(posicion, 1);
-            mensaje='Se elimino correctamente! Se le retornara a buscar censo';
+        let posicion = this.buscarPosicionCenso(cedula);                        //busco la posicion del la cedula
+        let censosNuevos= new Array();                                          //creo un nuevo array
+        let mensaje = '';                                                       //creo la variable mensaje
+        if(posicion>=0){                                                        //si la posicion es mayo o igual a 0 
+            this.censos.splice(posicion, 1);                                    //elimino la posicion encontrada
+            mensaje='Se elimino correctamente! Se le retornara a buscar censo'; //asigno el mensaje
         }else{
-            mensaje = 'Por alguna extraña razon el censo no fue encontrado,'
+            mensaje = 'Por alguna extraña razon el censo no fue encontrado,'    //caso que de que llegue a dar error del buscar
         }
         
-        return mensaje;
+        return mensaje; //retorno mensaje
     }
 
     //Enviar Formulario
     enviar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar){
-        let cedulaNueva = this.formatearCedula(cedula);
-        let mensaje = '';
+        let cedulaNueva = this.formatearCedula(cedula);     //formateo la cedula
+        let mensaje = '';                                   
 
-        let censosNuevo = new Censo();
-        censosNuevo.nombre = nombre;
-        censosNuevo.apellido= apellido;
-        censosNuevo.edad = edad;
-        censosNuevo.cedula = cedulaNueva;
-        censosNuevo.departamento = departamento;
-        censosNuevo.ocupacion = ocupacion;
-        censosNuevo.checkCensado=checkValidar;
+        let censosNuevo = new Censo();              //
+        censosNuevo.nombre = nombre;                //
+        censosNuevo.apellido= apellido;             //
+        censosNuevo.edad = edad;                    //
+        censosNuevo.cedula = cedulaNueva;           //
+        censosNuevo.departamento = departamento;    //
+        censosNuevo.ocupacion = ocupacion;          //
+        censosNuevo.checkCensado=checkValidar;      //
 
 
         if(this.usuarioLogin === null){
@@ -887,45 +855,45 @@ class Sistema{
 
     // Modiciar Censo 
     modificar(nombre,apellido,cedula,edad,departamento,ocupacion,checkValidar){
-        let cedulaNueva = this.formatearCedula(cedula);
-        let mensaje = '';
+        let cedulaNueva = this.formatearCedula(cedula);     //formateo la cedula
+        let mensaje = '';                                   
         
-        let objetoCenso = this.traerObjetoCenso(cedula);
+        let objetoCenso = this.traerObjetoCenso(cedula);    //traigo el objeto censo
 
-        objetoCenso.nombre = nombre;
-        objetoCenso.apellido= apellido;
-        objetoCenso.edad = edad;
-        objetoCenso.cedula = cedulaNueva;
-        objetoCenso.departamento = departamento;
-        objetoCenso.ocupacion = ocupacion;
-        objetoCenso.checkCensado=checkValidar;
+        objetoCenso.nombre = nombre;                //Sobreescribo el nombre
+        objetoCenso.apellido= apellido;             //Sobreescribo el apellido
+        objetoCenso.edad = edad;                    //Sobreescribo la edad
+        objetoCenso.cedula = cedulaNueva;           //Sobreescribo la cedula
+        objetoCenso.departamento = departamento;    //Sobreescribo el departemento
+        objetoCenso.ocupacion = ocupacion;          //Sobreescribo la ocupacion
+        objetoCenso.checkCensado=checkValidar;      //Sobreescribo el check
 
+        if(this.usuarioLogin === null){                 //caso en el que el invitado modifica algo
 
-        if(this.usuarioLogin === null){
-            objetoCenso.idCensista = this.usuarioLogin;
-            mensaje=`El censo se edito correctamente!`;
-        }else{
+            mensaje=`El censo se edito correctamente!`; 
+        }else{                                          //caso en que el usuario esta logueado
+            objetoCenso.idCensista = this.usuarioLogin; //sobreescribo el usuario que cambio el validar
             mensaje='EL censo se valido correctamente!';
         }
 
-        return mensaje;
+        return mensaje;                                 //retorno mensaje
     }
 
     // Reasignar Censo 
 
     reasignar(censoCedula, censistaId) {
-        let cedulaConFormato = this.cedulaConFormato(censoCedula);
-        let objetoCenso = this.traerObjetoCenso(cedulaConFormato);
-        let objetoUsuario = this.obtenerUsuario(censistaId);
+        let cedulaConFormato = this.cedulaConFormato(censoCedula);  // a la cedula le pongo el formato
+        let objetoCenso = this.traerObjetoCenso(cedulaConFormato);  // traigo el obejeto censo con la cedula con formato
+        let objetoUsuario = this.obtenerUsuario(censistaId);    	// obtengo el usuario censista
 
         
-        objetoCenso.idCensista=objetoUsuario;
-        return true;
+        objetoCenso.idCensista=objetoUsuario;                       //asigno al objeto el nuevo censista
+        return true;                                                
     }
 
     // Tabla para Validar Censos
     tablaParaValidar(){
-        let arrayCensos = this.censosUsuarioNoValidados();
+        let arrayCensos = this.censosUsuarioNoValidados(); //LLAMO A LOS CENSOS NO VALIDADOS
 
         let table = `<table border="1">`; //Contenedor tabla
 
@@ -935,14 +903,14 @@ class Sistema{
 
             let objetoCenso = arrayCensos[i]; // Tomo el objeto del array
 
-            table += `<tr><td>${objetoCenso.cedula}</td><td>${objetoCenso.nombre}</td><td>${objetoCenso.apellido}</td>`;                    
-            table += `<td><input type="button" value="Ver Censo" class="btn btnTableEvent" selectCenso="${objetoCenso.cedula}"/></td></tr>`;
+            table += `<tr><td>${objetoCenso.cedula}</td><td>${objetoCenso.nombre}</td><td>${objetoCenso.apellido}</td>`;                     //CREO LA FILA DE LA TABLA 
+            table += `<td><input type="button" value="Ver Censo" class="btn btnTableEvent" selectCenso="${objetoCenso.cedula}"/></td></tr>`; //concateno el boton
             
 
         }
 
 
-        if (arrayCensos.length === 0){
+        if (arrayCensos.length === 0){  //Preguntos si el 
             table = `<h2>No tiene censos asignados!</h2>`; // Mensaje en el caso de que no hay elementos 
             
         }else{
@@ -957,83 +925,85 @@ class Sistema{
     // ESTADISTICAS CENSISTAS
 
     contadorCensosValidados(){
-        let newArray = new Array();
-        for (let i = 0; i < this.censos.length; i++) {
-            let objetoCenso = this.censos[i];
-            if(objetoCenso.checkCensado){
-                newArray.push(objetoCenso);
+        let newArray = new Array();                     //creo el array 
+        for (let i = 0; i < this.censos.length; i++) {  //recorro el array censo
+            let objetoCenso = this.censos[i];           //tomo el objeto censo
+            if(objetoCenso.checkCensado){               //Me pregunto si esta validado
+                newArray.push(objetoCenso);             //agrego al array
             }
             
         }
 
-        return newArray;
+        return newArray;    //retono el array
     }
 
     contadorCensosNoValidados(){
-        let newArray = new Array();
-        for (let i = 0; i < this.censos.length; i++) {
-            let objetoCenso = this.censos[i];
-            if(!objetoCenso.checkCensado){
-                newArray.push(objetoCenso);
-            }
+        let newArray = new Array();                     //creo un array
+        for (let i = 0; i < this.censos.length; i++) {  //recorrro el array censos
+            let objetoCenso = this.censos[i];           //tomo el censo
+            if(!objetoCenso.checkCensado){              //pregunto si no esta validado (lo niego para agregarlo al array)
+                newArray.push(objetoCenso);             //agrego al array
+            }       
             
         }
 
-        return newArray;
+        return newArray;    //retorno el array nuevo
     }    
 
     totalPersonasCensadasPorDep(){
-        let censosValidados = this.contadorCensosValidados();
+        let censosValidados = this.contadorCensosValidados();   //Todos los censos validados
 
         let table = `<table border="1">`; //Contenedor tabla
 
         table += `<thead><tr><th>Departamento</th><th>Cantidad Censados</th></tr></thead>`; // Titulos Tablas
 
-        if(censosValidados.length !== 0){
-            for (let i = 0; i < this.departamentos.length; i++) {
+        if(censosValidados.length !== 0){                                               //Pregunto si no hay ningun censo validado
+            for (let i = 0; i < this.departamentos.length; i++) {                       //recorro el array de departamentos
                 let n = 0;
-                let objetoDepartamento = this.departamentos[i];
-                for (let j = 0; j < censosValidados.length; j++) {
-                    let objetoCenso = censosValidados[j];
-                    if(objetoDepartamento.id === Number(objetoCenso.departamento)) {
+                let objetoDepartamento = this.departamentos[i];                         //tomo el objeto departamento
+                for (let j = 0; j < censosValidados.length; j++) {                      //recorro el array de censos validados
+                    let objetoCenso = censosValidados[j];                               //tomo el objeto censo validado
+                    if(objetoDepartamento.id === Number(objetoCenso.departamento)) {    //Pregunto si el id del censo del departamento coincide con el departamento en el que estoy actual
                         n++;
                     }
                 }
     
-                table += `<tr><td>${objetoDepartamento.nombre}</td><td>${n}</td></tr>`;     
+                table += `<tr><td>${objetoDepartamento.nombre}</td><td>${n}</td></tr>`; //  Pongo la cantidad de censados 
     
                 
             }
+            
+            table += `</table>`; //Contenedor tabla
         }else{
-            table += `<tr><td>No hay censos aún</td></tr>`; // Mensaje en el caso de que no hay elementos 
+            table = `<h5>No hay censos aún</h5>`; // Mensaje en el caso de que no hay elementos 
         }
-
-        table += `</table>`; //Contenedor tabla
-
         
         return table;
     }
 
     porcentajePendienteAValidar(){
-        let pendientes = this.contadorCensosNoValidados().length;
-        let validadas = this.contadorCensosValidados().length;
+        let pendientes = this.contadorCensosNoValidados().length;   //traigo todos los censos que estan para validadar y saco el largo de ese resultado ya que es un arreglo
+        let validadas = this.contadorCensosValidados().length;      //traigo todos los censos que estan validados y saco el largo de ese resultado ya que es un arreglo
 
-        let total = pendientes + validadas;
+        let total = pendientes + validadas;                         //sumo el total
 
-        let porcentaje = (pendientes * 100)/total;
+        let porcentaje = 0;                                      
+        if(total !== 0){                                            //pregunto si el total es disitino de cero
+            porcentaje = (pendientes * 100)/total;                  //calculo el porcentaje
+        }
 
         return porcentaje;
     }
 
     traerObjetoDepartamento(id){
-        let objetoDepartamento = null;
-        for (let i = 0; i < this.departamentos.length; i++) {
-            if(Number(id) === this.departamentos[i].id){
-                objetoDepartamento = this.departamentos[i];
+        let objetoDepartamento = null;                          //creo una variable para tomar el departamento
+        for (let i = 0; i < this.departamentos.length; i++) {   //recorro el array de departamento
+            if(Number(id) === this.departamentos[i].id){        //me pregunto si el id es igual al id del departamento
+                objetoDepartamento = this.departamentos[i];     //capturo el objeto del departamento
             }
         }
 
-        return objetoDepartamento;
+        return objetoDepartamento; 
     }
 
     porcentajePersonasEdadDepartamento(departamento){
@@ -1072,11 +1042,11 @@ class Sistema{
     
             table += `<tr><td>${objetoDepartamento.nombre}</td><td>${porcentajeMayores}%</td><td>${porcentajeMenores}%</td></tr>`;
 
-        }else{
-            table += `<tr><td>No hay censos aún</td></tr>`; // Mensaje en el caso de que no hay elementos 
-        }
 
-        table += `</table>`; //Contenedor tabla
+            table += `</table>`; //Contenedor tabla
+        }else{
+            table = `<h5>No hay censos aún</h5>`; // Mensaje en el caso de que no hay elementos 
+        }
 
         
         return table;
@@ -1113,8 +1083,10 @@ class Sistema{
 
                 }
             }
-
-            let porcentajeDep = (personasConCenso * 100)/total;
+            let porcentajeDep = 0;
+            if(personasConCenso!==0){
+                porcentajeDep = (personasConCenso * 100)/total;
+            }
 
             table += `<tr><td>${objetoDepartamento.nombre}</td><td>${estudian}</td><td>${noTrabajan}</td><td>${trabajan}</td><td>${porcentajeDep}%</td></tr>`;
             
@@ -1129,7 +1101,7 @@ class Sistema{
     // LOGOUT
 
     logout(){
-        this.usuarioLogin = null;
+        this.usuarioLogin = null; //Le saco el login al usuario
     }
 
 

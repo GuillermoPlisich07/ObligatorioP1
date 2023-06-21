@@ -39,7 +39,7 @@ function eventos(){
     document.querySelector('#btnDashbord').addEventListener('click', volverAlDashboard);        //VOLVER AL DASHBOARD (INVITADO / CENSISTA)
 
     //LOGIN
-    document.querySelector('#btnLogin').addEventListener('click', login);                   //LOGUEARSE (CENSISTA)
+    document.querySelector('#btnLogin').addEventListener('click', llamarLogin);                   //LOGUEARSE (CENSISTA)
     document.querySelector('#btnIrALogin').addEventListener('click', mostrarLogin);         //MOSTRAR LOGIN (CENSISTA)
 
     //Crear Usuario
@@ -242,12 +242,8 @@ function mostrarLogin(){
     mostrarID('btnDashbord');                   // Muestro boton para ir al dashboard
 }
 
-function login(){
+function login(usuario, password){
     let mensaje = '';
-    let usuario = document.querySelector("#txtUsuario").value;// Capturo el usario     
-    let password = document.querySelector("#txtPassword").value;// Capturo la password
-    // Compruebo que ningun campo este vacio, en el caso de que no
-    // se le retornara el mensaje `Debe ingresar usuario y contrasena`
     if (sis.esVacio(usuario) && sis.esVacio(password)) {
         // Realizo un llamado a la funcion login la cual se encarga de verificar
         // si el usario existe, en caso de que si me retorna 'true', en el caso 
@@ -260,6 +256,17 @@ function login(){
     } else {
         mensaje = `Debe ingresar usuario y contrasena.`;
     }
+
+    return mensaje;
+}
+
+function llamarLogin(){
+    let mensaje = '';
+    let usuario = document.querySelector("#txtUsuario").value;// Capturo el usario     
+    let password = document.querySelector("#txtPassword").value;// Capturo la password
+    // Compruebo que ningun campo este vacio, en el caso de que no
+    // se le retornara el mensaje `Debe ingresar usuario y contrasena`
+    mensaje = login(usuario,password);
 
     //Si el mensaje en 'Bien' vuelvo a dashboard pero contodas las opciones de censista
     if(mensaje === 'Bien'){
@@ -307,7 +314,7 @@ function crearUsuario(nombre,nombreUsuario,password){
                 mensaje = 'La contraseña deberá tener un mínimo de 5 caracteres, contando con al menos una mayúscula, una minúscula y un número.';
             }
         }else{
-            mensaje = `Ya existe un usuario un usuario con el nombre ${nombreUsuario}.`;
+            mensaje = `Ya existe un usuario con el nombre ${nombreUsuario}.`;
         }
     }else{
         mensaje = `Debe ingresar nombre, nombre usuario y contrasena.`;
@@ -422,57 +429,57 @@ function buscar(){
 ////////////////////////////////////////////////////////////////////////
 
 function mostrarMensaje(mensaje){
-    limpiarMensajes('divResultadoFormulario');
-    document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
-    mostrarClases('divContenedorMensajeFormulario');
-    ocultarClases('divContenedorFormulario');
-    ocultarID('divResultadoBusqueda');
-    ocultarClases('divContenedorVolverABuscar');
-    let temporizador = setTimeout(mostrarBuscarCenso, 4000);
+    limpiarMensajes('divResultadoFormulario');                              //LIMPIO EL RESULTADO DEL FORMULARIO
+    document.querySelector('#divResultadoFormulario').innerHTML=mensaje;    //ASIGNO EL MENSAJE AL RESULTADO DEL FORMULARIO
+    mostrarClases('divContenedorMensajeFormulario');                        //MUESTRO EL BLOQUE DEL MESNAJE DEL FORMULARIO
+    ocultarClases('divContenedorFormulario');                               //OCULTO EL BLOQUE DEL FORMULARIO
+    ocultarID('divResultadoBusqueda');                                      //OCULTO EL RESULTADO DE LA BUSQUEDA DEL CENSO
+    ocultarClases('divContenedorVolverABuscar');                            //OCULTO EL VOLVER A BUSCAR
+    let temporizador = setTimeout(mostrarBuscarCenso, 4000);                //USO EL SETTIMEOUT PARA LLAMAR A LA FUNCION mostrarBuscarCenso, LUEGO DE LOS 4 SEGUNDOS
 }
 
 //ELIMINAR
 function mostrarConfirmacionDeEliminar(){
-    ocultarClases('divContenedorFormulario');
-    ocultarID('divResultadoBusqueda');
-    mostrarClases('divContenedorResultadoEliminar');
+    ocultarClases('divContenedorFormulario');           //OCULTAR EL BLOQUE DE FORMULARIO
+    mostrarClases('divContenedorResultadoEliminar');    //MOSTRAR EL BLOQUE RESULTADO DE ELIMINAR
+    ocultarID('divResultadoBusqueda');                  //OCULTAR EL RESULTADO DE LA BUSQUEDA
     
 }
 
 function eliminarCenso(){
-    let cedula=document.querySelector('#txtCedulaFormulario').value;
-    let mensaje='';
-    if(sis.usuarioLogin === null){
-        mensaje=sis.eliminar(cedula);
-    }else{
-        mensaje = 'Usted no esta autorizado para eliminar este censo';
+    let cedula=document.querySelector('#txtCedulaFormulario').value;            //TOMO EL VALOR DE LA CEDULA DEL FORMULARIO
+    let mensaje='';                 
+    if(sis.usuarioLogin === null){                                              //ME PREGUNTO SI EL USUARIO LOGIN ES IGUAL A NULL
+        mensaje=sis.eliminar(cedula);                                           //ELIMINO EL MENSAJE Y RETORNO UN MENSAJE
+    }else{                                                                      //CASO EN QUE EL USUARIO LOGIN SEA DISTINTO A NULL
+        mensaje = 'Usted no esta autorizado para eliminar este censo';          // 
     }
 
-    if(mensaje === 'Usted no esta autorizado para eliminar este censo'){
-        limpiarMensajes('divResultadoEliminarError');
-        document.querySelector('.divResultadoEliminarError').innerHTML=mensaje;
-    }else{
-        limpiarMensajes('divResultadoFormulario');
-        document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
-        ocultarClases('divContenedorResultadoEliminar');
-        mostrarClases('divContenedorMensajeFormulario');
+    if(mensaje === 'Usted no esta autorizado para eliminar este censo'){        //EN CASO DE QUE HALLA UN BUG SE LE MUESTRA UN MENSAJE DE ERROR
+        limpiarMensajes('divResultadoEliminarError');                           //LIMPIO EL MENSAJE DE ERROR DE ELIMINAR FORMULARIO
+        document.querySelector('.divResultadoEliminarError').innerHTML=mensaje; //ASIGNO EL MENSAJE AL RESULTADO DE ERROR
+    }else{                                                                      
+        limpiarMensajes('divResultadoFormulario');                              //LIMPIO EL MENSAJE ANTERIOR DEL RESULTADO FORMULARIO
+        document.querySelector('#divResultadoFormulario').innerHTML=mensaje;    //ASIGNO EL MENSAJE AL RESULTADO FORMULARIO
+        ocultarClases('divContenedorResultadoEliminar');                        //OCULTAR RESULTADO DE ELIMINAR
+        mostrarClases('divContenedorMensajeFormulario');                        //MOSTRAR MENSAJE FORMULARIO
         
-        let temporizador = setTimeout(mostrarBuscarCenso, 4000);
+        let temporizador = setTimeout(mostrarBuscarCenso, 4000);                //USO EL SETTIMEOUT PARA LLAMAR A LA FUNCION mostrarBuscarCenso, LUEGO DE LOS 4 SEGUNDOS
     }
 
 }
 
 function cancelarEliminacion(){
-    mostrarID('divResultadoBusqueda')
-    mostrarClases('divContenedorFormulario');
-    ocultarClases('divContenedorResultadoEliminar');
+    mostrarID('divResultadoBusqueda')                   //MUESTRO EL RESULTADO DE LA BUSQUEDA
+    mostrarClases('divContenedorFormulario');           //MUESTRO EL CONTENEDOR DE FORMULARIO
+    ocultarClases('divContenedorResultadoEliminar');    //OCULTAR EL BLOQUE DE RESULTADO DE ELIMINAR
 }
 
 //ENVIAR
 function enviarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar){
 
     let mensaje = '';
-    let error = true;
+    let error = true; //TOMO EL
 
     if(sis.esVacio(nombre) && sis.esVacio(apellido) && sis.esVacio(cedula) && sis.esVacio(edad)){
         if(departamento>=0 && ocupacion>=0){
@@ -511,25 +518,31 @@ function enviarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, ch
     }else{
         mensaje = 'Debe completar todos los datos.';
     }
-
+    
+    console.log(cedula,mensaje);
     if(error){
         document.querySelector('#divResultadoFormulario').innerHTML=mensaje;
         mostrarClases('divContenedorMensajeFormulario');
+        return '';
     }else{
-        mostrarMensaje(mensaje);
+        return mensaje;
     }
 }
 
 function llamarEnviarCenso(){
-    let nombre = document.querySelector('#txtNombreFormulario').value;
-    let apellido = document.querySelector('#txtApellidoFormulario').value;
-    let cedula = document.querySelector('#txtCedulaFormulario').value;
-    let edad = document.querySelector('#txtEdadFormulario').value;
-    let departamento = document.querySelector('#selDepartamentoFormulario').value;
-    let ocupacion = document.querySelector('#selOcupacionFormulario').value;
-    let checkValidar = document.querySelector('#chkValidarFormulario').checked;
+    let nombre = document.querySelector('#txtNombreFormulario').value;                      //TOMO EL VALOR NOMBRE DEL FORMULARIO
+    let apellido = document.querySelector('#txtApellidoFormulario').value;                  //TOMO EL VALOR APELLIDO DEL FORMULARIO
+    let cedula = document.querySelector('#txtCedulaFormulario').value;                      //TOMO EL VALOR CEDULA DEL FORMULARIO
+    let edad = document.querySelector('#txtEdadFormulario').value;                          //TOMO EL VALOR EDAD DEL FORMULARIO
+    let departamento = document.querySelector('#selDepartamentoFormulario').value;          //TOMO EL VALOR DEPARTAMENTO DEL FORMULARIO
+    let ocupacion = document.querySelector('#selOcupacionFormulario').value;                //TOMO EL VALOR OCUPACION DEL FORMULARIO
+    let checkValidar = document.querySelector('#chkValidarFormulario').checked;             //TOMO EL VALOR CHECK DEL FORMULARIO
     
-    enviarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar);
+    let mensaje = enviarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar);     //LLAMO A MODIFICAR CENSO Y RETORNA UN VALOR
+    
+    if(mensaje !== ''){          //ME PREGUNTO SI EL MENSAJE ES DISTINTO DE VACIO
+        mostrarMensaje(mensaje); //LLAMO A MOSTRAR MENSAJE
+    }
 }
 
 //EDITAR Y VALIDAR
@@ -586,27 +599,27 @@ function modificarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion,
 }
 
 function llamarEdiar(){
-    let nombre = document.querySelector('#txtNombreFormulario').value;
-    let apellido = document.querySelector('#txtApellidoFormulario').value;
-    let cedula = document.querySelector('#txtCedulaFormulario').value;
-    let edad = document.querySelector('#txtEdadFormulario').value;
-    let departamento = document.querySelector('#selDepartamentoFormulario').value;
-    let ocupacion = document.querySelector('#selOcupacionFormulario').value;
-    let checkValidar = document.querySelector('#chkValidarFormulario').checked;
+    let nombre = document.querySelector('#txtNombreFormulario').value;                      //TOMO EL VALOR NOMBRE DEL FORMULARIO
+    let apellido = document.querySelector('#txtApellidoFormulario').value;                  //TOMO EL VALOR APELLIDO DEL FORMULARIO
+    let cedula = document.querySelector('#txtCedulaFormulario').value;                      //TOMO EL VALOR CEDULA DEL FORMULARIO
+    let edad = document.querySelector('#txtEdadFormulario').value;                          //TOMO EL VALOR EDAD DEL FORMULARIO
+    let departamento = document.querySelector('#selDepartamentoFormulario').value;          //TOMO EL VALOR DEPARTAMENTO DEL FORMULARIO
+    let ocupacion = document.querySelector('#selOcupacionFormulario').value;                //TOMO EL VALOR OCUPACION DEL FORMULARIO
+    let checkValidar = document.querySelector('#chkValidarFormulario').checked;             //TOMO EL VALOR CHECK DEL FORMULARIO
 
-    modificarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar);
+    modificarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar);  //LLAMO A MODIFICAR CENSO
 }
 
 function llamarValidar(){
-    let nombre = document.querySelector('#txtNombreFormulario').value;
-    let apellido = document.querySelector('#txtApellidoFormulario').value;
-    let cedula = document.querySelector('#txtCedulaFormulario').value;
-    let edad = document.querySelector('#txtEdadFormulario').value;
-    let departamento = document.querySelector('#selDepartamentoFormulario').value;
-    let ocupacion = document.querySelector('#selOcupacionFormulario').value;
-    let checkValidar = document.querySelector('#chkValidarFormulario').checked;
+    let nombre = document.querySelector('#txtNombreFormulario').value;                      //TOMO EL VALOR NOMBRE DEL FORMULARIO
+    let apellido = document.querySelector('#txtApellidoFormulario').value;                  //TOMO EL VALOR APELLIDO DEL FORMULARIO
+    let cedula = document.querySelector('#txtCedulaFormulario').value;                      //TOMO EL VALOR CEDULA DEL FORMULARIO
+    let edad = document.querySelector('#txtEdadFormulario').value;                          //TOMO EL VALOR EDAD DEL FORMULARIO
+    let departamento = document.querySelector('#selDepartamentoFormulario').value;          //TOMO EL VALOR DEPARTAMENTO DEL FORMULARIO
+    let ocupacion = document.querySelector('#selOcupacionFormulario').value;                //TOMO EL VALOR OCUPACION DEL FORMULARIO
+    let checkValidar = document.querySelector('#chkValidarFormulario').checked;             //TOMO EL VALOR CHECK DEL FORMULARIO
 
-    modificarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar);
+    modificarCenso(nombre ,apellido ,cedula, edad, departamento, ocupacion, checkValidar);  //LLAMO A MODIFICAR CENSO
 }
 
 
@@ -656,15 +669,15 @@ function reasignarCenso(){
         mensaje = 'Debe completar todos los datos.';
     }
 
-    limpiarCampo('selCensos');                                      //
-    limpiarCampo('selUsuarios');                                    //
-    cargarSelectCensos();                                           //
-    cargarSelectCensistas();                                        //
+    limpiarCampo('selCensos');                                      //Limpiar el campo selCensos
+    limpiarCampo('selUsuarios');                                    //Limpiar el campo selUsuarios
+    cargarSelectCensos();                                           //CARGAR LOS SELECT DE CENSOS QUE TENGA EL USUARIO
+    cargarSelectCensistas();                                        //CARGAR LOS CENSISTAS PARA ASIGNARLES LOS CENSOS
 
-    document.querySelector('#divResultadoReasignar').innerHTML = mensaje;   //
-    mostrarID('divResultadoReasignar');                                     //
-    let temporizador = setTimeout( function (){                             
-                                        ocultarID('divResultadoReasignar'); // 
+    document.querySelector('#divResultadoReasignar').innerHTML = mensaje;   // Asigno el mensaje obtenido anteriormente
+    mostrarID('divResultadoReasignar');                                     //Muestro el bloque del resultado
+    let temporizador = setTimeout( function (){                             // Utilizo un setTimeout para ejecutar mediante una funcion anonima la funcion
+                                        ocultarID('divResultadoReasignar'); // ocultarID, esto ocultario el resultado obtenido
                                     }, 4000);                               // a los 4 segundos
 }
 
@@ -680,48 +693,44 @@ function reasignarCenso(){
 
 
 function eventoBtn(){
-    let mensaje = ""
-    let censoCedula = this.getAttribute("selectCenso");
+    let mensaje = ""                                                        
+    let censoCedula = this.getAttribute("selectCenso");                     //Tomo el valor del boton seleccionado
 
-    let cedula = sis.cedulaConFormato(censoCedula);
+    let cedula = sis.cedulaConFormato(censoCedula);                         //Le pongo formato a la cedula nuevamente
 
-    let mensajeBusqueda=sis.buscarCenso(cedula);
-    cargarSelectDepartamento();
-    cargarSelectOcupacion();
-    mensaje = sis.mostrarFormulario(mensajeBusqueda, cedula, 1);
+    let mensajeBusqueda=sis.buscarCenso(cedula);                            //Busco la cedula y tomo el mensaje de retorno
+    cargarSelectDepartamento();                                             //Cargo el select departamentos del formulario
+    cargarSelectOcupacion();                                                //Cargo el select departamentos del formulario
+    mensaje = sis.mostrarFormulario(mensajeBusqueda, cedula, 1);            //Llamo a la funcion mostrar formulario le paso el mensaje de la busqueda, la cedula, y 1 para decirle que vengo desde la tabla censos para validar
 
-    ocultarID('divContenedorCensosParaValidar');
-    mostrarID("divResultadoBusqueda");
-    document.querySelector("#divResultadoBusqueda").innerHTML = mensaje;
+    ocultarID('divContenedorCensosParaValidar');                            //OCULTO CENSOS PARA VALIDAR
+    mostrarID("divResultadoBusqueda");                                      //MUESTRO EL RESULTADO DE LA BUSQUEDA
+    document.querySelector("#divResultadoBusqueda").innerHTML = mensaje;    //MUESTRO EL MENSAJE DE BUSQUEDA
 }
 
 
 function mostrarTablaParaValidar() {
-    ocultarClases('divContendorBienvenida');
-    ocultarClases('divContenedorBuscarCenso');
-    ocultarClases('divContenedorReasignar');
-    ocultarID('divTotalPersonasPorDepEdades');  
-    ocultarClases('divContenedorFormulario');
-    ocultarID('divResultadoBusqueda');
-    ocultarClases('divContenedorVolverABuscar');
-    ocultarClases('divContenedorEstadisticasCensista');
-    mostrarID('btnDashbord');
-    mostrarID('divContenedorCensosParaValidar');  // MUESTRO EL BLOQUE TABLA CENSOS PARA VALIDAR
+    ocultarClases('divContendorBienvenida');            //OCULTAR EL BLOQUE DE BIENVENIDA
+    ocultarClases('divContenedorBuscarCenso');          //OCULTAR EL BLOQUE DE BUSCAR CENSO
+    ocultarClases('divContenedorReasignar');            //OCULTAR EL BLOQUE REASIGNAR
+    ocultarClases('divContenedorFormulario');           //OCULTAR EL BLOQUE FORMULARIO
+    ocultarClases('divContenedorEstadisticasCensista'); //OCULTAR EL BLOQUE ESTADISTICAS CENSISTA
+    ocultarClases('divContenedorVolverABuscar');        //OCULTAR EL BLOQUE VOLVER A BUSCAR
+    ocultarID('divTotalPersonasPorDepEdades');          //OCULTAR EL BLOQUE PERSONAS DEPARTAMENTO EDAD
+    ocultarID('divResultadoBusqueda');                  //OCULTAR EL RESULTADO DE BUSQUEDA
+    mostrarID('btnDashbord');                           //MUESTRO EL BOTON DE DASHBOARD
+    mostrarID('divContenedorCensosParaValidar');        //MUESTRO EL BLOQUE TABLA CENSOS PARA VALIDAR
 
-    let table = sis.tablaParaValidar(); // ARMO LA TABLA LLAMANDO A LA FUNCION QUE ESTA EN SISTEMAS
+    let table = sis.tablaParaValidar(); //ARMO LA TABLA LLAMANDO A LA FUNCION QUE ESTA EN SISTEMAS
 
-    if(table !== '<h2>No tiene censos asignados!</h2>'){
-        document.querySelector("#divContenedorCensosParaValidar").innerHTML = table; // ASIGNO LA TABLA QUE TRAIGO AL BLOQUE DEL CENSOS PARA VALIDAR
-
-   
-        let botones = document.querySelectorAll(".btnTableEvent"); // LLAMO A TODAS LAS FILAS QUE CONTENGAN LA CLASE .filaTablaVentas
-
-
+    if(table !== '<h2>No tiene censos asignados!</h2>'){                             //EN CASO DE QUE SEA DISTINTO EL MENSAJE ENTRA AL IF
+        document.querySelector("#divContenedorCensosParaValidar").innerHTML = table; //ASIGNO LA TABLA QUE TRAIGO AL BLOQUE DEL CENSOS PARA VALIDAR
+        let botones = document.querySelectorAll(".btnTableEvent");                   //LLAMO A TODAS LAS FILAS QUE CONTENGAN LA CLASE .filaTablaVentas
         for (btn of botones) {
-            btn.addEventListener("click", eventoBtn); // A TODAS LAS FILAS DE LA TABLA QUE ACABE DE CREAR QUE CONTENGAN LA CLASE .filaTablaVentas EL EVENTO 
+            btn.addEventListener("click", eventoBtn);                                //A TODAS LAS FILAS DE LA TABLA QUE ACABE DE CREAR QUE CONTENGAN LA CLASE .filaTablaVentas EL EVENTO 
         }
-    }else{
-        document.querySelector("#divContenedorCensosParaValidar").innerHTML = table;
+    }else{                                                                           //EN CASO DE QUE SEA IGUAL AL MENSAJE
+        document.querySelector("#divContenedorCensosParaValidar").innerHTML = table; //ASIGNO EL MENSAJE DE QUE NO TIENE DATOS
     }
 }
 
@@ -735,30 +744,30 @@ function mostrarTablaParaValidar() {
 //////////////////////////////////////////////////////////////////////// 
 
 function recalcularEstadisticas(){
-    document.querySelector('#divTotalPersonasCensadas').innerHTML = `<h4>El total de personas censadas es: ${sis.contadorCensosValidados().length} </h4>`;
-    document.querySelector('#divTotalPersonasCensadasPorDep').innerHTML = sis.totalPersonasCensadasPorDep();
-    document.querySelector('#divPorcentajePendienteAValidar').innerHTML = `<h4>Porcentaje de personas pendiente a validar respecto al total: ${sis.porcentajePendienteAValidar()}%</h4>`;
+    document.querySelector('#divTotalPersonasCensadas').innerHTML = `<h4>El total de personas censadas es: ${sis.contadorCensosValidados().length} </h4>`;                                  //RETORNO MENSAJE USUANDO LA FUNCION contadorCensosValidados
+    document.querySelector('#divTotalPersonasCensadasPorDep').innerHTML = sis.totalPersonasCensadasPorDep();                                                                                //ASIGNO LA TABLA OBTENIDA DE LA FUNCION totalPersonasCensadasPorDep
+    document.querySelector('#divPorcentajePendienteAValidar').innerHTML = `<h4>Porcentaje de personas pendiente a validar respecto al total: ${sis.porcentajePendienteAValidar()}%</h4>`;   //RETORNO MENSAJE USUANDO LA FUNCION porcentajePendienteAValidar
 }
 
 function depEstadisticasEdades(){
-    let departamento = document.querySelector('#selDepartamentosEstadisticas').value;
-    mostrarID('divTotalPersonasPorDepEdades');
-    document.querySelector('#divTotalPersonasPorDepEdades').innerHTML = sis.porcentajePersonasEdadDepartamento(departamento);
+    let departamento = document.querySelector('#selDepartamentosEstadisticas').value;                                           //TOMO EL VALOR DEL DEPARTAMENTO SELECCIONADO
+    mostrarID('divTotalPersonasPorDepEdades');                                                                                  //MUESTRO EL BLOQUE PERSONAS POR DEPARTAMENTO
+    document.querySelector('#divTotalPersonasPorDepEdades').innerHTML = sis.porcentajePersonasEdadDepartamento(departamento);   //ASIGNO LA TABLA OBTENIDA DE LA FUNCION porcentajePersonasEdadDepartamento
 }
 
 function mostrarEstadisticas(){
-    cargarSelectDepartamentoEstadisticas();
-    recalcularEstadisticas();
-    ocultarClases('divContendorBienvenida');
-    ocultarClases('divContenedorBuscarCenso');
-    ocultarClases('divContenedorReasignar');
-    ocultarClases('divContenedorFormulario');
-    ocultarID('divResultadoBusqueda');
-    ocultarClases('divContenedorVolverABuscar');
-    ocultarID('divContenedorCensosParaValidar');  
-    ocultarID('divTotalPersonasPorDepEdades');  
-    mostrarID('btnDashbord');
-    mostrarClases('divContenedorEstadisticasCensista');
+    cargarSelectDepartamentoEstadisticas();             //CARGO LOS DEPARTAMENTOS EN LAS ESTADISTICAS
+    recalcularEstadisticas();                           //RECALCULO LAS ESTADISTICAS ANTES DE MOSTRAR
+    ocultarClases('divContendorBienvenida');            //OCULTO EL BLOQUE DE BIENVENIDA
+    ocultarClases('divContenedorBuscarCenso');          //OCULTO EL BLOQUE DE BUSCAR CENSO
+    ocultarClases('divContenedorReasignar');            //OCULTO EL BLOQUE DE REASIGNAR
+    ocultarClases('divContenedorFormulario');           //OCULTO EL BLOQUE DE FORMULARIO
+    ocultarID('divResultadoBusqueda');                  //OCULTO EL RESULTADO DE LA BUSQUEDA
+    ocultarClases('divContenedorVolverABuscar');        //OCULTO EL VOLVER A BUSCAR
+    ocultarID('divContenedorCensosParaValidar');        //OCULTO EL BLOQUE CENSOS PARA VALIDAR
+    ocultarID('divTotalPersonasPorDepEdades');          //OCULTO LAS PERSONAS POR DEPARATEMENTO EDAD
+    mostrarID('btnDashbord');                           //MUESTRO EL BOTON DE DASHBORD
+    mostrarClases('divContenedorEstadisticasCensista'); //MUESTRO EL BLOQUE DE ESTADISTICAS
     
 }
 
@@ -772,17 +781,17 @@ function mostrarEstadisticas(){
 //////////////////////////////////////////////////////////////////////// 
 
 function recalcularReporte(){
-    document.querySelector('#divReporteInvitado').innerHTML = sis.reporteCenso();
+    document.querySelector('#divReporteInvitado').innerHTML = sis.reporteCenso(); //LLAMO A LA FUNCION REPORTE CENSO
 }
 
 function mostrarReporte(){
-    ocultarClases('divContendorBienvenida');
-    ocultarID('divTotalPersonasPorDepEdades');  
-    ocultarID('btnIrALogin');
-    mostrarID('btnDashbord');
-    mostrarClases('divContenedorReporteInvitado');
+    ocultarClases('divContendorBienvenida');        //OCULTO EL BLOQUE DE BIENVENIDA
+    ocultarID('divTotalPersonasPorDepEdades');      //OCULTO EL PERSONAS POR DEPARTAMENTOS EDADES
+    ocultarID('btnIrALogin');                       //OCULTO EL BOTON LOGIN
+    mostrarID('btnDashbord');                       //OCULTO EL BOTON DASHBOARD
+    mostrarClases('divContenedorReporteInvitado');  //OCULTO EL CONTENEDOR REPORTE DE INVITADO
 
-    recalcularReporte();
+    recalcularReporte();                            //LLAMO A LA FUNCION RECALCULAR REPORTE
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -795,8 +804,8 @@ function mostrarReporte(){
 //////////////////////////////////////////////////////////////////////// 
 
 function deslogueo(){
-    sis.logout();
-    volverAlDashboard();
+    sis.logout();        //LLAMO A LA FUNCION LOGOUT PARA QUITAR EL USUARIO LOGIN
+    volverAlDashboard(); //VUELVO AL DASHBOARD SIN NINGUN PERMISO
 }
 
 ////////////////////////////////////////////////////////////////////////
