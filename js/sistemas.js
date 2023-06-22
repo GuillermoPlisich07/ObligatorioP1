@@ -61,7 +61,7 @@ class Sistema{
         edad = '15';
         cedula = '3.456.789-4';
         departamento = '6';
-        ocupacion = '4';
+        ocupacion = '0';
         checkCensado=false;
         enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
@@ -178,7 +178,7 @@ class Sistema{
         edad = '35';
         cedula = '6.677.889-1';
         departamento = '9';
-        ocupacion = '4';
+        ocupacion = '0';
         checkCensado=false;
         enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
@@ -223,7 +223,7 @@ class Sistema{
         edad = '34';
         cedula = '3.216.549-8';
         departamento = '6';
-        ocupacion = '4';
+        ocupacion = '0';
         checkCensado=true;
         enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
 
@@ -304,7 +304,7 @@ class Sistema{
         edad = '46';
         cedula = '1.324.596-6';
         departamento = '7';
-        ocupacion = '4';
+        ocupacion = '0';
         checkCensado=true;
         enviarCenso(nombre,apellido,cedula,edad,departamento,ocupacion,checkCensado);
     }
@@ -897,8 +897,8 @@ class Sistema{
     tablaParaValidar(){
         let arrayCensos = this.censosUsuarioNoValidados(); //LLAMO A LOS CENSOS NO VALIDADOS
 
-        let table = `<table border="1">`; //Contenedor tabla
-
+        let table = `<h2>Censos para validar</h2>`;
+        table += `<table border="1">`; //Contenedor tabla
         table += `<thead><tr><th>Cedula</th><th>Nombre</th><th>Apellido</th><th>Accion</th></tr></thead>`; // Titulos Tablas
 
         for (let i = 0; i < arrayCensos.length; i++) { // recorro el array previamente validado que sea del usuario.
